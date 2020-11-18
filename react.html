@@ -1,0 +1,97 @@
+<h3>React</h3>
+<hr>
+<p>
+    React is an Open Source view library created and maintained by Facebook. It's a great tool to render the User Interface (UI) of modern web applications.
+</p>
+<p>
+    React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable. 
+</p>
+<p>
+    Because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: <code>{ 'this is treated as JavaScript code' }</code>.
+</p>
+<p>
+    JSX is not valid JavaScript, JSX code must be compiled into JavaScript. The transpiler Babel is a popular tool for this process.
+</p>
+<p>
+    All JSX elements needs to be wrapped up in a parent element to work. In the following example the <code>&lt;div&gt;</code> is the parent element.
+</p>
+<p>
+    With React, we can render this JSX directly to the HTML DOM using React's rendering API known as ReactDOM.
+</p>
+<p>
+    ReactDOM offers a simple method to render React elements to the DOM which looks like this: <code>ReactDOM.render(componentToRender, targetNode)</code>, where the first argument is the React element or component that you want to render, and the second argument is the DOM node that you want to render the component to.
+</p>
+<p>
+    As you would expect, <code>ReactDOM.render()</code> must be called after the JSX element declarations, just like how you must declare variables before using them.
+</p>
+<p>
+    In JSX you can no longer use the word <q>class</q> to define HTML classes. This is because class is a reserved word in JavaScript. Instead, JSX uses <code>className</code>.
+</p>
+<p>
+    The naming convention for all HTML attributes and event references in JSX become camelCase. For example, a click event in JSX is <code>onClick</code>, instead of <q>onclick</q>. Likewise, <q>onchange</q> becomes <code>onChange</code>
+</p>
+<pre>
+    {/* The way to comment in JSX */}
+    const myJSX = (
+    {/* parent tag */}
+    &lt;div className='wrapper'&gt;
+      &lt;h1&gt;&lt;/h1&gt;
+      &lt;p&gt;&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    );
+    {/* rendering to HTML */}
+    ReactDOM.render(myJSX, document.querySelector('#main'));
+    {/* getElementById/Class, querySelector or JQuery all works */}
+</pre>
+<h4>Self closing Tags</h4>
+<hr>
+<p>
+    In HTML, almost all tags have both an opening and closing tag: &lt;div&gt;&lt;/div&gt;; the closing tag always has a forward slash before the tag name that you are closing. However, there are special instances in HTML called “self-closing tags”, or tags that don’t require both an opening and closing tag before another tag can start.
+</p>
+<p>
+    For example the line-break tag can be written as &lt;br&gt; or as &lt;br /&gt;, but should never be written as &lt;br&gt;&lt;/br&gt;, since it doesn't contain any content.
+</p>
+<p>
+    In JSX, the rules are a little different. Any JSX element can be written with a self-closing tag, and every element must be closed. The line-break tag, for example, must always be written as &lt;br /&gt; in order to be valid JSX that can be transpiled. A &lt;div&gt;, on the other hand, can be written as &lt;div /&gt; or &lt;div&gt;&lt;/div&gt;. The difference is that in the first syntax version there is no way to include anything in the &lt;div /&gt;.
+</p>
+<h4>Components is Everything</h4>
+<hr />
+<p>
+    Components are the core of React and there are two ways to create a React component.
+</p>
+<ol>
+    <li>The use of a JavaScript function creates a <i>stateless functional component</i>. A component that can receive data and render it, but does not manage or track changes to that data.</li>
+    <li>The use of ES6 class syntax creates a component which extends a parent class, inheriting all its features. Such as local state and lifecycle hooks. **********</li>
+</ol>
+<p>
+    To create a component with a function, you simply write a JavaScript function that returns either JSX or null. One important thing to note is that React requires your function name to begin with a capital letter.
+</p>
+<pre>
+    const MyComponent = function() {
+        return (
+            &lt;div className='customClass' /&gt;
+        );
+    };
+</pre>
+<p>
+    To create a component with the class syntax we use the <code>extends</code> to call the parent class, and in the constructor method we call the properties of the parent into the child instances. Then it looks more familiar as the JS functions return.
+</p>
+<pre>
+    class MyComponent extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;h1&gt;Hello React!&lt;/h1&gt;
+                    &lt;div&gt;
+            )
+        }
+    };
+</pre>
