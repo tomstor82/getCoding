@@ -1,0 +1,109 @@
+<h3>
+    Linux/UNIX shell script Terminal
+</h3>
+<hr>
+<p>
+    <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank">Bash</a> (Borne Again Shell) is a Unix shell and command language. It follows the <a href="https://en.wikipedia.org/wiki/POSIX" target="_blank">POSIX</a> standard.
+</p>
+<p>
+    Hidden files and folders are preceeded by a single dot. Listing permissions will indicate a dash for normal file, d for directory, c for character and some more I am not familiar with currently.
+</p>
+<p>
+    Variables are declared without a keyword, and accessed through the <code>$</code> symbol.
+</p>
+<h4>
+    Manual Pages
+</h4>
+<hr>
+<p>
+    Bash has built in manuals for many apps (commands) to help the user understand its purpose and syntax. To open a manual simply type: <br />
+    <code>man</code> followed by the command, separated by space. Example: <code>man ssh</code>
+</p>
+<p>
+    To navigate we use arrow keys as well as <q>u, d, b, f</q>. The up and down moves half a page, while the back and forward keys move the full page. To search we press <q>/</q> followed by search word. scroll to next result is accomplished with the <q>n</q> key; and to quit we press <q>q</q>.
+</p>
+<h4>
+    Command syntax
+</h4>
+<hr>
+<p>
+    A command normally follows a standard syntax. first app name then flags preceeded by a single or double dash, then arguments. Flags can in many cases be joined together like <code>ls -alhF</code> instead of <code>ls -a -l -h -F</code>.<br />
+    <code>ls -a1hF --color /dev</code>
+</p>
+<h4>
+    Comman Commands
+</h4>
+<ul>
+    <li>ls - listing</li>
+    <li>wc - word count</li>
+    <li>cat - print text content from files</li>
+    <li>vi - basic text editor</li>
+    <li>rm - remove files or directories</li>
+    <li>mkdir - create directory</li>
+    <li>touch - create file</li>
+    <li>ssh - secure shell</li>
+    <li>cd - return to home directory</li>
+    <li>cd- - go back to previous directory</li>
+    <li>~ - tilda symbol used to point to home directory</li>
+    <li>grep - get RegExp matches from file or std-in (Basic Regular Expressions - BRE)
+        <ul>
+            <li>egrep or grep -E (Extended RegExp - ERE)</li>
+            <li>grep -F (Fixed string matching <u>not</u> RegExp</li>
+            <li>grep -G (Basic RegExp, e.g. no groups * standard)</li>
+            <li>grep -P (Perl Compatible RegExp - PCREs)</li>
+        </ul>
+    </li>
+    <li>find - search directories
+        <ul>
+            <li>find -P ~/ -iregex '.+\.jpe?g' // search home directory for Perl regex pattern ignoring case</li>
+            <li>find / -name '???.txt' 2> /dev/null //  search root directory for 3 letter long txt files. Errors passed to /dev/null</li>
+            <li>find ~/ -ctime -2 // search home directory for files changed within the last 48 hours (ctime = 24hrs)</li>
+            <li>find ~/ -cmin -5 -name '*.html' // search home directory for html files changed within the last 5 minutes</li>
+            <li>find /etc -mmin 2 </li>
+            <li>find ~/ -atime +1 -iname '*.html' // search case insensistive html files accessed 48 hrs ago</li>
+            <li>find ~/ -used 1 -name '*.html' // files last accessed one day after its status was last changed</li>
+        </ul>
+    </li>
+    <li>ifconfig - Interface Configuration</li>
+    <li>netstat - Network Status</li>
+    <li>route - Shows network routing</li>
+</ul>
+<h4>
+    StdIn, StdOut, StdError and streams
+</h4>
+<hr>
+<p>
+    Std-in is for us the keyboard input but also a file or an input directed by the user. 0>
+</p>
+<h4>
+    /dev directory
+</h4>
+<hr>
+<p>
+    A interesting location which contains inputs and outputs that at first glance appears as files. These items can be used to interact directly with hardware and offer some handy outputs like random numbers (random and urandom), a black hole (zero) eating anything sent in, and many more. Use with caution!
+</p>
+<h4>Network</h4>
+<hr>
+<p>
+    The abstraction layers in networking are link, internet, transport and the application layers. Communication goes exclusively between these and no steps are skipped along the route.
+</p>
+<ol>
+    <li>link: utilise MAC addresses when communicating together. Ethernet, ISDN, ADSL, Fiber, WiFi ethernet. This is the network card communicating with another network card on a local network.</li>
+    <li>internet: utilise the Internet Protocol IP. This is a router communicating with another router on the Internet. Package loss is acceptable in this protocoll.</li>
+    <li>transport: utilise Port numbers. TCP and UDP are the protocols. TCP is the work horse which checks if packages are lost and querries for new if so. UDP is a simple shell which doesn't query package loss.<br />
+        Naturally one would see the benefit of TCP when accurat data is transported, however when speed is prioritiesed UDP can be of benefit in examples like streaming and VoIP communications.</li>
+    <li>application: Broad term for all softwares using the internet. Email clients, Streaming apps, HTTP and HTTPS...</li>
+</ol>
+<p>
+    To move up and down the layers we use different tools. Network cards help us in the link layer, along with routers that can communicate through multiple protocols in the same layer, as well as elevate the communication to the internet layers.
+</p>
+<p>
+    Switches are used to split the communication between multiple devices. These are only allowing communication between the requested MAC addressed unlike the predated <q>hubs</q>, which sent the same data to all the devices slowing communication drastically.
+</p>
+<p>
+    Netmask or subnet mask determines the size of the subnet, or how many IP addresses should be made available for the network.
+</p>
+<p>
+    IP addresses are 32 bit long as well as a mask. However it is common to refer to the mask in bits despite this, which simply means where to split the IP. If a mask is say 24 bits, it means the first 24 bits in any subnet address must be the same, and the last 8 bits can be utilised for the clients, in decimal this comes to 256 IP addresses. 2 addresses are reserved which gives the opportunity for there to be 254 clients in this subnet.<br />
+    24 bits are the most common in home networks and it translates into 255.255.255.0, which in a normal home network will allow clients to occupy the IP range from 192.168.0.1 to 192.168.0.254.
+</p>
