@@ -43,6 +43,7 @@ const myComponent = (
 {/* rendering to HTML */}
 ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
 </pre>
+
 <h4>Self closing Tags</h4>
 <hr>
 <p>
@@ -54,6 +55,7 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
 <p>
     In JSX, the rules are a little different. Any JSX element can be written with a self-closing tag, and every element must be closed. The line-break tag, for example, must always be written as &lt;br /&gt; in order to be valid JSX that can be transpiled. A &lt;div&gt;, on the other hand, can be written as &lt;div /&gt; or &lt;div&gt;&lt;/div&gt;. The difference is that in the first syntax version there is no way to include anything in the &lt;div /&gt;.
 </p>
+
 <h4>Components are Everything</h4>
 <hr />
 <p>
@@ -121,6 +123,7 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
         }
     };
 </pre>
+
 <h4>Pass Props to a Stateless Functional Component</h4>
 <hr>
 <p>
@@ -165,6 +168,45 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
         }
     };  
 </pre>
+
+<h4>Access Props Using this.props</h4>
+<hr>
+<p>
+    If the child component that you're passing a prop to is an ES6 class component, rather than a stateless functional component, you use the this keyword. To access props within a class component, you preface the code that you use to access it with this. For example, if an ES6 class component has a prop called data, you write {this.props.data} in JSX.
+</p>
+<pre>
+    class ReturnTempPassword extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+            &lt;div&gt;
+                { /* Accessing "this" syntax */ }
+                &lt;p&gt;Your temporary password is: &lt;strong&gt;{ this.props.tempPassword }&lt;/strong&gt;&lt;/p&gt;
+            &lt;/div&gt;
+            );
+        }
+    };
+      
+    class ResetPassword extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+            &lt;div&gt;
+                &lt;h2&gt;Reset Password&lt;/h2&gt;
+                &lt;h3&gt;We've generated a new temporary password for you.&lt;/h3&gt;
+                &lt;h3&gt;Please reset this password from your account settings ASAP.&lt;/h3&gt;
+                { /* Passing the "custom" attribute and prop */ }
+                &lt;ReturnTempPassword tempPassword = { '12414355434' } /&gt;
+            &lt;/div&gt;
+            );
+        }
+    };
+</pre>
+
 <h4>Use PropTypes to Define the Props You Expect</h4>
 <hr>
 <p>
@@ -178,4 +220,7 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
 </pre>
 <p>
     In the example above, the PropTypes.func part checks that handleClick is a function. Adding isRequired tells React that handleClick is a required property for that component. You will see a warning if that prop isn't provided. Also notice that func represents function. Among the seven JavaScript primitive types, function and boolean (written as bool) are the only two that use unusual spelling. In addition to the primitive types, there are other types available. For example, you can check that a prop is a React element.
+</p>
+<p>
+    <strong>Note:</strong> As of React v15.5.0, PropTypes is imported independently from React, like this: <code>import PropTypes from 'prop-types';</code>
 </p>
