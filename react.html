@@ -4,49 +4,44 @@
     React is an Open Source library created and maintained by Facebook. It's a great tool to render the User Interface (UI) of modern web applications.
 </p>
 <p>
-    React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable. 
+    React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable.<br />
+    JSX syntax: <code>const component = &lt;h1&gt;Hello World!&lt;h1/&gt;</code>
 </p>
 <p>
-    Because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: <code>{ 'this is treated as JavaScript code' }</code>.
+    Because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: <code>{ 'this is treated as JavaScript code' }</code>.<br />
+    However JSX must be compiled into JavaScript before it can be used by the browser, and the transpiler Babel is a popular tool for this process.
 </p>
 <p>
-    JSX is not valid JavaScript, JSX code must be compiled into JavaScript. The transpiler Babel is a popular tool for this process.
+    All JSX elements needs to be wrapped up in a parent element to work. Usually accomplished by the use of <code>&lt;div&gt;</code> tags.
 </p>
 <p>
-    All JSX elements needs to be wrapped up in a parent element to work. In the following example the <code>&lt;div&gt;</code> is the parent element.
-</p>
-<p>
-    With React, we can render this JSX directly to the HTML DOM using React's rendering API known as ReactDOM.
-</p>
-<p>
+    With React, we can render JSX directly to the HTML DOM using React's rendering API known as ReactDOM.<br />
     ReactDOM offers a simple method to render React elements to the DOM which looks like this: <code>ReactDOM.render(componentToRender, targetNode)</code>, where the first argument is the React element or component that you want to render, and the second argument is the DOM node that you want to render the component to.
 </p>
 <p>
     As you would expect, <code>ReactDOM.render()</code> must be called after the JSX element declarations, just like how you must declare variables before using them.
 </p>
 <p>
-    In JSX you can no longer use the word <q>class</q> to define HTML classes. This is because class is a reserved word in JavaScript. Instead, JSX uses <code>className</code>.
-</p>
-<p>
+    In JSX you can no longer use the word <q>class</q> to define HTML classes. This is because class is a reserved word in JavaScript. Instead, JSX uses <code>className</code>.<br />
     The naming convention for all HTML attributes and event references in JSX become camelCase. For example, a click event in JSX is <code>onClick</code>, instead of <q>onclick</q>. Likewise, <q>onchange</q> becomes <code>onChange</code>
 </p>
+<p>
+    Simple react component:
+</p>
 <pre>
-    {/* The way to comment in JSX */}
-    const myJSX = (
-    {/* parent tag */}
-    &lt;div className='wrapper'&gt;
-      &lt;h1&gt;&lt;/h1&gt;
-      &lt;p&gt;&lt;/p&gt;
-      &lt;ul&gt;
-        &lt;li&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;/li&gt;
-      &lt;/ul&gt;
+const myComponent = (
+    &lt;div id='parent_tag'&gt;
+        &lt;h1&gt;&lt;/h1&gt;
+        &lt;p&gt;&lt;/p&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;/li&gt;
+        &lt;/ul&gt;
     &lt;/div&gt;
-    );
-    {/* rendering to HTML */}
-    ReactDOM.render(myJSX, document.querySelector('#main'));
-    {/* getElementById/Class, querySelector or JQuery all works */}
+);
+{/* rendering to HTML */}
+ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
 </pre>
 <h4>Self closing Tags</h4>
 <hr>
@@ -94,4 +89,79 @@
             )
         }
     };
+</pre>
+<p>
+    Composing components together is made easy with inserting the component name within a self closing tag as shown in the example:
+</p>
+<pre>
+    class ChildComponent extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;p&gt;I am the child&lt;/p&gt;
+                &lt;/div&gt;
+            );
+        }
+    };
+    class ParentComponent extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+                &lt;div&gt;
+                    &lt;h1&gt;I am the parent&lt;/h1&gt;
+                    { /* Add the Child component */ }
+                    &lt;ChildComponent /&gt;
+                &lt;/div&gt;
+            );
+        }
+    };
+</pre>
+<h4>Pass Props to a Stateless Functional Component</h4>
+<hr>
+<p>
+    In React, you can pass props, or properties, to child components. Say you have an App component which renders a child component called Welcome which is a stateless functional component. You can pass Welcome a user property by writing:
+</p>
+<pre>
+    &lt;App&gt;
+        &lt;Welcome user='Tatiana' /&gt;
+    &lt;/App&gt;
+</pre>
+<p>
+    You use <u>custom HTML attributes</u> created by you and supported by React to be passed to the component. In this case, the created property user is passed to the component Welcome. Since Welcome is a stateless functional component, it has access to this value like so:
+</p>
+<pre>
+    const Welcome = (props) => &lt;h1&gt;Hello, {props.user}!&lt;/h1&gt;
+</pre>
+<p>
+    It is standard to call this value props and when dealing with stateless functional components, you basically consider it as an argument to a function which returns JSX. You can access the value of the argument in the function body. With class components, you will see this is a little different.
+</p>
+<pre>
+    const CurrentDate = (props) => {
+        return (
+        <div>
+            { /* The property is accessed using supported custom attribute */ }
+            <p>The current date is: {props.date}</p>
+        </div>
+        );
+    };
+      
+    class Calendar extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+            <div>
+                <h3>What date is it?</h3>
+                { /* custom supported "date" attribute passed to CurrentDate*/ }
+                <CurrentDate date={Date()}/>
+            </div>
+            );
+        }
+    };  
 </pre>
