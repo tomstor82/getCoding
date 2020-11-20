@@ -1,0 +1,2722 @@
+<p>
+	JavaScript is a <a title="External Link" href="https://www.geeksforgeeks.org/introduction-to-scripting-languages/" target="_blank">scripting</a> language in the <a title="External Link" href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">Object Oriented (OO)</a> <a title="External Link" href="https://cs.lmu.edu/~ray/notes/paradigms/" target="_blank">paradigm</a>. Developed for front-end manipulation of loaded web content throught interactivity and dynamics, it has since evolved into including servers and desktop apps (node.js and frameworks like electron and cordova).<br />
+	Written in C/C++ over a weekend and first released as LiveScript, it was renamed 3 months later as JavaScript, as the syntax was similar to newly developed Java. However rumours exist as this being a marketing trick, joining the hot new Java language.
+</p>
+<p>
+	JavaScript is generally considered an interpreted language (translated into machine language as it goes), but modern JavaScript engines no longer just interpret JavaScript, they compile it too, in what we call <a title="External Link" href="https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/" target="_blank">Just In Time compilation</a> (JIT).<br />
+	This has been happening since 2009, when the <em>SpiderMonkey</em> JavaScript compiler was added to <em>Firefox</em> 3,5.
+</p>
+<p>
+	With the introduction of <a title="External Link" href="https://nodejs.org/en/" target="_blank">Node.js</a> in 2009 JavaScript became a full-stack scripting language, and today with <em>Microsofts´</em> superset <a title="External Link" href="https://www.typescriptlang.org/" target="_blank">Typescript</a> together with <a title="External Link" href="https://nestjs.com/" target=_blank>Nest.js</a>, allows for large scale coding by eliminating some design flaws present in JavaScript. Declaring data types are one of the many improvements.
+</p>
+
+<h3>ES6</h3>
+<hr>
+<p>
+	ECMAScript is a standardized version of JavaScript with the goal of unifying the language's specifications and features. As all major browsers and JavaScript-runtimes follow this specification, the term ECMAScript is interchangeable with the term JavaScript.
+</p>
+<p>
+	The most recent standardized version is called ECMAScript 6 (ES6), released in 2015. The most noteworthy improvement in my opinion is the introduction of the <q>class</q> syntax, essentially superseeding the <q>prototype</q> based syntax.
+</p>
+
+<h3>Data types</h3>
+<hr>
+<p>
+	ES6 describes 9 data types. 7 which are primitives: <code>undefined, Boolean, Number, String, BigInt, Symbol</code> and the special primitive <code>Null</code>. The remaining 2 are <code>Object</code> and <code>Function</code>.
+</p>
+<p>
+	There are 3 object types in client side web development namely the HTML DOM objects, JavaScript built-in objects and the JavaScript custom objects.
+</p>
+
+<h3>Variables</h3>
+<hr>
+<p>
+	Variables are elements assigned specific values for use throughout a program. Since ES6 we declare variables with both the <code>var</code> and the <code>let</code> keywords. Differences here is what we call <q>scope</q>. No data type are specified in JS as in other languages, this however is incorporated in the superset <q>TypeScript</q>.
+</p>
+<p>
+	Since most things in JS are in fact <em>objects</em>, and a variable can be used to reference them, we can declare them to contain these references and not just values. Very handy when using <q>callbacks</q> (passing a function as an argument to a function).
+</p>
+<pre>
+let val = 5;
+/* this anonymous function becomes "function multi" */
+const multi = function(x) {
+	return x * x;
+};
+/* "function addition" is only accessible through "add" */
+const add = function addition(x) {
+	return x + x;
+};
+/* using a callback function */
+function print(callback, value) {
+	console.log(callback(value));
+};
+/* lets call the print function */
+print(multi, val); // 25
+print(add, val); // 10
+</pre>
+<p>
+	<strong>Note:</strong> Thing to remember is that a variable hold a <i>reference</i> to an object and not the actual object itself, contrary to a value which is held directly.
+</p>
+<pre>
+const tom = { name: "Tom" }; // creating an object referenced through "tom"
+const tom2 = tom; // "tom2" references the same object
+tom2 === tom; // true, referencing the same object
+tom2.name = "TOM"; // changing to upperCase
+tom.name; // "TOM" // the change is apparent here too
+Object.freeze(tom); // makes the object referenced read-only
+tom2.name = "Tom"; // try changing the name back to lowerCase
+tom2.name; // "TOM"
+tom.name; // "TOM"
+</pre>
+
+<h4>Scope</h4>
+<hr>
+<p>
+	A <q>block</q> is code contained within curly brackets. Variables declared inside these can either be visible or not on the outside. This is called <q>scope</q> and is useful to avoid conflicting variables.
+</p>
+<p>
+	To separate the two we refer to <q>global-</q> and <q>block-scope</q>. Global meaning visible throughout the code and block only to whatever is within the specific block.
+</p>
+<p>
+	The keywords we use in JS to declare variables are <code>var, let</code> and <code>const</code>. var is the pre ES6 which when declared has global scope. let and const introduced in ES6 to allow block scope. A variable declared without a keyword automatically gets the <code>var</code> keyword e.g. global scope. This can be avoided by utilising <code>'use strict';</code> at the global level. Does not work within a block.
+</p>
+<p>
+	re-declaration example:
+</p>
+<pre>
+var camper = "Lucy";
+var camper = "Rodney";	// re-declaration without error
+
+let camper2 = "Juliette";
+let camper2 = "Violette"; // Uncaught SyntaxError: redeclaration of let camper2
+</pre>
+<p>
+	Demonstration of global- vs block scope:
+</p>
+<pre>
+var x = 1;
+let y = 2;
+if (true) {
+	var x = 2;
+	let y = 3;
+	console.log(`block variables x = ${x} and y = ${y}`);
+}
+console.log(`global variables x = ${x} and y = ${y}`);
+</pre>
+
+<h4>const keyword</h4>
+<hr>
+<p>
+	<code>const</code> is the keyword for declaration of a <i>constant</i>, introduced in ES6.<br />
+	They <u>cannot</u> be re-assigned or re-declared but they <u>can</u> be added to. Should be in capital letters.
+</p>
+<pre>
+const MY_ARRAY = [];
+MY_ARRAY[0] = "abc"; // allowed
+MY_ARRAY.push("def"); // allowed
+
+MY_ARRAY = ["abc","def"]; // not allowed as this is re-assignment
+const MY_ARRAY = "abc"; // not allowed as this is re-declaration
+</pre>
+
+<h4>Best Practice</h4>
+<hr>
+<p>
+	Casing the letters when declaring variables helps identify the scope of a variable:
+</p>
+<pre>
+/* Global variable UPPERCASE */
+const DATE = new Date;
+
+/* classes leading UPPER then camelCase */
+class PhoneList {
+	/* static methods */
+	static caseNames(name) {
+		return name
+			.toLowerCase()
+			.replace(name[0], name[0]
+			.toUpperCase())
+			.replace(/\s[\w]/g, name
+			.match(/\s[\w]/g)
+			.toString()
+			.toUpperCase());
+	}
+	static checkNum(num) {
+		if (/^\+\d+/.test(num) || /^00\d+/.test(num)) return num;
+		else throw new TypeError("Please input phone number 'string' including country code");
+	}
+	/*static* indexGen() {
+		let i = 0;
+		while (true) {
+			yield i;
+			i++;
+		}
+	}*/
+	/* static variable */
+	/*static index = this.indexGen();*/
+	static index = 0;
+
+	/* constructor function */
+	constructor (name, num) {
+		/* instance data attributes */
+		this.name = PhoneList.caseNames(name);
+		/* private variable */
+		this._number = PhoneList.checkNum(num);
+		/* instance attribute collected from class attribute */
+		this.index = PhoneList.index++;/*.next()['value'];*/
+	}
+	/* instance method */
+	print() {
+		console.log(`${this.index} = ${this.name}: ${this._number}`);
+	}
+	/* class or static getter and setter methods */
+	get getIndex() {
+		return this.index;
+	}
+	set setIndex(arg) {
+		if (typeof arg != "number" || arg < 0) throw Error("Pass a positive numeric value please");
+		this.index = arg;
+
+		/*static set resetIndex(arg) {
+		if (arg == 0) this.index = this.indexGen();
+		else throw new RangeError("Set index equal to 0 to reset");*/
+	}
+	/* constructor getter and setter methods */
+	get getNumber() {
+		return this._number;
+	}
+	set updateNumber(num) {
+		this._number = PhoneList.checkNum(num);
+	}
+}
+</pre>
+
+<h3>Functions</h3>
+<hr>
+<p>
+	A language is said to have <q>first-class functions</q> when they can be passed (callback functions) and returned by other functions. Achieved by either assigning a function to a variable or by passing directly, most often as arrow function.
+</p>
+<p>
+	3 different function names exist in JS OOP:
+</p>
+<ul>
+	<li>constructor: methods to create object instances.</li>
+	<li>static: functions within a class but not passed into instances.</li>
+	<li>instance: methods in a instance object created by a constructor function.</li>
+</ul>
+
+<h3>Objects</h3>
+<hr>
+<p>
+	A custom object is similar to an array and sometimes referred to as <q>associative array, map, symbol table and dictionary</q>. Instead of using a fixed numbered index in permanent order to access their values, you access them through a string reffered to as the key. This relationship is called the <q>key value pair</q>.
+</p>
+<p>
+	Comparing the two we see that in both objects we separate the element by using comma. <code>let myObj = { boat: "sea", aeroplane: "sky" };</code> and <code>let myArr = ["sea", "sky"];</code>. And we use curly braces with objects and square braces with arrays.
+</p>
+<p>
+	Accessing and manipulating the content of an array with the many built in methods on the <code>prototype.Array</code> is easy as we work with a fixed numbered index, however these can also be applied on the objects contents. We just need to convert them into arrays.<br />
+	<code>Object.keys(myObj);</code> returns an array of the objects property names. <code>Object.values(myObj.boat);</code> returns an array with the selected property values. <code>Object.entries(myObj);</code> returns each property (names and valeus).
+</p>
+<pre>
+const USER = {
+  name: "Louis",
+  age: 30
+};
+Object.keys(user); // Array ["name", "age"]
+Object.values(user); // Array ["Louis", 30]
+Object.entries(user); // Array [ ["name","Louis"], ["age",30] ]
+</pre>
+<p>
+	Objects are useful for storing data in a structured way, and can represent real world objects like a phone book, where a numerically indexed array would be insufficient. These are referred to as <q>dictionaries</q><br />
+	The fundamental, basic objects upon which all other objects are based includes: general objects, booleans, functions, and symbols.
+</p>
+
+<h4>Simple Objects</h4>
+<hr>
+<p>
+	These objects contain <u>only</u> key value pairs (data attributes). <u>No</u> functions or methods. A JSON string is an example of a simple object.
+</p>
+
+<h4>OOP Expressions in JavaScript</h4>
+<hr>
+<ul>
+	<li>Object:<br />Element containing, properties which consist of property names (keys) and or property values (values), and/or property methods (functions). We have DOM, built-in and user-defined objects in JavaScript.</li>
+
+	<li>Data attributes:<br />Properties within the object, static or class attributes are used by the instances but not duplicated into them. Private data attributes can be accessed with a get and set method. Constructor data attributes are copied into individual object instances.</li>
+	
+	<li>Prototype:<br />Pre ES6: Is the mechanism by which objects inherit features from one another. They work differently to inheritance mechanisms in classical OOP languages that are <code>class</code> based.</li>
+	
+	<li>Initialiser:<br />Objects can be initialised in a few different ways:<br />
+		<ul>
+			<li>With the <q>new</q> keyword: <code>const myObj = new Object();</code></li>
+			<li>Using literal notation <code>const myObj = { key1: value1, key2: value2; }</code></li>
+			<li>The Object.create() method creates a new object, using an existing object as the prototype: <code>const myNewObj = Object.create(myObj);</code></li>
+		</ul>
+	</li>
+	
+	<li>Constructor:<br />Function used for creating object instances, which describes properties to be added to the new object. The <code>this</code> keyword is used here to assign the properties to the object calling the function.<br />
+		<strong>Note: </strong>By creating a function or an array we essentially use the built-in constructors in JS.<br />
+		<pre>function Person(firstName, lastName) {<br />  this.firstName = firstName;<br />  this.lastName = lastName;<br />};</pre></li>
+	
+	<li>Instance:<br />Is an object created with a constructor function. This can be achieved using the <code>new</code> keyword and in other ways. The instance object will contain properties as described in the constructor function.<br />
+		<pre>const tom = new Person("Tom", "Storeb&oslash;"); // person object from constructor above
+const myArr = [1,2,3,4]; // the built-in Array constructor
+function myFunc() {}; // the built-in Function constructor</pre>
+	<strong>Note:</strong> Basically everywhere we can use the <q>new</q> keyword, being it built-in constructors as for array and functions or user-made custom constructors, create object instances.</li>
+	
+	<li>Class:<br />
+		When we need to create many objects of the same kind like users, goods, animals or similar, we can utilise classes.
+		They have many features useful for OOP and allow for prototype-based inheritance.<br />
+		<pre>
+function orbitalPeriod(arr) {
+  class Orbiter {
+	/* class or static data attributes */
+	static PI = Math.PI;
+	static GM = 398600.4418;
+	static earthRadius = 6367.4447;
+	/* constructor function */
+    constructor (name, avgAlt) {
+	  this.name = name;
+	  this.orbitalPeriod = `${
+	    Math.round(2 * Orbiter.PI * (Math.sqrt(
+	    ((Orbiter.earthRadius + avgAlt)**3)
+	    / Orbiter.GM)))} seconds`;
+	}
+  }
+  return arr.map(e => e = new Orbiter(Object.values(e)[0], Object.values(e)[1]));
+}
+
+orbitalPeriod([
+{name: "moon", avgAlt: 378632.553},
+{name: "sputnik", avgAlt : 35873.5553},
+{name: "hubble", avgAlt: 556.7},
+{name: "iss", avgAlt: 413.6},
+{name: "salyut7", avgAlt: 248.5},
+{name: "vostok1", avgAlt: 248},
+{name: "sputnik2", avgAlt: 935}
+]);
+		</pre>
+	</ul>
+		<p>
+			Classes in JS are often referred to as <q>syntactic sugar</q> as the same features they add are achievable with the use of functions. This is not entirely correct, but JS is nevertheless prototype based and simply act like a class based language.
+		</p>
+		<ol>
+			<li>
+				A function created by class is labelled by a special internal property [[FunctionKind]]:"classConstructor". So it’s not entirely the same as creating it manually.<br />
+				The language checks for that property in a variety of places. For example, unlike a regular function, it must be called with <q>new</q>:
+				<pre>
+class User {
+  constructor() {}
+}
+alert(typeof User); // function
+User(); // Error: Class constructor User cannot be invoked without 'new'
+				</pre>
+			</li>
+			<li>
+				A string representation of a class constructor in most JavaScript engines starts with the “class…”
+				<pre>
+class User {
+  constructor() {}
+}
+alert(User); // class User { ... }
+				</pre>
+			</li>
+			<li>
+				Class methods are non-enumerable. A class definition sets enumerable flag to false for all methods in the "prototype".<br />
+				Good because if we for...in over an object, we usually don’t want its class methods.
+			</li>
+			<li>
+				Classes always use strict. All code inside the class construct is automatically in strict mode.
+			</li>
+			<li>
+				Class syntax brings many more features...
+			</li>
+		</ol>
+		<pre>
+class MyClass {
+  prop = value; // property
+  constructor(...) { // constructor
+    // ...
+  }
+  method(...) {} // method
+  get something(...) {} // getter method
+  set something(...) {} // setter method
+  [Symbol.iterator]() {} // method with computed name (symbol here)
+  // ...
+};
+		</pre>
+
+<ul>
+	<li>Get:<br />This syntax binds an object property to a function that will be called when that property is looked up.</li>
+	
+	<li>Set:<br />This syntax binds an object property to a function to be called when there is an attempt to modify that property value.</li>
+	
+	<li>this:<br />Connects the object calling the function to the this variable.
+</ul>
+
+<h3>Create Objects</h3>
+<hr>
+<p>
+	There are many ways to create an object:
+<dl>
+	<dt>Literal syntax using <code>{}</code> and <code>:</code> for single stand-alone objects:</dt>
+	<dd><pre>const person = { firstName: "Billy", lastName: "Bobby" };</pre></dd>
+
+	<dt>ES6 classes. Which resembles class-based languages like JAVA and is similar to using the ES5 <code>new</code> keyword with user-defined constructor functions:</dt>
+	<dd><pre>class Person {<br />  constructor(fn, ln) {<br />    this.firstName = fn;<br />    this.lastName = ln;<br />  }<br />}<br />const pers1 = new Person("Lizzy", "Longlegs");</pre></dd>
+
+	<dt>Constructor functions using the <code>new</code> keyword:</dt>
+	<dd>With user-defined constructor functions:<pre>  function person(fn, ln) {<br />    this.firstName = fn;<br />    this.lastName = ln;<br />  };<br />  const pers1 = new person('Lisa', 'Bombshell');<br />  const pers2 = new person('Laura', 'Intellectual');</pre></dd>
+	<dd>With the built-in Object constructor function:<pre>  const person = new Object();<br />  person.firstName = "Billy"; // Here we have to add every property and value separately.<br />  person.lastName = "Bobby";</pre></dd>
+
+	<dt>Copy other objects with <code>Object.create()</code>.</dt>
+	<dd>This method takes two parameters, first one is a mandatory object that serves as the prototype of the new object to be created. The second is an optional object which contains the properties to be added to the new object.</dd>
+	
+	<dt>Copy from more than one existing object with <code>Object.assign().</code></dt>
+	<dd>Takes any number of objects as parameters. The first parameter is the object that it will create and return. The rest of the objects passed to it will be used to copy the properties into the new object.</dd>
+</dl>
+
+<h4>Accessing object properties</h4>
+<hr>
+<p>
+	There are two ways to access the properties (keys value pairs) of an object:
+</p>
+<ol>
+	<li>With the canonically correct bracket notation <code>[]</code>.</li>
+	<li>Through dot notation <code>.</code></li>
+</ol>
+<p>
+	Bracket notation is the <u>only</u> way to access property names starting with a number or symbol and with white-space as part of the name, and can safely be used in all scenarios.
+</p>
+<p>
+	Dot notation can be used in other cases and is convenient as it demands a little less code.
+</p>
+
+
+<h4>Iterating through object entries</h4>
+<hr>
+<p>
+	The <em>key-value pairs</em> in an object can be referred to as <em>properties</em>, <em>entries</em> or <em>members</em>. In JavaScript <em>properties</em> and <em>entries</em> are most common.
+</p>
+<p>
+	Iteration through the properties of an Object is easily achieved with the <a title="Jump to more about Loops" href="#for_in_of">for...in loop</a>
+</p>
+
+<h4>Constructor property</h4>
+<hr>
+<p>
+	There is a special property located on the object instances which is referencing the constructor function that created it.
+</p>
+<p>
+	The advantage of the constructor property is that it's possible to check for this property to find out what kind of object it is:
+</p>
+<p>
+	<strong>Note:</strong> If manually setting the prototype to a new object instance it overwrites the constructor property, and it is therefore a better practice to use <code>.instanceof</code> to see the constructor that created it before it was modified.
+</p>
+<pre>
+// We have mistakenly changed the constructor property for the duck instance
+duck.constructor === Bird; // false -- Oops
+duck.constructor === Object; // true, all objects inherit from Object.prototype
+duck instanceof Bird; // true, still works
+
+// Restoring the constructor property again
+Bird.prototype = {
+  constructor: Bird, // defining the constructor property
+  numLegs: 2,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+}
+</pre>
+
+<h3>Composition (HAS-A) vs Inheritance (IS-A)</h3>
+<hr>
+<p>
+	To effectively utilise objects there need to be ways one object can interact with another.<br />
+	<q>Has a</q> and <q>is a</q> are terminologies used to describe two ways object form connections with each other.
+</p>
+<ul>
+	<li><q>has a</q> relates to an instance of a class containing one or more data attributes which in turn reference an instance from a different class.</li>
+	<li><q>is a</q> relates to the relationship between parent- (super class) and child- (sub class) objects in a tree like hierarchy. Two key words <code>extend</code> and <code>super</code> are used to create these ties.</li>
+</ul>
+
+<h3>Prototype Pre ES6</h3>
+<hr>
+<p>
+	Objects can have two types of properties, their <em>own-</em> and <em>prototype</em> properties. Own properties are defined directly to the instance itself while prototype properties are defined to the prototype object.
+</p>
+<p>
+	Prototype properties are automatically connected to child objects, much like we inherit genes, children of the prototype inherits properties.
+</p>
+<p>
+	Since a property might have the same values across all instances created with the same constructor, you essentially have duplicated variables inside each instance.<br />
+	This may not be an issue when there are only a few instances, but if there are millions of instances. That would be a lot of duplicated variables.
+</p>
+<p>
+	A better way is to use the constructors prototype. Properties in the prototype are shared among <u>all</u> instances, instead of being duplicated.
+</p>
+<p>
+	The <code>prototype</code> property even allows us to add new properties to built-in objects.
+</p>
+<p>
+	Make the <code>unshift()</code> method work as the <code>pop()</code> method:
+	<pre>Array.prototype.unshift = function(x) { this[this.length] = x };</pre>
+</p>
+<p>
+	Add new method to the <em>Object</em> prototype. Type <q>hello</q> in terminal will display <q>Hello World!</q>:
+	<pre>Object.prototype.hello = () => alert("Hello World!");</pre>
+</p>
+<p>
+	My own <code>map()</code> method:
+	<pre>Array.prototype.myMap = function(callback){<br />  const newArray = [];<br />  for (let i=0; i&lt;this.length; i++) {<br />    newArray.push(callback(this[i]));<br />  }<br />  return newArray;<br />};</pre>
+</p>
+
+<p>
+	Most JavaScript objects inherit properties and methods from a prototype:
+</p>
+<ul>
+	<li><code>Date</code> objects inherit from <code>Date.prototype</code></li>
+   <li><code>Array</code> objects inherit from <code>Array.prototype</code></li>
+	<li><code>Person</code> objects inherit from <code>Person.prototype</code></li>
+</ul>
+<p>
+The <code>Object.prototype</code> is on the top of the prototype inheritance chain.
+</p>
+<pre>
+// ES6 class object with constructor and custom method
+class Employee {
+	constructor(firstName, lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = (firstName + lastName).toLowerCase() + "@stobartair.com";
+	}
+	say() {
+		alert(`My name is ${this.firstName} ${this.lastName}.`);
+	}
+}
+// Pre ES6 constructor function
+const Employee = function (firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.email = (firstName+lastName).toLowerCase() + "@stobartair.com";  
+}
+// assign properties to the prototype of the constructor, to be shared by all instances
+Employee.prototype.status = "Laid-off indefinitely";
+Employee.prototype.company = "Stobart Air";
+
+// creating object instances
+const Tom = new Employee("Tom", "Storeboe");
+const Rob = new Employee("Rob", "Roy");
+
+// checking content
+Tom; // displays all object properties and values excl. prototype
+Tom.status; // "Laid-off indefinitely"
+Tom.company; // "Stobart Air"
+
+// assign object properties to arrays
+const ownProp = [], prototypeProp = [];
+
+for (let prop in Tom) {
+if(Tom.hasOwnProperty(prop)) {
+ownProp.push(prop);
+}
+else prototypeProp.push(prop);
+}
+console.log(ownProp);  // firstName, lastName, email
+console.log(prototypeProp); // status, company
+</pre>
+<p>
+	<strong>Note:</strong> Prototype properties won't be seen when checking the object instance variable <code>objInstanceName;</code>. However this is seen when looping through the properties or accessed when calling the property directly: <code>objInstanceName.newProp;</code>
+</p>
+
+<h4>Adding Properties to unrelated objects</h4>
+<hr>
+<p>
+	In some cases it might be convenient to have similar properties set for inherently different objects. This is easily achieved with a <em>mixin</em> function.<br />
+	This example adds a method property to bird and boat.
+</p>
+<pre>
+const glideMixin = obj => obj.glide = () => alert("gliding");
+
+glideMixin(bird); // adds property glide to bird
+glideMixin(boat); // adds property glide to boat
+</pre>
+
+<h4>Prototype Relations</h4>
+<hr>
+<p>
+	As biological creature inherit genes from their ancestors, JS objects inherit from their creators. These "genes"(properties) are contained in the <em>prototype</em> object. To check if an object is the creator we can use <code>parentObject.prototype.isPrototypeOf(childObject);</code>
+</p>
+<p>
+	Before we get a good desirable gene pool we need to set the custom properties to inherit. Setting a property to the Object.prototype:
+</p>
+<pre>
+Object.prototype.hello = () => alert("Hello World!");
+hello(); // alerts "Hello World!", as it now is a new property of the Object.prototype object
+</pre>
+<p>
+Since a prototype is an object, a prototype can have its own prototype! All children objects are inheriting prototype properties from the the top level Object.prototype, and their parent objects if not modified.
+</p>
+<pre>
+Object.prototype.isPrototypeOf(Object); // true - top of the hierarchy
+Object.prototype.isPrototypeOf(allChildren); // true
+childObject.prototype.isPrototypeOf(childObject); // false
+</pre>
+<p>
+	We can force inheritance:
+</p>
+<pre>
+childObject.prototype = Object.create(someObject.prototype); // can be set to any object which has a prototype property set
+</pre>
+<p>
+	The <code>hasOwnProperty</code> method is defined in Object.prototype which contains many useful methods. The can be accessed through <u>all</u> objects as they inherit it as children.<br />
+	Since Object.prototype is at the top we can omit the use of <code>.prototype.hasOwnProperty</code> and simply write <code>.hasOwnProperty</code>.
+</p>
+
+<h4>Super- and Subtypes</h4>
+<hr>
+<p>
+	The <code>Object.prototype</code> is the supertype for any object. The children are the subtypes and the parents of children down the line are their supertypes.
+</p>
+
+<h4>DRY principle</h4>
+<hr>
+<p>
+	There's a principle in programming called Don't Repeat Yourself (DRY). The reason repeated code is a problem is because any change requires fixing code in multiple places. This usually means more work for programmers and more room for errors.
+</p>
+<p>
+	Notice in the example below that the <em>describe</em> method is shared by Bird and Dog:
+</p>
+<pre>
+Bird.prototype = { // prototype properties common to all Bird instances
+  constructor: Bird,
+  describe: () => console.log("My name is " + this.name);
+  }
+};
+function Bird(name) { // constructor assigning individual properties to Bird instances
+  this.name = name;
+}
+Dog.prototype = { // prototype properties common to all Dog instances
+  constructor: Dog,
+  describe: () => console.log("My name is " + this.name);
+  }
+};
+function Dog(name) { // constructor assigning individual properties to Dog instances
+  this.name = name;
+}
+</pre>
+<p>
+	The <em>describe</em> method is repeated in two places. The code can be edited to follow the DRY principle, by creating a supertype (or parent) called Animal:
+</p>
+
+<pre>
+function Animal() { }; // to be able to point to a constructor within the prototype
+
+Animal.prototype = { // supertype (parent) prototype properties common to all subtypes (children)
+  constructor: Animal,
+  eat: () => console.log("nom, nom nom"),
+  describe: function () { // can't be arrow function due to the "this" keyword
+    console.log("My name is: " + this.name);
+  }
+};
+Bird.prototype = { // prototype properties common to all Bird instances
+  constructor: Bird,
+  eat: () => console.log("peck, peck, peck") // overrides the eat property from Animal.prototype
+};
+function Bird(name) { // constructor assigning individual properties to Bird instances
+	this.name = name;
+}
+Dog.prototype = { // prototype common to all instances
+  constructor: Dog
+};
+function Dog(name) { // constructor assigning individual properties to Dog instances
+	this.name = name;
+}
+</pre>
+<p>
+	However we need to link the Bird and Dog to the prototype property of Animal. We use the technique called inheritance. Animal is the supertype (parent), bird and dog are subtypes (children) and instances are subtypes (children) of bird and dog.
+</p>
+<p>
+	<strong>Note:</strong> <code>let Bird = new Animal();</code> has some disadvantages when used for inheritance.
+</p>
+<pre>
+Bird.prototype = Object.create(Animal.prototype); // Now all instances of Bird inherits from Animal
+Dog.prototype = Object.create(Animal.prototype); // And all instances of Dog inherits from Animal
+</pre>
+<p>
+	Then we can add individual methods for the subtypes after inheritance. These will be shared amongst the children of Bird and Dog respectively.
+</p>
+<pre>
+Bird.prototype.fly = () => console.log("I'm flying!");
+
+Dog.prototype.sound = () => console.log("woof, woof");
+</pre>
+
+// Lets create some object instances containing all the prototype properties
+let duck = new Bird("Donald");
+
+let beagle = new Dog("Snoopy");
+</pre>
+<p>
+	duck and beagle now inherits properties from prototypes of Object, Animal and their respective Bird and Dog.
+</p>
+
+<h4>Private properties</h4>
+<hr>
+<p>
+	All property values outside a function are public. To avoid changing values we can make them private, or only accessible within the function. An internal method able to access this property is called privileged. A function always has access to the context in which it was declared. This is called <em>closure</em>.
+</p>
+<pre>
+	/**************************************************************** WHAT ???? **************/
+function Bird() {
+  let weight = 15; // private property within a function
+  this.getWeight = () => weight; // privileged function returning the private property
+}
+</pre>
+
+<h4 id="modules">Modules</h4>
+<hr>
+<p>
+	An immediately invoked function expression (IIFE) is often used to group related functionality into a single object or module.
+</p>
+<pre>
+let motionModule = (function () {
+  return {
+    glideMixin: function(obj) {
+      obj.glide = function() {
+        console.log("Gliding on the water");
+      };
+    },
+    flyMixin: function(obj) {
+      obj.fly = function() {
+        console.log("Flying, wooosh!");
+      };
+    }
+  }
+})(); // Two parentheses cause immediate invoking
+
+// Using the module with already declared objects
+motionModule.glideMixin(duck);
+duck.glide();
+</pre>
+<p>
+	Note that you have an immediately invoked function expression (IIFE) that returns an object motionModule. This returned object contains all of the mixin behaviors as properties of the object. The advantage of the module pattern is that all of the motion behaviors can be packaged into a single object that can then be used by other parts of your code.
+</p>
+
+<h3><code>this</code> keyword</h3>
+<hr>
+<p>
+The <code>this</code> keyword is attached to functions. Whenever you invoke a function, <code>this</code> is given a certain value, depending on how you invoke the function. Often called the invocation pattern.
+</p>
+<p>
+Unlike many OOP languages, there is no distinction between a function and a method definition. Rather, the distinction occurs during function calling; when a function is called as a method of an object, the function's local <em>this</em> keyword is bound to that object for that invocation.
+<br />
+The <em>this</em> keyword points to or represents the current object.
+</p>
+
+<h3>Properties and Methods (keys and functions)</h3>
+<hr>
+<p>
+	Almost all JavaScript <i>properties</i> have a value. The exceptions are null and undefined.
+</p>
+<p>
+	The <code>myString.length</code>(to get the length of a string), Date() and <code>Math.max</code> (the maximum function), are some of the many built in <i>methods</i>.
+<br />
+	These are expressions that access a property of some value. In the first case, we access the length property of the value in myString. In the second, we access the property named max in the Math object (which is a collection of mathematics-related constants and functions).
+</p>
+<p>
+	The two main ways to access properties in JavaScript are with the canonically correct <q>square brackets</q> and with the single <q>dot</q>. Both myObj[x] and myObj.x access a property of <q>myObj</q> — but not necessarily the same property. The difference is in how x is interpreted. When using a dot, the word after the dot is the <em>literal name</em> of the property e.g. "length". When using square brackets, the expression between the brackets is evaluated to get the property name. Whereas myObj.x fetches the value of the property named <q>x</q>, myObj[x] tries to evaluate the expression x and use the result, converted to a string, as the property name.
+</p>
+<p>
+	The elements in an array are stored as the array’s values, using fixed order ascending numbers as property names. Because you can’t use the dot notation with numbers, we use the bracket notation to get at them. The length property of an array tells us how many elements it has. This property name is a valid binding name, and we know its name in advance, so to find the length of an array, you typically write <code>myArray.length</code> because that’s easier to write than <code>myArray["length"]</code>, though the use of <q>square</q> brackets aids the understanding of inherited properties and methods from the prototype.
+</p>
+<p>
+	Properties that containing functions are generally called <em>methods</em>, as in "toUpperCase" is a method of a string.<br />
+	<code>myString.toUpperCase;</code> or <code>myString["toUpperCase"]();</code>
+</p>
+
+<h3>Document Object Model</h3>
+<hr>
+<p>
+	To work with the browser document JavaScript uses the browsers <em>DOM <a title="API is simply put a Web app, like an interactive web mail or social media platform." href="#api">API</a></em> (Application Programming Interface). It consist of a hierarchy of parent and child objects in a tree like structure.
+</p>
+<div class="fig-flex">
+	<figure>
+		<img title="DOM window Hierarchy" src="/getCoding/images/dom.png" width="400" alt="DOM Window Hierarchy" />
+	</figure>
+	<figure>
+		<img title="DOM HTML Hierarchy" src="/getCoding/images/domHTML.png" width="400" alt="DOM HTML hierarchy" />
+	</figure>
+</div>
+<p>
+	Each of the boxes in the images, called containers or elements are represented by objects but called "nodes" in DOM. Often references to individual nodes are required and achieved by assigning them ID's.
+</p>
+<ul class="bullet_list">
+	<li><div class="link">Window node properties include:</div>
+		<ul class="dropDown">
+			<li>"onload = myFunction;" calls the function once window has completed loading (note no parantheses when calling function. With them you get the functions result).</li>
+			<li>"setTimeout" and "clearTimeout". Example:<pre>var sayHello = setTimeout(function() { alert("Hello"); }, 1000);<br />function noAlert() {<br />	clearTimeout(sayHello);<br />}</pre></li>
+			<li>"setInterval" and "clearInterval". Example:<pre>function liveClock() {<br />	var time = new Date();<br />	document.getElementById("clock").innerHTML = '&lt;div id="clock"&gt;'time'&lt;/div&gt;<br />}<br />var updateClock = setInterval(liveClock, 1000);<br />function stopClock() {<br />	clearInterval(updateClock);<br />}</pre></li>
+		</ul>
+	<li>Window node methods include: "alert("text" or value)" and "prompt".</li>
+	<li><div class="link">Document node properties include:</div>
+		<ul class="dropDown">
+			<li>"addEventListener("event", function);". Note no parantheses when calling the function. With them you get the result, without you trigger the function. It is a very convenient way of detecting user interaction like a mouse sliding over text changing its colour or a click on a menu link revealing the content.</li>
+			<li>"URL" (read-only).</li>
+			<li>"title".</li>
+			<li>"referrer".</li>
+			<li>"lastModified" (from server).</li>
+			<li>"cookie".</li>
+			<li>"images" lists number of images and DOM location.</li>
+		</ul>
+	</li>
+	<li><div class="link">Document node methods include:</div>
+		<ul class="dropDown">
+			<li>"write"("text" or value); "writeln" can be used but it doesn't render a new line but a space in the browser.</li>
+			<li>"getElementById('id')" returns the element with the specified id.</li>
+			<li>"getElementsByClassName('class')" returns an array of the elements. Not supported by all browsers.</li>
+			<li>"querySelector('class')" new feature which is more compatible than the above. Returns first element.</li>
+			<li>"querySelectorAll(".class")" same as above but collects all elements in an array to enable looping through.</li>
+			<li>"getElementsByTagName(tag)" returns an array of tag names like body, head, div.. Can use "*" to get a list of all. Not supported by all browsers.</li>
+			<li>"createTextNode(text)" create a new text node to replace or append a existing text node found in child elements of tags. Most element nodes has no text just their children.</li>
+			<li>"createElement(tag)" creates a new HTML element. ('p'), ('div')..</li>
+			<li>"renameNode()". Example: <pre>var p = document.getElementsByTagName("P")[0];<br />document.renameNode(p, null, "h1");</pre></li> 
+		</ul>
+	</li>
+	<li>History node Property: "length". <br />Methods: "go(x), back(x), forward(x); "x" representing number of pages e.g. "back()" is the same as "go(-1)".</li>
+	<li>Location node Properties: "href, protocol, hostname, port, pathname, search, host, hash".<br />"window.location.href="http://www.homepage.org;" changes current page to "homepage.org".</li>
+</ul>
+<p class="link">
+	Node "Properties" are values one can examine and sometimes set. They include:
+</p>
+<ul class="dropDown">
+	<li>"onload" triggers event ones the node has loaded completely. Can be used with images. See "window" properties.</li>
+	<li>"nodeName" (read-only). Names of some are: body tag = body, p tag = p; special names for document and text nodes include a preceeding # e.g. #document and #text.</li>
+	<li>"nodeType" (read-only) returns an integer with values 1 for HTML tags, 3 for text nodes and 9 for the document node.</li>
+	<li>"nodeValue" is the actual text contained within a text node. Returns "null" for other types of nodes.</li>
+	<li>"value" is the value/text contained in an element node as a user entry text field.</li>
+	<li>"innerHTML" accesses the content of selected node. It manipulates the whole content including tags. Text nodes can't be added directly but written inside "". Add content with +=, erase "". Remember to add tags if replacing content.</li>
+</ul>
+<div class="link">
+	All nodes has Relationship "Properties":
+</div>
+<ul class="dropDown">
+	<li>"firstChild" or "childNode[0]" is the first child of a node.</li>
+	<li>"lastChild" is the last child of a node.</li>
+	<li>"childNodes" is an array that includes all of a node's child nodes.</li>
+	<li>"previousSibling" is the node at the same level before current node.</li>
+	<li>"nextSibling" is the node at the same level after current node.</li>
+</ul>
+<p class="link">
+Other node "Methods" within a page includes:
+</p>
+<ul class="dropDown">
+	<li>"appendChild(new node)".</li>
+	<li>"insertBefore(new node, old node)" inserts the new child node before the specified old node which must already exist.</li>
+	<li>"replaceChild(new node, old node)" replaces specified old child node with the new one.</li>
+	<li>"removeChild(node)" removes a child node.</li>
+	<li>"hasChildNodes()" return True or False.</li>
+	<li>"cloneNode()" creates a copy of a node including children if a "true" parameter is supplied.</li>
+</ul>
+<h4>Manipulating CSS properties</h4>
+<hr>
+<p>
+	Using querySelector or getElementsByClass we first find the element to manipulate. We can the view the value of a property with the getComputedStyle method, and then set values by simply assigning style properties to the selected element.
+</p>
+<pre>
+const subHead = document.querySelectorAll(".subhead"); // Creates array
+
+const cssProps = getComputedStyle(subHead[0]); // Selecting first element
+cssProps.color; // reveals the current color setting
+subHead[0].style.color = "red"; // sets colour to red
+</pre>
+<p>
+	Check if methods are unsupported by setting one to boolean
+</p>
+<pre>
+if (!!document.querySelectorAll === true) {
+  document.querySelectorAll(".subhead")[0].style.color = "red";
+}
+else {
+  document.getElementsByClassName("subhead")[0].style.color = "red";
+}
+</pre>	
+
+<h3>nodeValue, textContent, innerText and innerHTML</h3>
+<hr>
+<p>
+How these different methods deal with HTML content and code (can vary between browsers):
+</p>
+<pre>
+&lt;h1 id="head" style="color: red; text-decoration: underline"&gt;Header&lt;/h1&gt;&lt;p&gt;First Paragraph&lt;/p&gt;&lt;p&gt;Second paragraph&lt;/p&gt;
+
+alert(document.getElementById("head").firstChild.nodeValue);
+alert(document.getElementById("head").textContent);
+alert(document.getElementById("head").innerText);
+alert(document.getElementById("head").innerHTML);
+</pre>
+<p>
+	All methods alert <u>only</u> the text content, meaning they can all be safely used to <u>only</u> modify the text value.
+<pre>
+alert(document.body.innerHTML);
+alert(document.body.innerText);
+alert(document.body.textContent);
+</pre>
+<p>
+	In this example there are differences. Firstly nodeValue displays "null" and:
+</p>
+<ul>
+	<li>innerHTML - displays the whole HTML code.</li>
+	<li>innerText - displays the <em>text</em> as we see it on the web page, with appropriate paragraphs as instructed by the HTML code (resource hungry).</li>
+	<li>textContent - displays the <em>text</em> as a string removing all HTML code (tags).</li>
+</ul>
+<p>
+	<b>Caution:</b> these methods effectively deletes all child nodes of an element.
+</p>
+
+<h3>node.value</h3>
+<hr>
+<p>
+	<code>value</code> is used with element nodes like text input boxes.
+</p>
+
+<h3>Data types</h3>
+<hr>
+<p>
+	In computer science, data is anything that is meaningful to the computer. JavaScript provides nine different data types:<br />
+	<i>undefined, null, boolean, string, number, symbol, bigInt, function</i> and <i>object</i>.
+</p>
+<p>
+	Data types are not declared in JS and a variable can contain any of the recognised ones and also be modified by script without producing any warnings potentially triggering errors.<br />
+	<em>Typescript</em> uses declaration of types to avoid this potential issue.
+</p>
+<pre>
+typeof undefined; // "undefined"
+typeof null; // "object"
+typeof true; // "boolean"
+typeof ""; // "string"
+typeof 1; // "number"
+typeof Symbol(); // "symbol"
+typeof 1n; // "bigint"
+typeof function() {}; // "function"
+typeof Object(); // "object"
+</pre>
+
+<h3>Object freeze and Object seal</h3>
+<hr>
+<p>
+	To protect objects JavaScript provides two method, <code>Object.freeze</code> to prevent data mutation and <code>Object.seal</code> to prevent addition of properties and re-configuration.
+</p>
+<p>
+	With <strong>freeze</strong> you can no longer add, update, or delete properties from it. Any attempt at changing the object will be rejected without an error.
+</p>
+<p>
+	With <strong>seal</strong> it prevents new properties from being added to it and marking all existing properties as non-configurable. Values of present properties can still be changed as long as they are writable.
+</p>
+
+<h3>Strict Mode</h3>
+<hr>
+<p>
+	The <i>"use strict"</i> enables Strict Mode, which catches common coding mistakes and "unsafe" actions. For instance:
+</p>
+<pre>
+"use strict";
+x = 3.14; // throws an error as x is not declared
+</pre>
+
+<h3>JS Operators</h3>
+<hr>
+<p>
+	JavaScript operators and precedence work for the most part the same way as C, C++, Java and PHP.
+</p>
+<ul class="no_bullet_list">
+	<li><b>+</b> Add</b>ition</li>
+	<li><b>-</b> Subtraction</li>
+	<li><b>*</b> Multiplication</li>
+	<li><b>/</b> Division</li>
+	<li><b>%</b> Modulus (Division Remainder)</li>
+	<li><b>++</b> Increment</li>
+	<li><b>--</b> Decrement</li>
+    <li><b>&lt;&lt; &gt;&gt;</b> Bitwise shift</li>
+	<li><b>**</b> Exponentiation (ES2016)</li>
+	<li><b>e</b> Euler constant</li>
+    <li><b>&&</b> And (ampersand)</li>
+    <li><b>||</b> Or</li>
+    <li><b>&gt;= &lt;= &gt;</b> Greater or equal to (compare)</li>
+</ul>
+<p>
+	Bitwise shifting example:<br />
+	<code>2 &lt;&lt; 2; // 8 ( 0010 shifted left 2 spaces = 1000 )</code><br />
+	A shift of one space left or right is the same as multiplying or dividing the value by 2. Shift of two multiply by 4, and so on. 
+</p>
+<p>
+	Incrementation example<br />
+	<code>let a = 1;<br />
+	let b = a++; // increment after ( b = 1 & a = 2 )<br />
+	let c = ++a; // increment before ( c = 3 & a = 3 )<br />
+	console.log(--c); // decrement before ( c = 2 & a remain unchanged as we only changed c)</code>
+</p>
+	
+<h4>Comparison operators</h4>
+<p>
+	Strict and non-strict comparison operators: <code>1 === true</code> returns <code>false</code> , while <code>1 == true</code> returns <code>true</code>.
+</p>
+<p>
+	<b>==</b> translates a numeric string into numbers (parse) before comparing. Alpha strings compare the elements chronologically from element to element.
+</p>
+<pre>
+"123" == 123; // true
+"123" === 123; // false
+"b" > "abc"; // true
+"abc" > "ace" // false
+</pre>
+
+<h4>Greater, Smaller and Equal to</h4>
+<p>
+	<em>Lexical</em> comparison is simply if the first character in the two strings are higher or lower in the alphabetic order. If the values are equal the next characters are compared, and so on (applies to both alpha and numerical values). Comparing a string and a number will as mentioned above result in the string being parsed to a number before the comparison.
+</p>
+<pre>
+"aab" &lt; "abc"
+2 > 1
+"2" > 1
+</pre>
+
+<h3>Math methods and properties</h3>
+<hr>
+<p>Examples of calculations with some of the many variations of the built in <code>Math</code> method:</p>
+<ul>
+	<li>Math.abs(3 - 5); // 2; return the positive value of any number</li>
+	<li>Math.round(3.49); // 3</li>
+	<li>Math.floor(3.9); // 3</li>
+	<li>Math.ceil(3.01); // 4</li>
+	<li>Math.max(-1, -0.3, -0); // -0</li>
+	<li>Math.min(3.3, -1.1, 0); // -1.1</li>
+	<li>Math.pow(3, 3); // 27; second argument is the exponent</li>
+	<li>Math.sqrt(64); // 8</li>
+	<li>Math.random(); // float between 0 and 1</li>
+	<li>Math.cos(Math.PI); // -1; Radians as arguments</li>
+</ul>
+<p>And some of the built in properties:</p>
+<ul>
+	<li>Math.PI; // 3.141592653589793</li>
+	<li>Math.E; // 2.718281828459045; Base of natural logarithms</li>
+</ul>
+
+<h3>if...else statement</h3>
+<hr>
+<p>
+	The if statements are used to test if conditions exist or not, and then to proceed with whatever code is present inside the block.
+</p>
+<p>
+	It is important to remember that <u>everything</u> in JS can be tested to either <code>true</code> or <code>false</code>, and that is exactly what is happening within the if statements parentheses.<br />Unless told otherwise by the operator, conveniently everything in JS is <code>true</code> exept for the <q>falsy</q> values.
+</p>
+<p>
+	<code>else if</code> can contain additional parameters to be tested. While <code>else</code> simply runs everything that was not accepted by the <code>if</code> statement.
+</p>
+<pre>
+let x = 0;
+if (x === 0) {
+	alert(`Value of x is ${x} which is Boolean "${!!x}"`);
+}
+else if (x === 1) {
+	alert(`Value of x is ${x} which is Boolean "${!!x}"`);
+}
+else { // if x is neither 0 nor 1, reset x to 0
+	alert(`Value of x is ${x}, but will be changed to "0" as I only want 0-1 values.`);
+	x = 0;
+}
+</pre>
+<p>
+	<strong>Note:</strong> This particular example can be exchanged for a <q>switch</q> statement.
+</p>
+
+<h3>Functions</h3>
+<hr>
+<p>Functional terminology</p>
+<ul>
+	<li>Callbacks - functions that are passed into other functions. As the name suggest this function is called by the higher order function it is passed to.</li>
+	<li>First class - functions that can be assigned to a variable, passed into another function, or returned from another function just like any other normal value. In JS all functions.</li>
+	<li>Higher order - functions that take a function as an argument, or return a function as a return value.</li>
+	<li>Lambda - functions that are passed in to another function or returned from another function.</li>
+	<li>Arity - number of required arguments. <code>n</code> arity.</li>
+	<li>Currying - is restructuring a function so it takes one argument, then returns another function that takes the next argument, and so on.</li>
+</ul>
+<p>
+<strong>Functions</strong> are  declared by writing <code>function myFunction() {</code> some code <code>};</code>. Since functions are objects in JS and because of this they can take functions as arguments, and return other functions. These are called <em>higher-order</em> functions. Any function being passed as an argument is a <em>callback</em> function. This allows to control the order of the functions being called. e.g. if a condition exist run a new function, if not do something else.
+</p>
+<pre>
+function homeWork (subject, callback = function () { alert('Almost there.');}) { // standard value for callback argument
+  alert(`I'm studying ${subject} right now.`); // template literals
+  callback();
+}
+function finished () {
+  alert('I\'ve finished my homework.'); // classical string with escape character
+}
+homeWork('math'); // I'm studying math right now. Almost there.
+homeWork('math', finished); // I'm studying math right now. I've finised my homework.
+</pre>
+
+<h4><q>this</q>and <q>arguments</q> variables</h4>
+<hr>
+<p>
+	A function gets two free variables automatically when created, namely <q>this</q> and <q>arguments</q>.
+</p>
+<h4>Normal functions</h4>
+<p>
+	<q>this</q> is always an object <em>placeholder</em>: either the provided object if called with an object-valued <q>this</q>; the value, boxed, if called with a Boolean, string, or number this; or the global object if called with an undefined or null <q>this</q>.
+</p>
+<h4>'use strict' functions</h4>
+<p>
+	Not only is automatic boxing a performance cost, but exposing the global object in browsers is a security hazard because the global object provides access to functionality that "secure" JavaScript environments must restrict. Thus for a strict mode function, the specified <q>this</w> is not boxed into an object, and if unspecified, this will be undefined:
+</p>
+<p>
+	Neither of these variables are assigned before the function is executed and will change throughout a program if the function is executed from different operations.
+</p>
+<h4>When to use "this"</h4>
+<p>
+	If a normal function is <em>directly invoked</em> (also called "simple call", it is directly executed) the <q>this</q> <em>placeholder</em> typically points to the <q>document <em>window</em> object</q> in JS.<br />In Node.js <q>this</q> points to something very different.<br />
+	<code>(function () { console.log(`"this" is a placeholder for ${this}`); })();</code><br />
+	<code>( () => console.log(`"this" is a placeholder for ${this}`) )();</code> // even works with arrow functions.<br />
+	<strong>Note:</strong> Don't use the <q>this</q> keyword in directly invoked functions.
+</p>
+<p>
+	In an <em>indirectly</em> <q>invoked</q> function (executed by an object) <q>this</q> points to that object invoking the function. The object preceding the <q>dot</q><br />
+	<code>myObj.myFunc() {<br />  console.log(`"this" is a placeholder for ${this}`);<br />};</code>
+</p>
+<h4>Override "this" and "args"</h4>
+<p>
+	We can override the value of these two variables by using some prototypes of the <q>Function</q> object the <q>class functions</q> formerly <q>static functions</q>,<br /> <code>Function.apply</code> and <code>Function.call</code>.
+</p>
+<p>
+	<code>apply()</code> takes exactly two parameters: the <q>this</q> placeholder value and an array of the <q>arguments</q>.<br />
+	<code>call()</code> takes parameters: <q>this</q> placeholder value, followed by the </q>arguments</q>.<br />
+	<code>bind()</code> creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.<br />
+	The simplest use of <code>bind()</code> is to make a function that, no matter how it is called, is called with a particular this value.<br />
+	A common mistake for new JavaScript programmers is to extract a method from an object, then to later call that function and expect it to use the original object as its this (e.g., by using the method in callback-based code).<br />
+	Without special care, however, the original object is usually lost. Creating a bound function from the function, using the original object, neatly solves this problem.
+</p>
+<pre>
+function myFunc(a, b) {
+  console.log(this + a + "\n" + this + b);
+}
+myFunc.apply("Tom is ", ["Awesome", "Sexy"]);
+myFunc.call("Tom is ", "Fantastic", "Smart");
+</pre>
+
+<h4>Default Function Parameter</h4>
+<hr>
+<p>
+	A function can accept default value for missing parameters:
+</p>
+<pre>
+function greeting = (name = "Anonymous") {
+  return "Hello " + name;
+}
+console.log(greeting("John")); // Hello John
+console.log(greeting()); // Hello Anonymous
+</pre>
+
+<h4>Function Rest operator</h4>
+<hr>
+<p>
+	In ES6 <q>the rest</q> parameter was introduced, allowing infinite parameters to be passed to a function without the need to write them in the function call parameters individually. The syntax is <code>...</code> and it is common to match it with <code>args</code> for function arguments and <code>rest</code> in an array.
+</p>
+<p>
+	The function arguments array:
+</p>
+<pre>
+function sum(...args) {
+  return "You have passed " + args.length + " parameters";
+}
+</pre>
+<p>
+	Extracting <q>the rest</q> or left-overs from an array:
+</p>
+<pre>
+const myArr = [1,20,3,45,5];
+const [a, b, c, ...rest] = myArr.sort((a, b) => a - b);
+</pre>
+<p>
+	Create array of a string element:
+</p>
+<pre>
+const myStr = "This is confusing";
+[...myStr].forEach(e => console.log(e));
+</pre>
+
+<h4>Spread operator</h4>
+<hr>
+<p>
+	Allows us to expand arrays and other <q>iterable</q> expressions in places where multiple parameters or elements are expected. Where in ES5 <code>apply</code> was used to change arguments from an <em>array</em> into comma separated, we can now use the ES6 <code>...</code> spread operator.
+</p>
+<pre>
+const myStr = "Good morning";
+const myNum = 13;
+let spreadArr = [...myStr];
+spreadArr = [...spreadArr, ...spreadArr];
+spreadArr = [...myNum]; // TypeError: num is not iterable
+</pre>
+<pre>
+var arr = [6, 89, 3, 45];
+var maximus = Math.max.apply(null, arr); // returns 89
+</pre>
+<p>
+	We had to use Math.max.apply(null, arr) because Math.max(arr) returns NaN. Math.max() expects comma-separated arguments, but not an array. The spread operator makes this syntax much better to read and maintain.
+</p>
+<pre>
+const arr = [6, 89, 3, 45];
+const maximus = Math.max(...arr); // returns 89
+</pre>
+<p>
+	Concatination of arrays made easy with the spread operator:
+</p>
+<pre>
+const arr1 = [3,4,5];
+const arr2 = [0,1,2];
+const Arrays = [...arr2, ...arr1];
+</pre>
+<p>
+	<strong>Note:</strong> <code>...arr</code> returns an unpacked array. In other words, it spreads the array. However, the spread operator only works in-place, like in an argument to a function or in an array literal. The following code will not work:
+</p>
+<pre>
+const spreaded = ...arr; // will throw a syntax error
+</pre>
+
+<h4>Currying functions</h4>
+<hr>
+<p>
+	This is useful in your program if you can't supply all the arguments to a function at one time. You can save each function call into a variable, which will hold the returned function reference that takes the next argument when it's available.
+</p>
+<pre>
+//Un-curried function
+function unCurried(x, y) {
+  return x + y;
+}
+
+//Curried function
+function curried(x) {
+  return function(y) {
+    return x + y;
+  }
+}
+//Alternative using ES6
+const curried = x => y => x + y
+curried(1)(2) // Returns 3
+
+// Call a curried function in parts:
+var funcForY = curried(1);
+console.log(funcForY(2)); // Prints 3
+</pre>
+<p>
+	Partial application can be described as applying a few arguments to a function at a time and returning another function that is applied to more arguments.
+</p>
+<pre>
+//Impartial function
+function impartial(x, y, z) {
+  return x + y + z;
+}
+var partialFn = impartial.bind(this, 1, 2);
+partialFn(10); // Returns 13
+</pre>
+
+<h4>Immediately Invoked Function Expression (IIFE)</h4>
+<hr>
+<p>
+	These functions are invoked as soon as the program runs and are anonymous. And often used to create <a href="#
+	modules">modules</a>.
+</p>
+<pre>
+(function() {
+	alert("Good morning!");
+})();
+</pre>
+
+<h3>Set object</h3>
+<hr>
+<p>
+	Is a special object than holds <u>only</u> unique values. Unlike other object types we can iterate through the property values in <u>insertion</u> order.
+</p>
+<p>
+	The constructor is <code>Set();</code><br />
+	<a title="Set Object Methods from MDN" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Mozilla Developer Network</a>
+</p>
+<pre>
+let mySet = new Set()
+
+mySet.add(1)           // Set [ 1 ]
+mySet.add(5)           // Set [ 1, 5 ]
+mySet.add(5)           // Set [ 1, 5 ]
+mySet.add('some text') // Set [ 1, 5, 'some text' ]
+let o = {a: 1, b: 2}
+mySet.add(o)
+
+mySet.add({a: 1, b: 2})   // o is referencing a different object, so this is okay
+
+mySet.has(1)              // true
+mySet.has(3)              // false, since 3 has not been added to the set
+mySet.has(5)              // true
+mySet.has(Math.sqrt(25))  // true
+mySet.has('Some Text'.toLowerCase()) // true
+mySet.has(o)       // true
+
+mySet.size         // 5
+
+mySet.delete(5)    // removes 5 from the set
+mySet.has(5)       // false, 5 has been removed
+
+mySet.size         // 4, since we just removed one value
+</pre>
+<p>
+	This example turns random arrays into a set object before transforming it back to an array with the spread operator.
+</p>
+<pre>
+function uniteUnique(...arr) {
+	let _concArr = new Array;
+	return [...new Set(_concArr.concat(...arr))]; // [...set] return an array
+}
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+// Expected return: Array(5) [ 1, 3, 2, 5, 4 ]
+</pre>
+
+<h3>Arrays</h3>
+<hr>
+<p>
+	<em>Arrays</em> can be declared in two main ways. With the <q>new</q> keyword creating an object instance from the Array prototype, or the more common square bracket way:
+</p>
+<pre>
+const x = new Array(1,2,3,"a","b","c");
+</pre>
+<p>
+	or
+</p>
+<pre>
+const x = [1,2,3,"a","b","c"];
+const y = [];
+</pre>
+<p>
+	<strong>Note:</strong> The use of <code>()</code> and <code>[]</code>.
+</p>
+<p>
+	Arrays can contain other arrays or be <i>nested</i>:
+</p>
+<pre>
+[["Bulls", 23], ["White Sox", 45]]
+</pre>
+<p>
+	This is also called a multi-dimensional array.
+</p>
+<p>
+	The <em>length</em> property tells us the number of indexes contained within the array e.g. <code>myArray.length</code>.
+</p>
+
+<h3>Some Array Methods</h3>
+<hr>
+<a title="Array Methods at MDN" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Mozilla Developer Network</a>
+<ul>
+	<h4>Add and Remove</h4>
+	<li>pop() - removes the last element and returns that element.</li>
+	<li>push(<i>value</i>) - adds one or more elements to the end of the array and returns the new array length.</li>
+	<li>shift() - removes the first element and returns that element.</li>
+	<li>unshift(<i>value</i>) - adds one or more elements to the front of the array and returns the new array length.</li>
+	
+	<h4>Join and String</h4>
+	<li>concat() - returns a new array comprised of this array joined by others.</li>
+	<li>join() - joins all element into a string.</li>
+	<li>toString() - returns a string representing the elements of the array.</li>
+	
+	<h4>Copy(slice), Cut and Paste(splice)</h4>
+	<li>slice() - copies a section or the entire array.<br />
+		<strong>Note:</strong> as Arrays are Objects in JS, <code>arr2 = arr1;</code> simply creates a pointer from arr2 to arr1. Modifying either array changes the other. <code>arr2 = arr1.slice(); //or .concat();</code> creates a separate Object and can be modified separately.</li>
+	<li>splice(<i>index number</i>, <i>number of indexes to be remove(can be 0), value to insert at index, more values separated by comma</i>) - adds/removes values from the array.</li>
+		
+	<h4>Locate</h4>
+	<li>includes() - <strong>search</strong> array for value. Returns <i>bolean</i>.</li>
+	<li>indexOf() - returns the <em>first</em> index of an element (not only single value) equal to the specified criteria, or -1 if not found.</li>
+	<li>lastIndexOf() - returns the <em>last</em> index of an element equal to the specified criteria, or -1 if not found.</li>
+	<li>some() - returns <em>true</em> if one of the elements satifies the provided testing function.</li>
+	
+	<h4>Change</h4>
+	<li>map() - calls a provided function on every element in an array without modifying it.</li>
+	<li>reduce() - apply a function simultaneously against two elements from <em>left to right</em> as to reduce it to a single value.<br /> <code>myArray.reduce((a, b) => console.log(a + b));</code> Shortens the array to pass two parameters to the addition function.</li>
+	<li>reduceRight() - as reduce but from <em>right to left</em>.</li>
+	<li>reverse() - reverse the order of the elements.</li>
+	<li>sort() - sorts the array alphabetically. <code>sort((a,b) => a-b);</code> sort the array numerically.</li>
+	<li>every() - returns true if every element satifies the provided testing function.</li>
+	<li>filter(<i>word => word.length > 6</i>) - returns the array based on the elements that passed through the filter.</li>
+	<li>forEach(<i>element => console.log(element)</i>) - calls a function for each element in the array.</li>
+	<li>fill(<i>value, from index, to index</i>) - replaces the array elements with the specified value. Optional <i>from</i> and <i>to</i> index can be supplied.</li>
+</ul>
+<p>Serial use of some methods:</p>
+<code>
+myArr.filter(num =&gt; num &lt; 0).sort((a,b) =&gt; b-a).map(num =&gt; num-5).join("").split(" ").splice(0,1).reverse().reduce((a,b) =&gt; a-b);
+</code>
+<p>
+	<strong>Locate placement of letters in a word string with <b>Tom's</b> letterFinder function:</strong><br />
+	<small>Methods used: includes(), push(), indexOf(), lastIndexOf(), map(), sort() and pop() .</small>
+</p>
+<pre>
+function letterFinder(word, letter) {
+ let iArr = [];
+ let i = 0;
+ let foundNum = 0;
+
+ // Sorting the array function
+ function numberCompare (a, b) {
+  return a-b;
+ }
+
+ // Is the letter present in the word: bolean?
+ let found = word.includes(letter);
+
+ // Discovered no letters
+ if (found !== true) {
+  alert("Letter not found");
+  return;
+ }
+
+ // Discovered letters
+ else {
+  iArr.push(word.indexOf(letter)); // Locates <u>only</u> the first index
+  iArr.push(word.lastIndexOf(letter)); // Locates <u>only</u> the last index
+
+  // Discovered 2 or more letters
+  if (iArr[0] !== iArr[1]) {
+   foundNum = 2;
+  }
+
+  // Discovered one letter
+  else {
+
+   // Increment index to indicate letter location
+   iArr = iArr.map(x => x+1);
+
+   alert("Found one letter at place " + iArr[0]);
+   return;
+  }
+ }
+ // Create new string between first and last found letters index.
+ // Shifting index[0] by one as it should not be included
+ let wordSubString = word.substring((iArr[0] + 1), iArr[1]);
+
+ // Do we find more instances of the letter or are there only 2?
+ found = wordSubString.includes(letter);
+
+ // Discovered 2 letters
+ if (found !== true) {
+
+  // Increment index to indicate letter location
+  iArr = iArr.map(x => x+1);
+
+  alert("Found " + foundNum + " letters at space " + iArr.slice(0,2));
+  return;
+ }
+ // Discovered more letters
+ // Max 4 letters can be discovered with this function at the moment
+ else {
+  iArr.push(wordSubString.indexOf(letter));
+  iArr.push(wordSubString.lastIndexOf(letter));
+
+  iArr[2] = iArr[2]+iArr[0]+1;	// Compensating index location
+  iArr[3] = iArr[3]+iArr[0]+1;
+
+  // Discovered 4 and more letters
+  if (iArr[2] !== iArr[3]) {
+   foundNum += 2;
+  }
+  // Discovered 3 letters
+  else {
+   // Pop the last index off as it was the same as the previous
+   iArr.pop();
+
+   // Sort array
+   iArr = iArr.sort(numberCompare);
+
+   // Increment number of discovered letters before printing
+   foundNum++;
+
+   // Increment index to indicate letter location
+   iArr = iArr.map(x => x+1);
+
+   alert("Found " + foundNum + " letters at places " + iArr.slice(0,3));
+   return;
+  }
+  // Discovered 4 letters
+
+  // Sorting the array
+  iArr = iArr.sort(numberCompare);
+
+  // Increment index to indicate letter location
+  iArr = iArr.map(x => x+1);
+
+  alert("Found " + foundNum + " letters at places " + iArr.slice(0,4));
+ }
+}
+</pre>
+
+<h3>Strings</h3>
+<hr>
+<h4>Parse</h4>
+<p>
+	When manipulating strings we sometimes stumble across the term "parse". This term comes from Latin pars (orationis), meaning part (of speech).<br />
+	In essence this is the computer language translating a strings numeric value into numbers.
+</p>
+<pre>
+parseInt("123.456abc"); // 123
+parseFloat("123.456abc"); // 123.456
+</pre>
+<p>
+	Escape Sequences
+</p>
+<ul>
+	<li>\'	single quote</li>
+	<li>\"	double quote</li>
+	<li>\\	backslash</li>
+	<li>\n	newline</li>
+	<li>\r	carriage return</li>
+	<li>\t	tab</li>
+	<li>\b	word boundary</li>
+	<li>\f	form feed</li>
+</ul>
+<p>
+String values are <i>immutable</i> which means we can <u>not</u> change individual chars within a string once declared, we then need to declare the new string value over again.
+</p>
+<p>
+The <em>length</em> property in a string array tells us the length of the string, similar to in an array, each char in a string has an index. They are in fact <em>string arrays</em>
+</p>
+
+<h4>Substring in 3 ways</h4>
+<hr>
+<p><code>const myString = "I am learning JavaScript!";</code></p>
+<ol>
+	<li><code>myString.substring(0, 10); //"I am learn"</code> With 1 parameter <code>myString.substring(5); //"learning JavaScript!"</code></li>
+	<li><code>myString.slice(0, 10); //"I am learn"</code> With negative parameter <code>myString.slice(-5); //"learn"</code></li>
+	<li><code>myString.substr(5, 5); //"learn"</code> With 1 parameter <code>myString.substr(14); //"JavaScript!"</code></li>
+</ol>
+<p>
+	Conclusion. <code>substring()</code> and <code>slice()</code> are the preferred methods. They function similarly with start and end index. <code>slice()</code> has the useful feature of being able to start at the end of the string utilising negative parameters.
+</p>
+<p>
+	The <code>substr()</code> is considered a legacy method and should be avoided. It uses the length parameter instead of the end index.
+</p>
+<p>
+	<strong>Note:</strong> None of these methods change the original <code>string</code>.
+</p>
+<h3>Search a string</h3>
+<hr>
+<p>
+	Similarly to an array we can search values withing a string in a few ways:
+</p>
+<p>
+	<strong>Bolean result:</strong>
+</p>
+<pre>
+let myName = "Tom";
+let myChar = myName.includes("t");
+// false
+myChar = myName.includes("T");
+// true
+</pre>
+<p>
+	<strong>Display character:</strong>
+</p>
+<pre>
+myString = "Alphabet";
+alert("MyString character at 4th position is " + myString[3]);
+</pre>
+
+<h4>Trimming a string</h4>
+<hr>
+<p>
+	A very handy method to trim away unnecessary white space surrounding a string, are the <code>trim, trimStart, trimEnd, trimLeft</code> and <code>trimRight</code> methods.
+</p>
+<pre>
+const myStr = (" Hey We are happy   here   ");
+myStr.trim(); // "Hey We are happy   here"
+</pre>
+
+<h4>Splitting and Joining Strings</h4>
+<hr>
+<p>
+	The split() and the Array.from() methods can be used to split a string into an array.
+</p>
+<p>
+	The Array.from() method can map a function to apply to all elements in the array as well as setting the <q>this</q> value when executing the map function, as optional features.
+</p>
+<pre>
+myString = "Good Morning!";
+Array.from(myString, e => e.console.log(e + "\n"));
+</pre>
+<p>
+	The split() and join() methods gives the opportunity to split and join at any point and can also be used with RegExp.
+</p>
+<pre>
+const myString = "abc!ABC 123";
+
+myString.split(/\W/); // ["abc", "ABC", "123"] non-letter split
+myString.split(""); // ["a","b","c","!","A","B","C"," ","1","2","3"]
+myString.split(" "); // ["abc!ABC","123"] /* Removes white space and splits */
+myString.split("  "); // ["abc!ABC 123"]
+myString.split("B"); // ["abc!A", "C 123"]</code> /* Removes "B" and splits */
+
+const myArray = ["a","b","c",1,2,3];
+
+myArray.join(); // "a,b,c,1,2,3"
+myArray.join(""); // "abc123"
+myArray.join(" "); // "a b c 1 2 3"
+myArray.join("0 F"); // "a0 Fb0 Fc0 F10 F20 F3"
+</pre>
+<a title="External link" href="https://www.freecodecamp.org/news/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb/" target="_blank">3 ways to Reversing a String. Interview Prep</a>
+<p>
+<em>Sorting string array</em> - ".sort". <em>Sorting numeric array</em> require a comparing function:
+</p>
+<pre>
+function numberCompare(a,b) {
+	return a-b;
+}
+myArray.sort(numbercompare);
+</pre>
+<p>
+This function takes two values at a time and if the return is negative JS knows it is lower than a positive number.
+</p>
+
+<h3>Numeric Base System conversion with Radix</h3>
+<hr>
+<p>
+The <code>parseInt()</code> and <code>parseFloat()</code> methods parses a string and returns a <em>decimal</em> number. However <code>parseInt</code> can accept a second argument for radix, which specifies the base of the number in the string. The radix can be an integer between 2 and 36, representing the base systems 2, 3, 4, 5, 8, 10, ,12, 16, 20, 24, 26, 27, 30, 32 and 36.
+</p>
+<p>
+	The most relevant base systems are:
+</p>
+<ul class="no_bullet_list">
+	<li>base 2 = binary</li>
+	<li>base 8 = octal</li>
+	<li>base 10 = decimal</li>
+	<li>base 16 = hexadecimal</li>
+</ul>
+<p>
+	As <code>parseInt()</code> always returns a base 10 number, we need a different method converting to other base systems. <code>toString()</code> has this functionality.
+</p>
+<pre>
+let n = 123.4; 
+n = n.toString(16); // converts to hex
+n = parseInt(n, 16); // converts to dec loosing precision
+n = n.toString(2); // converts to bin
+n = parseInt(n, 2); // converts to dec
+parseInt("3c"); // converts without radix as dec is default
+</pre>
+<p>
+	Word to Binary and back
+</p>
+<pre>
+function wordBin(str) {
+	/* Is the argument string a number? */
+	if (Number(str))
+		return str.split(" ").map(e => String.fromCharCode(parseInt(e, 2))).join("");
+	/* If not a number we treat it as a string of characters */
+	else
+		return str.split("").map(e => e.codePointAt().toString(2)).join(" ");
+}
+wordBin('Tom Storebø');
+wordBin('1000001');
+</pre>
+
+<h3>Template Literals</h3>
+<hr>
+<p>
+	These are enclosed by the backtick <code>` `</code> (grave accent) character instead of double or single quotes.
+</p>
+<p>
+	They are string literals allowing embedded expressions, use of multiple line strings and string interpolation features.
+</p>
+<p>
+	They were called <em>template strings</em> in prior editions of the ES2015 specification.
+</p>
+<h5>Multiple lines</h5>
+<pre>
+/*
+First line
+Second line
+*/
+console.log("First line\nSecond line");
+// Becomes
+console.log(`First line
+Second line`);
+</pre>
+
+<h5>Expression Interpolation</h5>
+<pre>
+/*
+Fifteen is 15.
+*/
+let a = 5;
+let b = 10;
+console.log("Fifteen is " + (a + b) + ".");
+// Becomes
+console.log(`Fifteen is ${a + b}.`);
+</pre>
+
+<h5>Nesting Templates</h5>
+<p>
+	In certain cases, nesting a template is the easiest (and perhaps more readable) way to have configurable strings. Within a back-ticked template, it is simple to allow inner back-ticks simply by using them inside a placeholder ${ } within the template.
+</p>
+<pre>
+// ES5
+let classes = 'header';
+classes += (isLargeScreen() ?
+  '' : item.isCollapsed ?
+    ' icon-expander' : ' icon-collapser');
+
+// In ES2015 with template literals and without nesting:
+const classes = `header ${ isLargeScreen() ? '' :
+  (item.isCollapsed ? 'icon-expander' : 'icon-collapser') }`;
+
+// In ES2015 with nested template literals:
+const classes = `header ${ isLargeScreen() ? '' :
+  `icon-${item.isCollapsed ? 'expander' : 'collapser'}` }`;
+</pre>
+
+<h5>Tagged Templates</h5>
+<p>
+	A more advanced form of template literals are tagged templates.
+</p>
+<p>
+	Tags allow you to parse template literals with a function. The first argument of a tag function contains an array of string values. The remaining arguments are related to the expressions.
+</p>
+<p>
+	The tag function can then perform whatever operations on these arguments you wish, and return the manipulated string. (Alternatively, it can return something completely different, as described in one of the following examples.) 
+</p>
+<p>
+The name of the function used for the tag can be whatever you want.
+</p>
+<pre>
+let person = 'Mike';
+let age = 28;
+
+function myTag(strings, personExp, ageExp) {
+  let str0 = strings[0]; // "That "
+  let str1 = strings[1]; // " is a "
+
+  // There is technically a string after
+  // the final expression (in our example),
+  // but it is empty (""), so disregard.
+  // let str2 = strings[2];
+
+  let ageStr;
+  if (ageExp > 99){
+    ageStr = 'centenarian';
+  } else {
+    ageStr = 'youngster';
+  }
+
+  // We can even return a string built using a template literal
+  return `${str0}${personExp}${str1}${ageStr}`;
+}
+
+let output = myTag`That ${ person } is a ${ age }`;
+
+console.log(output);
+// That Mike is a youngster
+</pre>
+<p>
+	Tag functions don't even need to return a string!
+</p>
+<pre>
+function template(strings, ...keys) {
+  return (function(...values) {
+    let dict = values[values.length - 1] || {};
+    let result = [strings[0]];
+    keys.forEach(function(key, i) {
+      let value = Number.isInteger(key) ? values[key] : dict[key];
+      result.push(value, strings[i + 1]);
+    });
+    return result.join('');
+  });
+}
+
+let t1Closure = template`${0}${1}${0}!`;
+t1Closure('Y', 'A');                      // "YAY!"
+let t2Closure = template`${0} ${'foo'}!`;
+t2Closure('Hello', {foo: 'World'});       // "Hello World!"
+</pre>
+
+<h3>Regular Expressions (RegExp)</h3>
+<hr>
+<p>
+	<code>myString = "ant DOG bog 123";</code>
+</p>
+<p>
+	Flags: i = ignore case; g = global (all over the string);<br />
+	Symbols: + = one or more chars; * = zero or more; ^ = start of string; [^] = exclude; $ = end; . = wildcard; \. = dot; ? = optional/lazy match.<br />
+	Match number: {3} = 3 matches; {2,} = 2 or more matches; {3,4} = 3 to 4 matches. <strong>Note:</strong> Don't use + or * with these.<br />
+	Short: \w = match alphanumeric; \W = non-alphanumeric; \d = numbers; \D = non-numbers; \s = whitespace; \S = non-whitespace;
+</p>
+
+<h4>Testing for Regular Expressions</h5>
+<hr>
+
+<p>
+	There are subtle differences in our 3 methods for testing for <em>regexp</em>.<br />
+	Test and Exec methods takes the regexp and checks if the string contains any of the criteria.<br />
+	Match method takes the string and checks if the regexp meets the criteria.
+</p>
+<ul>
+	<li>Testing <em>method</em> returns <em>Boolean</em>: <code>/ANT|dog/.test(myString); // false</code> With "i" flag to ignore case: <code>/dog/i.test(myString; // true</code></li>
+	<li>Exec <em>method</em> return <em>Array</em> of matching Chars or <em>null</em>: <code>/^[A-Z]/.exec(dog); // null</code></li>
+	<li>Matching <em>method</em> return <em>Array</em> of matching Chars or <em>null</em>: <code>myString.match(/[db]og/ig); //"DOG bog"</code> With wildcard <code>myString.match(/.og/i); //"DOG"</code></li>
+</ul>
+
+<h4>The dual meaning of the <q>?</q> in RegExp</h4>
+<hr>
+
+<h5>Lazy vs Greedy Match Mode</h5>
+<p>
+	RegExp is normally in <q>greedy match mode</q> meaning it searches for the longest string matching the criteria. To change this to <q>lazy match mode</q> we use the ? character:
+</p>
+<pre>
+const myString = "Titanic";
+myString.match(/t[a-z]*i/i); //"Titani" * Greedy Mode
+myString.match(/t[a-z]*?i/i); //"Ti" * Lazy Mode
+</pre>
+
+<h5>Optional Character</h5>
+<p>
+	The other meaning of the ? is as the optional character, while identifying string values:
+</p>
+<code>
+myString.match(/t[a-z]*i?/i); //"Titanic"</code> only moving it behind the last identifiable character changes the whole meaning of this character.
+</code>
+
+<h4>Conditional operands in RegExp</h4>
+<hr>
+<p>
+	Here's my username validity checker from freeCodeCamp.org:<br />
+	The username has to be minimum 2 chars and only alpha in that case. More than two chars allows only one alpha and rest numbers. Numbers have to be at the end.
+</p>
+<code>
+/^[a-z]{2,}$|^[a-z]{2,}[\d]*$|^[a-z][\d]{2,}$/i;
+</code>
+
+<h4>Positive and negative look aheads</h4>
+<hr>
+<p>
+	A positive look ahead will look to make sure the element in the search pattern is there, but won't actually match it. A positive look ahead is used as (?=...) where the ... is the required part that is not matched.
+</p>
+<p>
+	On the other hand, a negative look ahead will look to make sure the element in the search pattern is not there. A negative look ahead is used as (?!...).
+</p>
+<p>
+	Returns <u>null</u> if not matched.
+</p>
+<pre>
+let myString = "quit";
+myString.match(/(?=quit/); // Array [""]
+myString.match(/qui(?=t/); // Array ["qui"]
+myString.match(/qui(?=z/); // null
+myString.match(/qui(?!=z)/); // Array ["qui"]
+</pre>
+
+<h4>Reuse Patterns Using Capture Groups</h4>
+<hr>
+<p>
+	Complicated subject but lets keep it simple by using the firefox console:
+</p>
+<pre>
+const myString = "ta ta ta ta ta ta";
+myString.match( /(ta)(\s)/ ); // Array ["ta ", "ta", " "] ** no repeats
+myString.match( /(ta)(\s)\1 ); // Array ["ta ta", "ta", " "] ** only repeats "ta"
+myString.match( /(ta)(\s)\1\2 ); // Array ["ta ta ", "ta", " "] ** repeats both "ta" and "whitespace"
+myString.match( /(ta)(\s)\1\2\1 ); // Array ["ta ta ta", "ta", " "] ** two repeats for "ta" and one repeat for "whitespace"
+myString.match( /(ta)(\s)\1\2\1\2 ); // Array ["ta ta ta ", "ta", " "] ** two repeats for both "ta" and "whitespace"
+</pre>
+<p>
+	Test a certain amount of re-use of groups with start and end tags.
+</p>
+<pre>
+const regExTest = /^(\d+)(\s)\1\2\1$/; // test for similar digits separated by single whitespace, with up to three repetitions
+regExTest.test("42 42 42 42"); // false
+regExTest.test("12 12 99"); // false
+regExTest.test("101 101 101"); // true
+regExTest.test("1 1 1"); // true
+</pre>
+<p>
+	Use Capture Groups to Search and Replace
+</p>
+<pre>
+"Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');
+// Returns "Camp Code"
+</pre>
+<p>
+	Conditional statements and capture groups
+</p>
+<pre>
+function translatePigLatin(str) {
+  // test 1 = vowel vs consonant
+  return /^[aeiou]/i.exec(str) !== null ? `${str}way` : 
+  // test 2 = no vowels vs some vowels
+  /[aeiou]/.test(str) === false ? `${str}ay` : str.replace(/^([^aeiou]{1,})(\w+)/i, `$2$1ay`);
+}
+translatePigLatin("rhythm");
+</pre>
+
+<h4>Serial methods with RegExp</h4>
+<hr>
+<p>
+	In this example we replace first letters of words with upper case:
+</p>
+<pre>
+let string = tom storebø;
+string = string
+  .replace(string[0], string[0]
+  .toUpperCase())
+  .replace(/\s[\w]/g, string
+  .match(/\s[\w]/g)
+  .toString()
+  .toUpperCase());
+  // Tom Storebø
+</pre>
+
+<h3>break, continue, and return statements</h3>
+<hr>
+<ul>
+	<li>The <b>break</b> statement terminates the current loop, switch, or label statement and transfers program control to the statement following the terminated statement.
+		<pre>
+let i = 0;
+while (i < 6) {
+  if (i === 3) {
+    break;
+  }
+  i = i + 1;
+}
+console.log(i);
+// expected output: 3
+		</pre>
+	</li>
+	<li>The <b>continue</b> statement terminates execution of the statements in the current iteration of the current or labeled loop, and continues execution of the loop with the next iteration.
+		<pre>
+let text = '';
+for (let i = 0; i < 10; i++) {
+  if (i === 3) {
+    continue;
+  }
+  text = text + i;
+}
+console.log(text);
+// expected output: "012456789"
+		</pre>
+	</li>
+	<li>The <b>return</b> statement terminates functional execution and <u>can</u> specify a value to be returned to the function caller.
+		<pre>
+function factorial(num) {
+  let x = num;
+  while (x > 1) {
+    num *= x-1;
+    x--;
+  }
+  return num;
+}		
+		</pre>
+	</li>
+</ul>
+
+<h3>Iteration with Loops</h3>
+<hr>
+<p>
+	5 loop types are available in JS:
+</p>
+<ul>
+	<li>for loop, used to iterate through property values of arrays and string objects.<br /><pre>for (let i = 0; i &lt; arr.length; i++) {<br />  console.log(arr[i]);<br />};</pre></li>
+	<li>while loop, used if variable is <u>known</u>. Will only iterate if condition exist.<br /><pre>while (x &lt; 10) {<br />  x++;<br />};</pre></li>
+	<li>do...while loop, used if variable is <u>unknown</u>. Will always iterate once.<br /><pre>do {<br />  x++;<br />};<br />while (x &lt; 10);</pre></li>
+</ul>
+<p id="for_in_of">
+	The <code>for...in</code> and <code>for...of</code> loops were introduced in ECMAScript 6. Iteration through object properties, arrays, strings and JQuery objects are greatly simplified.
+</p>
+<ul>
+	<li>for...in loop, used to iterate over all enumerable object properties (not symbols).<br /><pre>for (const keys in myObj) {<br />  console.log(`${keys}: ${myObj[keys]}`);<br />};</pre></li>
+	<li>for...of loop, requires the <q>iterable protocol</q> which allows JavaScript objects to define or customize their iteration behavior, such as what values are looped over in a for...of construct. Some built-in types are built-in iterables with a default iteration behavior, such as Array or Map, while other types (such as Object) are not.<br />
+		In order to be iterable, an object must implement the <code>@@iterator</code> method, meaning that the object (or one of the objects up its prototype chain) must have a property with a @@iterator key which is available via constant Symbol.iterator.<br />
+		To make an object iterable we can use <code>Object.keys(myObj), -.values(myObj)</code> or <code>.entries(myObj)</code> as these methods return arrays. However we need to make the array an iterable by using the <code>.values()</code>. method. This allows for the use of the <code>.next()</code> method, which returns a dictionary (two keys: value and done), and is used under the hood of the for...of loop.<br />
+		Whenever an object needs to be iterated (such as at the beginning of a for...of loop), its @@iterator method is called with no arguments, and the returned iterator is used to obtain the <u>values</u> to be iterated.
+		<pre>const myStr = "One, two, three and four";<br />const myArr = [1,2,3,4];<br />/**** Iteration with the for...of ****/<br />for (const Values of myStr) console.log(Values);<br />for (const Values of myArr) console.log(Values);<br />/**** Creating iterable objects and applying .next() ****/<br />const IterableStr = [...myStr].values();<br />const IterableArr = myArr.values();<br />IterableStr.next();<br />IterableArr.next();</pre>
+	</li>
+</ul>
+
+<h3>Generator Functions</h3>
+<hr>
+<p>
+	Generator functions are used to create <q>iterable</q> <em>generator objects</em>. <code>function*</code> is the syntax used and the keyword <code>yield</code> is used to return an object without terminating the function like the <code>return</code> keyword does.<br />
+	These functions serve only one purpose, to create generator objects, which are both an iterator and an iterable object. Meaning you can pass it directly into a <code>for...of</code> loop and also use the <code>.next()</code> function without making it iterable beforehand.<br />
+	Looking at the example below it might seem counter-intuitive to use, when a similar object serves the same purpose. However the generator object actually works like a <em>promise</em>. It will resume where you left of, despite running different operations in between. Calling <code>.next()</code> will always resume. Powerful indeed.
+</p>
+<p>
+	Fibonacci number generator example:
+</p>
+<pre>
+function fibonacci(count) {
+	// generator function - only creates generator objects
+	function* generator(count) {
+		let loop = 0, previous = 0, current = 1;
+		while (count > loop) {
+			loop++;
+			yield previous;
+			const new = previous + current;
+			previous = current;
+			current = new;
+		}
+	}
+	// creating generator object
+	const generatorObject = generator(count);
+	// using a for...of loop instead of calling .next() manually
+	for (const Fibonacci of generatorObject) console.log(Fibonacci);
+}
+</pre>
+<p>
+	Fibonacci without the generator:
+</p>
+<pre>
+function fibonacci(count) {
+	let loop = 0, prev = 0, curr = 1;
+	while (count > loop) {
+		loop++;
+		// using prev to get the start right
+		console.log(prev);
+		const new = prev + curr;
+		prev = curr;
+		curr = new;
+	}
+}
+</pre>
+<p>
+	However if we needed the next Fibonacci now and then at different stages in our code we see the power of the generator:
+</p>
+<pre>
+function* fibonacci() {
+	let prev = 0, curr = 1;
+	// infinite loop ok with .next()
+	while (true) {
+		yield prev;
+		const new = prev + curr;
+		prev = curr;
+		curr = new;
+	}
+}
+let fibs = fibonacci();
+fibs.next();
+fibs.next();
+window.alert("I'm now doing something different, but we'll see if the 'fibs gen obj' remembers where we left of. Exciting!");
+fibs.next();
+</pre>
+<p>
+	<strong>Note:</strong> Do not use the infinite loop generator with the <code>for...of</code> loop. Only the <code>.next()</code> method.
+</p>
+
+<h4>
+	Passing arguments to a generator object
+</h4>
+<hr>
+<p>
+	The <code>.next()</code> as a function accepts arguments. Once the generator object meets the keyword <code>yield</code> it returns the value to the right and pauses, until the <code>.next()</code> method resumes the operation. However adding an argument results in this being received by the variable to the left of <code>yield</code> and processed before the <q>yielding</q> takes place.
+</p>
+<pre>
+function* accumulator(initVal) {
+	/* force initVal to be a number */
+	const initValNum = Number(initVal);
+	/* if we received an argument (initVal) use it, else balance is 0 */
+	let balance = initValNum ? initValNum : 0;
+	while (true) {
+		/* when we pass an argument with .next() it gets stored in increasedBy */
+		const increasedBy = yield balance;
+		/* if we received an argument add to balance */
+		if (Number(increasedBy)) balance += increasedBy;
+	}
+}
+let accObj = accumulator();
+accObj.next(10);
+accObj.next();
+accObj.next(-3);
+</pre>
+
+<h3>Replace Loops using Recursion</h3>
+<hr>
+<p>
+	A program is called recursive when an entity calls itself. A program is called iterative when there is a loop. To help understand this, start by thinking about the following task: multiply the first <code>n</code> elements of an array to create the product of those elements. Using a for loop, you could do this:
+</p>
+<pre>
+function multiply(arr, n) {	// the <code>n</code> element indicates how many of the array indexes should be multiplied together
+	var product = 1;
+	for (var i = 0; i &lt; n; i++) {
+		product *= arr[i];
+	}
+	return product;
+}
+</pre>
+<p>
+However, notice that multiply(arr, n) == multiply(arr, n - 1) * arr[n - 1]. That means you can rewrite multiply in terms of itself and never need to use a loop.
+</p>
+<pre>
+function multiply(arr, n) {
+	if (n <= 0) {
+		return 1;
+	}
+	else {
+		return multiply(arr, n - 1) * arr[n - 1];	// <code>(arr, n - 1)</code> is whatever number n is, while <code>arr[n - 1]</code> is the index of the array
+	}
+}
+</pre>
+
+<h3>Boolean</h3>
+<hr>
+<p>
+	Everything in JS can be tested to <code>true</code> or <code>false</code>. This is very useful in an <em>if...else statement</em>.
+</p>
+<p>
+	There are two ways to convert values to <em>Boolean</em>, which can be useful for filtering.
+</p>
+<pre>
+// preferred method:
+const a = 0;
+!a = false;
+!!a = true;
+
+// example:
+if (a) a; // if a is true return a
+
+// other method:
+if (Boolean(a)) Boolean(a); // true
+</pre>
+<p>
+	The first <code>!</code> coerce the value to a <em>Boolean</em> and inverse it. In this case, <code>!value</code> will return <code>false</code>. So to reverse it back to true, we put another <code>!</code> on it.
+</p>
+
+<h4>Falsy values</h4>
+<hr>
+<p>
+	In JavaScript there are 6 <em>falsy</em> values. Converting these to <em>Boolean</em> returns <code>false</code>. Everything else return <code>true</code>
+</p>
+<ul>
+	<li>false</li>
+	<li>undefined</li>
+	<li>null</li>
+	<li>NaN</li>
+	<li>0</li>
+	<li>"" (empty string)</li>
+</ul>
+
+<h3>Arrow function</h3>
+<hr>
+<p>
+	Shortened way of declaring a function. They accept multiple arguments as well as functions (callbacks) and objects.
+</p>
+<p>
+	Here were passing the object watchList. We're interested in 2 of many properties "Title" and "imdbRating", to be returned as a new object.
+</p>
+<pre>
+	const ratings = watchList.map(({ Title: title, imdbRating: rating }) => ({title, rating}));	
+</pre>
+<p>
+	They can <u>not</u> blindly replace normal functions. If a function does not use the <code>this, arguments</code> or <code>new</code> keywords, it can be used as replacement.
+</p>
+
+<h4>Lexical <code>this</code> and <code>arguments</code></h4>
+<hr>
+<p>
+	Arrow functions don't have their own <code>this</code> or <code>arguments</code> binding. Instead, those identifiers are resolved in the lexical scope like any other variable. That means that inside an arrow function, <code>this</code> and <code>arguments</code> refer to the values of <code>this</code> and <code>arguments</code> in the environment the arrow function is defined in (i.e. "outside" the arrow function).
+</p>
+<p>
+	This example demonstrates the arrow function with <code>this</code> and also changing built in object methods with prototype.
+</p>
+<pre>
+const myString = "alibaba";
+String.prototype.indexOf = x => alert(this[x]);
+myString.indexOf(3); // undefined
+
+String.prototype.indexOf = function(x) { alert(this[x]); }
+myString.indexOf(3); // "b"
+</pre>
+<p>
+This makes arrow functions useful if you need to access the <code>this</code> of the current environment. <a title="Are Arrow functions interchangable with Functions?" href="https://stackoverflow.com/questions/34361379/are-arrow-functions-and-functions-equivalent-exchangeable">Stackoverflow</a>
+</p>
+<pre>
+var elements = [
+  'Hydrogen',
+  'Helium',
+  'Lithium',
+  'Beryllium'
+];
+
+// This statement returns the array: [8, 6, 7, 9]
+elements.map(function(element) {
+  return element.length;
+});
+
+// The regular function above can be written as the arrow function below
+elements.map((element) => {
+  return element.length;
+}); // [8, 6, 7, 9]
+
+// When there is only one parameter, we can remove the surrounding parentheses
+elements.map(element => {
+  return element.length;
+}); // [8, 6, 7, 9]
+
+// When the only statement in an arrow function is `return`, we can remove `return` and remove
+// the surrounding curly brackets
+elements.map(element => element.length); // [8, 6, 7, 9]
+
+// In this case, because we only need the length property, we can use destructuring parameter:
+// Notice that the `length` corresponds to the property we want to get whereas the
+// obviously non-special `lengthFooBArX` is just the name of a variable which can be changed
+// to any valid variable name you want
+elements.map(({ length: lengthFooBArX }) => lengthFooBArX); // [8, 6, 7, 9]
+
+// This destructuring parameter assignment can also be written as seen below. However, note that in
+// this example we are not assigning `length` value to the made up property. Instead, the literal name
+// itself of the variable `length` is used as the property we want to retrieve from the object.
+elements.map(({ length }) => length); // [8, 6, 7, 9]
+</pre>
+
+<h4>Passing arguments to an Arrow function</h4>
+<hr>
+<pre>
+// doubles input value and returns it
+const doubler = (item) => item * 2;	// This is actually a way to replace a traditional function
+
+console.log(doubler(2)); // 4
+
+// If an arrow function has a single argument, the parentheses enclosing the argument may be omitted.
+
+// the same function, without the argument parentheses
+const doubler = item => item * 2;
+
+// It is possible to pass more than one argument into an arrow function.
+
+// multiplies the first input value by the second and returns it
+const multiplier = (item, multi) => item * multi;
+</pre>
+
+<h4>Default Parameters in the Arrow function</h4>
+<hr>
+<pre>
+const greeting = (name = "Anonymous") => "Hello " + name;
+
+console.log(greeting("John")); // Hello John
+console.log(greeting()); // Hello Anonymous
+</pre>
+
+<h4>Rest Parameter with Function Parameters Passed</h4>
+<hr>
+<p>
+	With the rest parameter, you can create functions that take a variable number of arguments. These arguments are stored in an <u>array</u> that can be accessed later from inside the function the normal way.
+</p>
+<pre>
+const sum = (...args) => {
+  return args.reduce((a, b) => a + b, 0); // 0 is base value
+}
+</pre>
+
+<h3>Four ways to invoke functions in JS</h3>
+<hr>
+<p>
+You can invoke the function as a method, as a function, as a constructor, and with apply.
+</p>
+
+<h4>As a Method</h4>
+<hr>
+<p>
+A method is a function that's attached to an object
+</p><pre>
+var foo = {};
+foo.someMethod = function(){
+    alert(this);
+}
+</pre><p>
+When invoked as a method, <code>this</code> will be bound to the object the function/method is a part of. In this example, <code>this</code> will be bound to foo.
+
+<h4>As A Function</h4>
+<hr>
+</p><p>
+If you have a stand alone function, the this variable will be bound to the "global" object, almost always the window object in the context of a browser.
+</p><pre>
+var foo = function(){
+	alert(this);
+}
+foo();
+</pre><p>
+Since a callback is invoked as a function and not as a method, sometimes we are seeing what appears to be inconsistent behavior.
+</p><p>
+Many people get around the problem by doing something like, um, this
+</p><pre>
+var foo = {};
+foo.someMethod = function (){
+    var that = this;
+    function bar(){
+        alert(that);
+    }
+}
+</pre><p>
+You define a variable that which points to this. Closure (a topic all it's own) keeps that around, so if you call bar as a callback, it still has a reference.
+</p><p>
+<strong>Note:</strong> In use strict mode if used as function, this is not bound to global. (It is undefined).
+</p>
+
+<h4>As a Constructor</h4>
+<hr>
+<p>
+You invoke a function as a Constructor with the new keyword.
+</p>
+<pre>
+function Foo(){
+    this.confusing = 'hell yeah';
+}
+var myObject = new Foo();
+</pre>
+<p>
+When invoked as a constructor, a new Object will be created, and this will be bound to that object. Again, if you have inner functions and they're used as callbacks, you'll be invoking them as functions, and this will be bound to the global object. Use that var that = this trick/pattern.
+</p><p>
+Some people think the constructor/new keyword was a bone thrown to Java/traditional OOP programmers as a way to create something similar to classes.
+</p>
+
+<h4>With the Apply Method</h4>
+<hr>
+<p>
+Finally, every function has a method (yes, functions are objects in Javascript) named "apply". Apply lets you determine what the value of this will be, and also lets you pass in an array of arguments. Here's a useless example.
+<pre>
+function foo(a,b){
+    alert(a);
+    alert(b);
+    alert(this);
+}
+var args = ['ah','be'];
+foo.apply('omg',args);	// alerts ah, then be and finally omg
+</pre>
+</p>
+<div class="link">Example Object:
+</div>
+<ul class="dropDown">
+	<li><p style="font-weight: bold">Constructor Function</p>
+		<pre>
+function Card (name, address, email) {
+	this.name = name;
+	this.address = address;
+	this.email = email;
+	this.printCard = printCard;
+}
+		</pre>
+	</li>
+	<li><p style="font-weight: bold">Method Function</p>
+		<pre>
+function printCard() {
+	var name_line = "Name: " + this.name + "&lt;br /&gt;\n";
+	var address_line = "Address: " + this.address + "&lt;br /&gt;\n";	
+	var email_line = "Email: " + this.email + "&lt;br /&gt;\n";
+}
+		</pre>
+	</li>
+	<li><p style="font-weight: bold">Object Instance</p>
+		<pre>
+var eve = new Card("Eve", "Eden", "firstlady@paradise.eden");
+var adam = new Card("Adam", "Eden", "firstman@paradise.eden");
+		</pre>
+	</li>
+	<li><p style="font-weight: bold">Call method</p>
+		<pre>
+eve.printCard();
+		</pre>
+	</li>
+</ul>
+
+<h3>Getters and Setters to obtain and set values in an object</h3>
+<hr>
+<p>
+Getter functions are meant to simply return (get) the value of an object's private variable to the user without the user directly accessing the private variable.
+</p>
+<p>
+Setter functions are meant to modify (set) the value of an object's private variable based on the value passed into the setter function. This change could involve calculations, or even overwriting the previous value completely.
+</p>
+<pre>
+class Thermostat {
+  constructor(f) {
+    this._f = f;
+  }
+  get temperature() {
+    return ((this._f)-32)/(9/5) + "C";
+  }
+  set temperature(updateF) {
+    this._f = updateF*9.0/5+32;
+  }
+}
+const therm = new Thermostat(77);
+therm.temperature; // get returns 25C
+therm.temperature = 22; // set 22C
+therm; // private variable set to 73.4
+</pre>
+<p>
+	The syntax used to invoke a getter is straight forward as one would expect for a instance method, but for the setter it is not necessarily self explainatory. We'd expect to pass our argument within parantheses, but this is not the case. It behaves as if <code>set</code> is <code>const set = function(arg) {}</code> if that makes more sense.
+</p>
+<p>
+	These two methods are important because they hide internal implementation details from the user.
+</p>
+
+<strong>Note:</strong> It is convention to precede the name of a private variable with an underscore (_). However, the practice itself does not make a variable private.
+</p>
+
+<h3>Object De-structuring Assignment</h3>
+<hr>
+<p>
+	In ES6 we have the option to extract values from an object in a simple one line declaration.
+</p>
+<p>
+	Traditional multiple variable declarations are done by <code>var firstVar, secVar;</code>. In de-structuring it is similar but we use the <em>curly brackets</em> around the properties, <code>const { firstVar, secVar } = ObjectToDeStructure</code>.
+</p>
+<pre>
+const user = { name: 'John Doe', age: 34, contact: { email: 'please@thanks.co.uk', phone: 74747575 } }; // Contact details are nested
+
+// What we can accomplish in a one liner in ES6 was done with individual variable declaration in ES5
+
+const { name, age } = user;	// Extracts name and age from user object and assigns it to the variables name and age
+
+const { name: userName, age: userAge } = user;	// Does the same as above but assigns them to variables userName and userAge
+
+const { name: userName, contact: { phone: mobilePhone } } = user;	// Assignes both name to userName and phone to mobilePhone variables
+</pre>
+
+<h3>Array Destructuring Assignment</h3>
+<hr>
+<p>
+	The simplest form of destructuring is array destructuring assignment:
+</p>
+<pre>
+const input = [1, 2];
+const [first, second] = input;
+
+console.log(first); // 1
+console.log(second); // 2
+</pre>
+<p>
+	One key difference between the <q>spread operator</q> and <q>array destructuring</q>, is that the spread operator unpacks all contents of an array into a comma-separated list. Consequently, you cannot pick or choose which elements you want to assign to variables.
+</p>
+<p>
+Destructuring an array lets us do exactly that:
+</p>
+<pre>
+const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+
+console.log(a); // 1
+console.log(b); // 2
+console.log(c); // 5
+
+// Swapping values with destructuring
+let a = 8, b = 2;
+
+[a, b] = [b, a];	// Now the variable a holds value b and vice versa
+
+// Reassign array elements ( similar to Array.prototype.slice() )
+const [a, b, ...arr] = [1, 2, 3, 4, 5, 6];
+
+console.log(a, b); // 1, 2
+console.log(arr); // 3, 4, 5, 6	** NOTE multiple variables are placed into an array **
+</pre>
+
+<h3>Conditional Statements</h3>
+<hr>
+<p>
+	<i>if else</i> statements can be written without the <i>else</i> on single condition statements:
+</p>
+<pre>
+if (a === true) {
+	return "Yes, it is true";
+}
+return "No, it is false";
+</pre>
+<p>
+	Conditional (Ternary) Operator:
+</p>
+<pre>
+if (a == 1 ) {
+	x = 1;
+}
+</pre>
+equates to:
+<pre>
+x = (a == 1) ? 1 : 0;
+</pre>
+<p>
+	This also works with more conditional criteria:
+</p>
+<pre>
+x = (a !== 0) && (b == 1) ? 1 : 0;
+</pre>
+<p>
+	Multiple Conditional Operators:
+</p>
+<pre>
+function findGreaterOrEqual(a, b) {
+  return (a === b) ? "a and b are equal" 
+    : (a > b) ? "a is greater" 
+    : "b is greater";
+}
+</pre>
+<p>
+	Condition within a condition:
+</p>
+<pre>
+function translatePigLatin(str) {
+  // test 1 = vowel vs consonant
+  return /^[aeiou]/i.exec(str) !== null ? `${str}way` : 
+  // test 2 = no vowels vs some vowels
+  /[aeiou]/.test(str) === false ? `${str}ay` : str.replace(/^([^aeiou]{1,})(\w+)/i, `$2$1ay`);
+}
+
+translatePigLatin("rhythm");
+</pre>
+<p>
+	<b>To test if a property exist</b>
+</p>
+<pre>
+	if(parent[property]) alert("it exist");
+	
+	if(!parent[property]) alert("does not exist");
+</pre>
+
+<h3>Switch statement</h3>
+<hr>
+<p>
+	Used where there are one conditional variable to test. <i>case</i> is used to test the conditions. Use <i>if else</i> where complex conditions are tested, as the switch statements accept a single <i>variable</i>.<br />
+	<strong>Note:</strong> <u>Strict</u> mode is used in the switch statement and we need a <i>break;</i> between cases except before the <i>default</i>.
+</p>
+<p>
+	Block-scope variables within a switch statement
+</p>
+<pre>
+let action = 'say_hello';
+let message;
+switch (action) {
+  case 'say_hello':
+    message = 'hello';
+    console.log(message);
+    break;
+  case 'say_hi':
+    message = 'hi';
+    console.log(message);
+    break;
+  default:
+    console.log('Empty action received.');
+    break;
+}
+</pre>
+<p>
+	Multi-case chained operation
+</p>
+<pre>
+let foo = 1;
+let output = 'Output: ';
+switch (foo) {
+  case 0:
+    output += 'So ';
+  case 1:
+    output += 'What ';
+    output += 'Is ';
+  case 2:
+    output += 'Your ';
+  case 3:
+    output += 'Name';
+  case 4:
+    output += '?';
+    console.log(output);
+    break;
+  case 5:
+    output += '!';
+    console.log(output);
+    break;
+  default:
+    console.log('Please pick a number from 0 to 5!');
+}
+</pre>
+
+<h3>Functional Programming and Good Practices</h3>
+<p>Functional programming is centered around a theory of functions, and is about:</p>
+<ol>
+	<li>Isolated functions - there is no dependence on the state of the program, which includes global variables that are subject to change.</li>
+	<li>Pure functions - the same input always gives the same output.</li>
+	<li>Functions with limited side effects - any changes, or mutations, to the state of the program outside the function are carefully controlled.</li>
+</ol>
+<p>
+	Don't alter a variable or object - create new variables and objects and return them if need be from a function. When passed into a function this is not a problem. The reason for this is to avoid having a function return unexpected values, aiding in locating bugs and other faults in the program.
+</p>
+<p>
+	Duplicate the global variable or the variable that can cause trouble if changed. This is a good practice and <code>const</code> is a good help here as they trigger an error if they are re-assigned new values. Declare function arguments - any computation inside a function depends only on the arguments, and not on any global object or variable.
+</p>
+<p>
+	Manipulating an array or serial data with a cut function like <code>splice</code> the original array has now been manipulated, causing common errors and a bit more mental processing to use the remaining array.	
+</p>
+<p>
+	Functions are considered first class objects in JavaScript, which means they can be used like any other object. They can be saved in variables, stored in an object, or passed as function arguments.
+</p>
+<p>
+	Hoisting is also done to functions in real-time making it possible to call a function on a line before it is created.
+</p>
+
+<h3>JSON - JavaScript Object Notation</h3>
+<hr>
+<p>
+JSON is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others.
+</p>
+<p>
+	An object begins with {<small>left brace</small> and ends with }<small>right brace</small>. Each name is followed by :<small>colon</small> and the name/value pairs are separated by ,<small>comma</small>.
+</p>
+<p>
+An array begins with [<small>left bracket</small> and ends with ]<small>right bracket</small>. Values are separated by ,<small>comma</small>.
+</p>
+<p>
+A <i>value</i> can be a <i>string</i> in double quotes, or a <i>number</i>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <i>object</i> or an <i>array</i>. These structures can be nested.
+</p>
+<p>
+A <i>string</i> is a sequence of zero or more Unicode characters, wrapped in double quotes, using backslash escapes. A character is represented as a single character string. A string is very much like a C or Java string.
+</p>
+<p>
+	As JSON strings are <q>simple object</q> we need to convert any JS Objects into a literal simple object string. This is achievable simply by:
+</p>
+<pre>
+const JSONstring = JSON.stringify(myObj); // creates the JSON string
+JSON.parse(JSONstring); // creates a JS object
+</pre>
+
+<h3 class="link">Libraries</h3>
+<hr>
+<ul class="dropDown">
+	<li>JQuery: Similar to CSS selector styles. Extensive cross platform tested scripts in a big database. Scripts can be overwhelming if one requires only a small part. JQuery UI is built on top of JQuery to provide common UI interactions, effect and widgets. It also has a Download Builder which lets you customize what is included in the script.</li>
+	<li>Prototype: Simplifies tasks in working with the DOM, forms and AJAX. Single prototype.js file is all that is required. Built into the Ruby on Rails server framework.</li>
+	<li>Aculo: Animated objects, Drag and drop, highlighted text, vibrations, fade in and out are some of the features if Aculous.</li>
+	<li>Dojo: Extra string and math functions. Built to simplify building applications and user interfaces.</li>
+	<li>Yahoo!: Animation, calendars, sliders, DOM manipulations, event managment are some features.</li>
+</ul>
+<p>
+
+<h4>JQuery</h4>
+<hr>
+<p>
+	Possibly the most widely used JS library, which simplifies the selection and manipulation of DOM elements significantly.<br />
+	The syntax resembles CSS when it comes to selecting objects (elements) and the <q>$</q> function is used as the initiator.<br />
+	It is a good practice when storing objects in variables with JQuery to start their name with the <q>$</q> e.g. const $para = $("p");
+</p>
+<p>
+	The <q>$</q> function takes 5 different arguments, and create a JQuery Object from these, and returning this object enabling chaining.
+</p>
+<ul class="no_bullet_list">
+	<li><code>$('p a')</code> string means a CSS selector, here selecting all <q>anchor</q> tags inside <q>paragraph</q> tags.</li>
+	<li><code>$(&lt;span /&gt;)</code> creates new HTML start and end tag.</li>
+	<li><code>$(function() {} )</code> callback function that will execute once the DOM is ready.</li>
+	<li><code>$(this)</code> represent the current HTML element.</li>
+	<li><code>$()</code></li>
+</ul>
+	 It takes a <q>string</q> as the first argument, followed by optional args as callbacks.<br />
+	We can use the <q>.length</q> syntax to access the length property on JQuery objects as with normal objects.
+</p>
+<pre>
+$("p").filter(function (index) { return $("strong", this).length === 1; }).css("color", "red");
+// changes the color on the p tag with the first <q>strong</q> word. <q>this</q> refers to each DOM element in turn.
+</pre>
+<p>
+	It is common to initiate JQuery scripts with a delay method to allow the page to load completely before executing any commands.<br />The "$(document).ready(function() { // JQuery code // }); normally wraps around the other JQuery commands. A shorthand version exist simply by writing: $(function() { // JQuery code // });
+</p>
+<pre>$(".link").click(function(e) { $(this).next().toggle("blind", {direction: "up"}, 500); });</pre>
+<p>
+Calls a function to use the effect blind (window blind) to roll down the next sibling element (drop down menu) when clicking a node within the class "link".
+</p>
+<pre>$("a").mouseup(function(e) { $(this).css(color: "red"); }).mouseover(function(e) { $(this).css(cursor: "pointer"); });</pre>
+<p>
+Calls two different functions (separated by a point) for "a" tags. "mouseup" to change color to red and "mouseover" to change cursor to a pointer.
+<br />
+Using JSON syntax one can set multiple property values: $("p").css({"color": "red", "font-size": "200%"}); at the same time.
+<br />
+In JQuery we first choose node to work with, then another element if required, method to be applied and/or property values. e.g.: $("#heading").nextAll().remove(); removes all the siblings of the element with id heading.
+</p>
+<p>
+To move up and down the DOM tree can be challenging. The <em>parent()</em> syntax moves only one level but using the <em>parents()</em> method one can select all the nodes above the selected one. Other methods are children(), siblings(), next(), nextAll(), prev(), prevAll() and eq(). $("div").eq(2).nextAll().remove(); selects the 3rd div node and removes all sibling nodes after it, leaving div node 1-3 untouched. The eq() count starts at zero.
+</p>
+<img src="/getCoding/images/jquery-selectors.png" alt="Useful JQuery selectors" height="600"/>
+<p>
+The JQuery UI is a library built on top of JQuery to offer easier handling of commonly used features of the main library and is also possible to customise and download just the codes you need. JQuery UI include widgets or stand alone API's, which include drag and drop featured animations.
+<br />
+JQuery akes life easy as a programmer offering a wide variety of features one don't have to reinvent.
+</p>
+<p>
+	<a href="https://www.freecodecamp.org/learn/front-end-libraries/jquery/" target="_blank">FreeCodeCamp</a>s' excellent tutorial on JQuery
+</p>
+
+<h4>Lodash</h4>
+<hr>
+<p>
+	Lodash is a JavaScript utility library that can reduce your code size and quality through its many functions. Lodash has a helpful iteration methods, such as forEach and map that work on objects as well as arrays.
+</p>
+<code>_.forEach(arr, function(element, i) { console.log(element);});</code>
+<p>
+	forEach is included in the Lodash Core build, a small (4kb) size library that includes the most common methods used. The forEach method is also aliased to the each method.
+</p>
+<p>
+	This is great when you want to loop through the list in order. But what do you do when you want to loop from the bottom of the list, in reverse order?
+</p>
+<p>
+	Lodash has a sibling method, forEachRight. This method starts at the end or right of the list and loops in reverse order.
+</p>
+<code>_.forEachRight([1, 2], function(value) { console.log(value);});// => Logs 2 then 1.</code>
+
+<h3>Frameworks</h3>
+<hr>
+<p>
+	Frameworks are designed to simplify building single page web applications. They are used both in the <q>Front-End</q> and the <q>Back-End</q> of web-design. The old <em>JavaScript</em> manipulation of the DOM demands a lot of heavy lifting and was made easier with the appearance of libraries like <em>JQuery</em>.
+</p>
+<p>
+	However there are still significant work to be done even with helpful libraries. With a framework the requirement to type out every interaction with the DOM is eliminated as well as making reusable code with more security with the introduction of <em>TypeScript</em><br>
+	A framework takes care of a lot of otherwise behind the scenes heavy lifting.
+</p>
+<p>
+	Popular frameworks:
+</p>
+<ol>
+    <li>Front-End
+        <ul>
+            <li>Angular - TypeScript</li>
+            <li>React</li>
+            <li>Vue</li>
+        </ul>
+    </li>
+    <li>Back-End
+        <ul>
+            <li>NestJS - TypeScript</li>
+        </ul>
+    </li>
+</ol>
+
+<h3>AJAX - Asynchronous JavaScript and Extensible Markup Language XML</h3>
+<hr>
+<p>
+	<em>AJAX</em> also known as remote scripting, is a browser feature which allows JS to escape it's client-side boundaries and work with files on a web server or with server-side programs. It enables reading and storing data to the server without refreshing the page.<br />Complex scripting is required due to cross browser differences, however many libraries has been created to ease the complexity into more managable ways including JQuery. Some transfer formats include XML, HTML, plain text and JSON.
+</p>
+
+<h4 class="link">AJAX communication setup</h4>
+<hr>
+<ol class="dropDown">
+	<li>Create request object: <code>ajaxreq = new XMLHttpRequest();</code></li>
+	<li>The <code>open()</code> method of XMLHttpRequest specifies the filename and transfer type, <code>GET</code> or <code>POST</code>: <code>ajaxreq.open("GET","filename");</code></li>
+	<li>The <code>send()</code> method of the XMLHttpRequest object sends the request to the server. <code>GET</code> method: <code>ajaxreq.send(null);</code></li>
+	<li>Awaiting response which will trigger my chosen function: <code>ajaxreq.onreadystatechange = MyFunc;</code>
+		<ul>
+			<li>When the readyState property reaches 4 and the request is complete, the data returned from the server is available to your script in two properties: responseText is the response in raw text form, and responseXML is the response as an XML object. If the data was not in XML format, only the text property will be available.</li>
+		</ul>
+	</li>
+</ol>
+<p>
+	<em>JQuery</em> simplified communication through AJAX greatly with the <code>.load()</code> function. This is an example of replacing a text object with a html notated server side file: $(function(){ $("#id_of_old_text").first().load("/folder/new_imported_content.html");});. <em>first</em> used here to indicate first child node which in this example has the text value.<a href="http://api.jquery.com/category/ajax/"> AJAX related JQuery functions.</a>
+</p>
+<p>
+	Note: <em>AJAX</em> is not included in the <q>light</q> <em>JQuery</em> library where one finds essential functions, rather it is considered optional and found only in the full library.<br />
+	Bootstrap library requires JQuery but only requires the light which is what is linked at <a href="https://getbootstrap.com/">https://getbootstrap.com/</a>, which does not include <em>AJAX</em>.
+</p>
+<p>
+	To filter symbols we refer to regular expressions or <em>regex</em> in a string. To exclude we use the hat. This example excludes lower case and allows upper case alpha characters: [^a-z, A-Z].<a title="Learn RegExp" href="http://regexone.com/" target="_blank">RegEx ONE.</a>
+</p>
+<p>
+	<strong>User Input</strong> in the form of pop-up boxes like <em>alert</em> and <em>prompt</em> are methods of the window object. To store the input the user types into the <em>prompt</em> window, we assign it a variable: var userInput = prompt("What's your name?");<br/>
+	HTML text boxes are simply used by grabbing their <em>value</em> through the DOM tree: <code>const userInput = document.getElementById("text_box").value</code> or JQuery <code>const userInput = $("#text_box).val();</code>
+</p>

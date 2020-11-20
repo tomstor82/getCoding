@@ -1,0 +1,875 @@
+<h3>Box Model and Sizing</h3>
+<hr />
+<p>
+	With CSS one can organise and style the HTML content. I like to think of the content as boxes where visual objects on a page are contained within. For responsive web design we would like the content of these containers to have a <code>max-width</code> property set to keep this content contained with various screen resolutions, with <code>height</code> set to <code>auto</code>.
+</p>
+<pre>
+img {
+	max-width: 100%;
+	height: auto;
+}
+</pre>
+<p>
+	The max-width of 100% will make sure the image is never wider than the container it is in, and the height of auto will make the image keep its original aspect ratio.
+</p>
+<p>
+The <code>box-sizing</code> property was introduced in CSS3 which allows us to set a property that describes behaviour of child boxes globally. The values are: <code>content-box, and border-box.</code> These can be declared globally if desired:</p>
+<pre>
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+</pre>
+<ul>
+	<li>content-box: Default. The width and height properties (and min/max properties) includes only the content. Border and padding are not included.</li>
+	<li>border-box: The width and height properties (and min/max properties) includes content, padding and border.</li>
+</ul>
+<p>
+	The <code>flex</code> and <code>grid</code> box methods provide this structure of containers easily manipulated once the properties are understood. By using the media query <code>@media</code> method we can control content layout with various device resolutions.
+</p>
+<pre>
+    @media (max-width: 100px) { /* CSS Rules */ }
+</pre>
+<p>
+	A new unit of measure has been introduced to assist in controlling container size namely fraction or <code>fr</code>.
+	<br />
+	Fraction does what the name indicate. 1fr is 100%. 2fr is 50% so forth.
+</p>
+<p>
+	The <code>map</code> method provides options to have different areas of an element trigger different methods by using coordinates.
+</p>
+<p>
+    Nodes are <a href="#HTML_tags">tags in a HTML document</a> which are referred to in CSS to set values and parameters to style.<br />
+    The html <em>inline</em> and <em>block</em> properties can easily be manipulated with the <code>display</code> property e.g. <code>display: inline</code>.
+</p>
+<p>
+    Tags can be used to orient objects on the page. Nav is traditionally a left vertical bar, aside the same on the right. To change the placement of these columns can be used with more ease than margins as they take up invisible space. Tables should not be used for this purpose.
+</p>
+<p>
+    External style sheet can be used by multiple pages.
+</p>
+<p>
+    Map function for displaying items on chosen areas of a picture with mouse over.
+</p>
+
+<p>
+    <code>Animation</code> in CSS makes it possible to transition from one CSS style configuration to another. Animations consist of two components, a style describing the CSS animation and a set of keyframes that indicate the start and end states of the animation’s style, as well as possible intermediate waypoints. We use the <em>@keyframes</em> rule to establish how the apperance will be at start and end of animation. Intermediate points can be used too.
+</p>
+<p>
+    There are three key advantages to CSS animations over traditional script-driven animation techniques:
+</p>
+<ol>
+    <li>They’re easy to use for simple animations; you can create them without even having to know JavaScript.</li>
+    <li>The animations run well, even under moderate system load. Simple animations can often perform poorly in JavaScript (unless they’re well made). The rendering engine can use frame-skipping and other techniques to keep the performance as smooth as possible.</li>
+    <li>Letting the browser control the animation sequence lets the browser optimize performance and efficiency by, for example, reducing the update frequency of animations running in tabs that aren't currently visible.</li>
+</ol>
+<pre>
+	div:hover {
+		animation-name: expand_rotate;
+		animation-duration: 1s; /* accepts s and ms as values */
+		animation-timing-function: linear;  /* ease, ease-in, ease-out, ease-in-out, linear, cubic-bezier(x, x, x, x) */
+		animation-delay: 200ms;
+		animation-iteration-count: 1;   /* number or infinite */
+		animation-direction: alternate; /* accepts reverse, alternate, alternate-reverse and normal */
+		animation-fill-mode: forwards;    /* none, forwards, backwards and both */
+	}
+	@keyframes expand_rotate {
+		0% {
+			transform: scale(1.0);
+		}
+		50% {
+			transform: scale(2.0) rotate(-180deg);
+		}
+		100% {
+			transform: scale(1.0) rotate(-360deg);
+		}
+	}
+	/* As shorthand it can be written: */
+	/* animation: expand_rotate 1s linear 200ms 1 alternate forwards */
+</pre>
+<p>
+    <em>Variables</em> can be used to manipulate multiple items at the same time. To declare a variable in CSS we use the double hyphens. <em>--penguin-skin: grey;</em> then we refer to it like this <em>background-color: var(--penguin-skin);</em>. They are placed within the <em>:root { }</em> element for global scope.
+    <br />
+    If for some reason the variable is not set and for debugging we can fall back on a value as this example indicates <em>background: var(--penguin-skin, black);</em>.
+    <br/>
+    <em>Note variables are not compatible with IE and fallbacks are essential.</em>
+</p>
+<pre>.red-box {<br />	background: red;<br />	background: var(--red-color);<br />}</pre>
+<p class="link">
+    Colors can be set in many ways:
+</p>
+<ul class="dropDown">
+	<li>Names: There are currently 147 colors, Represented by 17 basic colors, with 130 other shades.</li>
+	<li>Hexadecimal: #FF9900 or shorthand #09F</li>
+	<li>Red Green Blue: rgb(255, 123, 0) and rgba(0, 123, 255, 0.5) where the <em>a</em> is alpha indicating opacity</li>
+	<li>HSL was introduced in CSS3 and is based on the color wheel. Hue, saturation and lightness are the values we set: hsl(180, 80%, 50%);
+		<ul>
+			<li>Hue uses a color wheel concept instead of the normal spectrum red - green - blue, where the angle of the color on the circle is given as a value between 0 and 360.</li>
+			<li>Saturation is greyness. 100% no greyness, 0% fully saturated and grey.</li>
+			<li>Lightness is whiteness. 100% full white, 0% black and 50% normal.</li>
+		</ul>
+	</li>
+</ul>
+<p>
+    Applying a color on HTML elements is not limited to one flat hue. CSS provides the ability to use color transitions, otherwise known as gradients, on elements. This is accessed through the background property's linear-gradient() function. Here is the general syntax:
+</p>
+<pre>background: linear-gradient(gradient_direction, color 1, color 2, color 3, ...);</pre>
+<p>
+    The repeating-linear-gradient() function is very similar to linear-gradient() with the major difference that it repeats the specified gradient pattern. repeating-linear-gradient() accepts a variety of values, but for simplicity, you'll work with an angle value and color stop values in this challenge.
+</p>
+<p>
+    The angle value is the direction of the gradient. Color stops are like width values that mark where a transition takes place, and are given with a percentage or a number of pixels.
+    If every two color stop values are the same color, the blending isn't noticeable because it's between the same color, followed by a hard transition to the next color, so you end up with stripes.
+</p>
+<pre>background: repeating-linear-gradient(90deg, yellow 0px, blue 40px, green 40px, red 80px);</pre>
+<p>
+    Creating shapes with CSS can be done with box-shadow property which takes values for offset-x, offset-y, blur-radius, spread-radius and a color value in that order. The blur-radius and spread-radius values are optional.
+</p>
+
+<h3>Pseudo Classes and Elements</h3>
+<hr />
+<p>
+    Pseudo means <q>pretended</q> which is an appropriate name for these properties, which are <u>not</u> assigned by the web developer, but created by the browser. We can manipulate these properties with CSS.
+</p>
+<p>
+    The anchor tags have three pseudo classes, namely <code>hover, active</code> and <code>visited</code>. We can style these as we please. The list of pseudo classes are long and applies to various tags.
+</p>
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr)4fr; grid-template-rows: auto; grid-template-areas: 'a a a' 'b c d' 'e e e' 'f g h'">
+
+<p style="grid-area: a"><b>
+All Pseudo Classes</p>
+<div style="grid-area: b">
+Selector</b><br />
+:active<br />
+:checked<br />
+:disabled<br />
+:empty<br />
+:enabled<br />
+:first-child<br />
+:first-of-type<br />
+:focus<br />
+:hover<br />
+:in-range<br />
+:invalid<br />
+:lang(language)<br />
+:last-child<br />
+:last-of-type<br />
+:link<br />
+:not(selector)<br />
+:nth-child(n)<br />
+:nth-last-child(n)<br />
+:nth-last-of-type(n)<br />
+:nth-of-type(n)<br />
+:only-of-type<br />
+:only-child<br />
+:optional<br />
+:out-of-range<br />
+:read-only<br />
+:read-write<br />
+:required<br />
+:root<br />
+:target<br />
+:valid<br />
+:visited<br />
+</div>
+
+<div style="grid-area: c">
+<b>Example</b><br />
+a:active<br />
+input:checked<br />
+input:disabled<br />
+p:empty<br />
+input:enabled<br />
+p:first-child<br />
+p:first-of-type<br />
+input:focus<br />
+a:hover<br />
+input:in-range<br />
+input:invalid<br />
+p:lang(it)<br />
+p:last-child<br />
+p:last-of-type<br />
+a:link<br />
+:not(p)<br />
+p:nth-child(2)<br />
+p:nth-last-child(2)<br />
+p:nth-last-of-type(2)<br />
+p:nth-of-type(2)<br />
+p:only-of-type<br />
+p:only-child<br />
+input:optional<br />
+input:out-of-range<br />
+input:read-only<br />
+input:read-write<br />
+input:required<br />
+root<br />
+#news:target<br />
+input:valid<br />
+a:visited<br />
+</div>
+
+<div style="grid-area: d">
+<b>Example description</b><br />
+Selects the active link<br />
+Selects every checked &lt;input&gt; element<br />
+Selects every disabled &lt;input&gt; element<br />
+Selects every &lt;p&gt; element that has no children<br />
+Selects every enabled &lt;input&gt; element<br />
+Selects every &lt;p&gt; elements that is the first child of its parent<br />
+Selects every &lt;p&gt; element that is the first &lt;p&gt; element of its parent<br />
+Selects the &lt;input&gt; element that has focus<br />
+Selects links on mouse over<br />
+Selects &lt;input&gt; elements with a value within a specified range<br />
+Selects all &lt;input&gt; elements with an invalid value<br />
+Selects every &lt;p&gt; element with a lang attribute value starting with "it"<br />
+Selects every &lt;p&gt; elements that is the last child of its parent<br />
+Selects every &lt;p&gt; element that is the last &lt;p&gt; element of its parent<br />
+Selects all unvisited links<br />
+Selects every element that is not a &lt;p&gt; element<br />
+Selects every &lt;p&gt; element that is the second child of its parent<br />
+Selects every &lt;p&gt; element that is the second child of its parent, counting from the last child<br />
+Selects every &lt;p&gt; element that is the second &lt;p&gt; element of its parent, counting from the last child<br />
+Selects every &lt;p&gt; element that is the second &lt;p&gt; element of its parent<br />
+Selects every &lt;p&gt; element that is the only &lt;p&gt; element of its parent<br />
+Selects every &lt;p&gt; element that is the only child of its parent<br />
+Selects &lt;input&gt; elements with no 'required' attribute<br />
+Selects &lt;input&gt; elements with a value outside a specified range<br />
+Selects &lt;input&gt; elements with a 'read-only' attribute specified<br />
+Selects &lt;input&gt; elements with no 'read-only' attribute<br />
+Selects &lt;input&gt; elements with a 'required' attribute specified<br />
+Selects the document's root element<br />
+Selects the current active #news element (clicked on a URL containing that anchor name)<br />
+Selects all &lt;input&gt; elements with a valid value<br />
+Selects all visited links<br />
+</div>
+
+<p style="grid-area: e">
+<b>All CSS Pseudo Elements</p>
+<div style="grid-area: f">
+Selector</b><br />
+::after<br />
+::before<br />
+::first-letter<br />
+::first-line<br />
+::selection<br />
+</div>
+<div style="grid-area: g">
+<b>Example</b><br />
+p::after<br />
+p::before<br />
+p::first-letter<br />
+p::first-line<br />
+p::selection<br />
+</div>
+<div style="grid-area: h">
+<b>Example description</b><br />
+Insert content after every &lt;p&gt; element<br />
+Insert content before every &lt;p&gt; element<br />
+Selects the first letter of every &lt;p&gt; element<br />
+Selects the first line of every &lt;p&gt; element<br />
+Selects the portion of an element that is selected by a user<br />
+</div>
+</div>
+<p>
+    To understand the ::before and ::after pseudo-elements are elementary to create more complex shapes. These pseudo-elements are used to add something before or after a selected element. In the following example, a ::before pseudo-element is used to add a rectangle to an element with the class heart.
+</p>
+<p class="link"> Example:</p>
+<div class="dropDown">
+<pre>
+  .heart {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-45deg);
+  }
+  .heart::after {
+    background-color: pink;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    left: 25px;
+  }
+  .heart::before {
+    content: "";
+    background-color: pink;
+    border-radius: 50%;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: -0px;
+  }
+</pre>
+</div>
+<p>
+    For the ::before and ::after pseudo-elements to function properly, they must have a defined content property. This property is usually used to add things like a photo or text to the selected element. When the ::before and ::after pseudo-elements are used to make shapes, the content property is still required, but it's set to an empty string. In the above example, the element with the class of heart has a ::before pseudo-element that produces a yellow rectangle with height and width of 50px and 70px, respectively. This rectangle has round corners due to its 25% border radius and is positioned absolutely at 5px from the left and 50px above the top of the element.
+</p>
+<p>
+    Transform the element on the screen to a heart. In the heart::after selector, change the background-color to pink and the border-radius to 50%.
+</p>
+<p>
+    Next, target the element with the class heart (just heart) and fill in the transform property. Use the rotate() function with -45 degrees.
+</p>
+<p>
+    Finally, in the heart::before selector, set its content property to an empty string.
+</p>
+<p>
+    Animation is accomplished by adding a few details in the style of current objects followed by an animation method.
+</p>
+<div class="link">
+    Example:
+</div>    
+<div class="dropDown">
+<pre>
+#ball {
+	position: fixed;
+    width: 50px;
+    height: 50px;
+    margin-top: 50px;
+	animation-name: bounce;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-out;
+}
+@keyframes bounce {
+	0% {
+	top: 10px;
+	}
+	50% {
+	top: 100px;
+	}
+	100% {
+	top: 10px;
+	}
+}</pre>
+</div>
+<p>
+    The animation-timing-function can be controlled by using Bezier curves with the cubic-bezier function. The shape of the curve represents how the animation plays out. The curve lives on a 1 by 1 coordinate system. The X-axis of this coordinate system is the duration of the animation (think of it as a time scale), and the Y-axis is the change in the animation.
+</p>
+<p>
+    The <code>cubic-bezier</code> function consists of four main points that sit on this 1 by 1 grid: p0, p1, p2, and p3. p0 and p3 are set for you - they are the beginning and end points which are always located respectively at the origin (0, 0) and (1, 1). You set the x and y values for the other two points, and where you place them in the grid dictates the shape of the curve for the animation to follow. This is done in CSS by declaring the x and y values of the p1 and p2 "anchor" points in the form: (x1, y1, x2, y2). Pulling it all together, here's an example of a Bezier curve in CSS code:
+</p>
+<pre>
+    animation-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
+</pre>
+<p>
+    Setting <code>overflow</code> to hidden, might be neccessary to use to avoid screen width being changed by animation extending beyond the viewable document. ** TO BE INVESTIGATED **
+</p>
+<p>
+    <em>Media Queries</em> are a new technique introduced in CSS3 that change the presentation of content based on different <em>viewport</em> sizes. The viewport is a user's visible area of a web page, and is different depending on the device used to access the site.
+    <br />
+    Media Queries consist of a media type, and if that media type matches the type of device the document is displayed on, the styles are applied. You can have as many selectors and styles inside your media query as you want.
+    <br />
+    Here's an example of a media query that returns the content when the device's width is less than or equal to 100px:
+    <br />
+    @media (max-width: 100px) { /* CSS Rules */ }
+    <br />
+    and the following media query returns the content when the device's height is more than or equal to 350px:
+    <br />
+    @media (min-height: 350px) { /* CSS Rules */ }
+</p>
+<p>
+    Instead of using <em>em</em> or <em>px</em> to size text, you can use <code>vw</code> - viewport units for responsive typography. Viewport units, like percentages, are relative units, but they are based off different items. Viewport units are relative to the viewport dimensions (width or height) of a device, and percentages are relative to the size of the parent container element.
+</p>
+<div class="link">
+    The four different viewport units are:
+</div>
+<ul class="dropDown">
+    <li>vw (viewport width): 10vw would be 10% of the viewport's width.</li>
+    <li>vh (viewport height): 3vh would be 3% of the viewport's height.</li>
+    <li>vmin (viewport minimum): 70vmin would be 70% of the viewport's smaller dimension (height or width).</li>
+    <li>vmax (viewport maximum): 100vmax would be 100% of the viewport's bigger dimension (height or width).</li>
+</ul>
+<p>
+    Here is an example that sets a body tag to 30% of the viewport's width.
+</p>
+<pre>body { width: 30vw; }</pre>
+
+<article>
+<h3>CSS Flexbox is a great way to allign elements in rows and columns.</h3>
+<hr />
+<p>
+    Adding <code>display: flex;</code> to an element turns it into a flex container. This makes it possible to align any children of that element into rows or columns. You do this by adding the <code>flex-direction</code> property to the parent item and setting it to row or column. Creating a row will align the children horizontally, and creating a column will align the children vertically.
+    <br />
+    Other options for <code>flex-direction</code> are <code>row-reverse</code> <code>and column-reverse</code>.
+    <br />
+    Note: The default value for the <code>flex-direction</code> property is row.
+</p>
+<p>
+    Sometimes the flex items within a flex container do not fill all the space in the container. It is common to want to tell CSS how to align and space out the flex items a certain way. Fortunately, the <em>justify-content</em> property has several options to do this. But first, there is some important terminology to understand before reviewing those options.
+    <br />
+    Recall that setting a flex container as a row places the flex items side-by-side from left-to-right. A flex container set as a column places the flex items in a vertical stack from top-to-bottom. For each, the direction the flex items are arranged is called the main axis. For a row, this is a horizontal line that cuts through each item. And for a column, the main axis is a vertical line through the items.
+</p>
+
+<h4>Spacing flex items</h4>
+<hr />
+<p>
+    There are several options for how to space the flex items along the line that is the main axis. One of the most commonly used is <code>justify-content: center;</code>, which aligns all the flex items to the center inside the flex container. Others options include:
+</p>
+    <ul>
+    	<li><code>justify-content: flex-start;</code>, aligns items to the start of the flex container. For a row, this pushes the items to the left of the container. For a column, this pushes the items to the top of the container.
+    <br />
+    This is the default alignment if no justify-content is specified.</li>
+		<li><code>justify-content: flex-end;</code>, aligns items to the end of the flex container. For a row, this pushes the items to the right of the container. For a column, this pushes the items to the bottom of the container.</li>
+		<li><code>justify-content: space-between;</code>, aligns items to the center of the main axis, with extra space placed between the items. The first and last items are pushed to the very edge of the flex container.</li>
+		<li>For example, in a row the first item is against the left side of the container, the last item is against the right side of the container, then the remaining space is distributed evenly among the other items.</li>
+		<li><code>justify-content: space-around;</code> similar to space-between but the first and last items are not locked to the edges of the container, the space is distributed around all the items with a half space on either end of the flex container.</li>
+		<li><code>justify-content: space-evenly;</code>, distributes space evenly between the flex items with a full space at either end of the flex container.</li>
+</ul>
+<p>
+    The <code>align-items</code> property is similar to <code>justify-content</code> confusingly. Recall that the justify-content property aligned flex items along the main axis. For rows, the main axis is a horizontal line and for columns it is a vertical line. Flex containers also have a cross axis which is the opposite of the main axis. For rows, the cross axis is vertical and for columns, the cross axis is horizontal.
+    <br />
+    <code>align-content</code> modifies the behaviour of the <code>flex-wrap</code> property. It is similar to align-items, but instead of aligning flex items, it aligns flex lines.<br />
+Note: There must be multiple lines of items for this property to have any effect.</p>
+<p>
+<code>align-self</code> are allowing positioning of individual elements.</p>
+<p>CSS offers the align-items property to align flex items along the cross axis. For a row, it tells CSS how to push the items in the entire row up or down within the container. And for a column, how to push all the items left or right within the container. The different values available for align-items include: flex-start: aligns items to the start of the flex container. For rows, this aligns items to the top of the container.
+    <br />
+    For columns, this aligns items to the left of the container. flex-end: aligns items to the end of the flex container. For rows, this aligns items to the bottom of the container. For columns, this aligns items to the right of the container. center: align items to the center.
+    <br />
+    For rows, this vertically aligns items (equal space above and below the items). For columns, this horizontally aligns them (equal space to the left and right of the items). stretch: stretch the items to fill the flex container. For example, rows items are stretched to fill the flex container top-to-bottom. This is the default value if no align-items value is specified. baseline: align items to their baselines. Baseline is a text concept, think of it as the line that the letters sit on.
+</p>
+
+<h4>Split into multiple rows or columns</h4>
+<hr />
+<p>
+    CSS flexbox has a feature to split a flex item into multiple rows (or columns). By default, a flex container will fit all flex items together. For example, a row will all be on one line.
+    <br />
+    However, using the <code>flex-wrap</code> property tells CSS to wrap items. This means extra items move into a new row or column. The break point of where the wrapping happens depends on the size of the items and the size of the container.
+</p>
+
+<h4>Wrap Direction</h4>
+<hr />
+<ul>
+    <li>nowrap: this is the default setting, and does not wrap items.</li>
+    <li>wrap: wraps items from left-to-right if they are in a row, or top-to-bottom if they are in a column.</li>
+    <li>wrap-reverse: wraps items from right-to-left if they are in a row, or bottom-to-top if they are in a column.</li>
+</ul>
+
+<h4>Flex Properties</h4>
+<hr />
+<ul>
+	<li>The first is the <code>flex-shrink</code> property. When it's used, it allows an item to shrink if the flex container is too small. Items shrink when the width of the parent container is smaller than the combined widths of all the flex items within it.</li>
+	<li>The <code>flex-shrink</code> property takes numbers as values. The higher the number, the more it will shrink compared to the other items in the container. For example, if one item has a flex-shrink value of 1 and the other has a flex-shrink value of 3, the one with the value of 3 will shrink three times as much as the other.</li>
+	<li>The opposite of flex-shrink is the <code>flex-grow</code> property. Recall that flex-shrink controls the size of the items when the container shrinks. The flex-grow property controls the size of items when the parent container expands.
+		<br />As example: if one item has a flex-grow value of 1 and the other has a flex-grow value of 3, the one with the value of 3 will grow three times as much as the other.</li>
+	<li>The <code>flex-basis</code> property specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex-grow. The units used by the flex-basis property are the same as other size properties (px, em, %, etc.). The value auto sizes items based on the content.
+		<p><u>There is a shortcut available to set several flex properties at once.</u> The <code>flex-grow, flex-shrink, and flex-basis</code> properties can all be set together by using the flex property.
+    <br />
+    For example, flex: 1 0 10px; will set the item to flex-grow: 1;, flex-shrink: 0;, and flex-basis: 10px;.
+    <br />
+    The default property settings are flex: 0 1 auto;.
+		</p>
+	</li>
+	<li>The <code>order</code> property is used to tell CSS the order of how flex items appear in the flex container. By default, items will appear in the same order they come in the source HTML. The property takes numbers as values, and negative numbers can be used.
+	</li>
+	<li>The final property for flex items is <code>align-self</code>. This property allows you to adjust each item's alignment individually, instead of setting them all at once. This is useful since other common adjustment techniques using the CSS properties float, clear, and vertical-align do not work on flex items.
+    <br />
+    align-self accepts the same values as align-items and will override any value set by the align-items property.</li>
+</ul>
+<!--<p>
+    The <strong>vertical-align</strong> property is very useful for controlling elements. <span class="link">The value options are:</span>
+</p>
+<div class="dropDown">
+<pre>
+    /* keyword values */
+    vertical-align: baseline;
+    vertical-align: sub;
+    vertical-align: super;
+    vertical-align: text-top;
+    vertical-align: text-bottom;
+    vertical-align: middle;
+    vertical-align: top;
+    vertical-align: bottom;
+
+    /* distance values */
+    vertical-align: 10em, 10px, 10vw, 10%, 10pt ++;
+
+    /* Global values */
+    vertical-align: inherit;
+    vertical-align: initial;
+    vertical-align: unset;
+</pre>
+</div>-->
+</article>
+
+<article>
+<h3>Use GRID to organise and keep structure with different viewports.</h3>
+<hr />
+<p>
+    <em>Grid</em>: Use Media Queries to Create Responsive Layouts to rearrange grid areas, change dimensions of a grid, and rearrange the placement of items which is very useful with different <em>viewport</em> dimensions.
+    <br />
+    You can turn any HTML element into a grid container by setting its display property to grid. This gives you the ability to use all the other properties associated with CSS Grid.
+    <br />
+    Note: In CSS Grid, the parent element is referred to as the container and its children are called items.
+    <br />
+     To add some columns and rows to the grid, use the <code>grid-template-columns</code> and <code>grid-template-rows</code> property on a grid container as demonstrated below:
+</p>
+<pre>
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 50px);
+        /* short for: grid-template-columns: 50px 50px; */
+        /* 2 similar columns 50px wide */
+    grid-template-rows: repeat(2, 1fr 50px) 20px;
+        /* short for: grid-template-columns: 1fr 50px 1fr 50px 20px; */
+        /* 2 and 2 similar rows: 1st and 3rd at 1fr, 2nd and 4th at 50px, with the 5th at 20px */
+}
+</pre>
+<p>
+    You can use absolute and relative units like px and em in CSS Grid to define the size of rows and columns. You can use these as well:
+    <br />
+    <code>fr</code>: The new unitsets the column or row to a fraction of the available space,
+    <br />
+    auto: sets the column or row to the width or height of its content automatically,
+    <br />
+    %: adjusts the column or row to the percent width of its container.
+</p>
+
+<h4>Gap between Grid Elements</h4>
+<hr />
+<p>
+    To add a gap between the rows or columns individually, use the <code>grid-row-gap</code> or the <code>grid-column-gap</code> property like this:
+</p>
+<pre>
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+</pre>
+<p>
+    This creates 10px of empty space between all of our columns and rows.
+</p>
+<p>
+    Shorthand of <code>grid-gap</code> followed by 1 or 2 values. With 1 value it sets both row and column space, if 2 are set the first one is used as row gap.
+</p>
+<p>
+    Up to this point, all the properties that have been discussed are for grid containers. The <code>grid-column</code> and <code>grid-row</code> properties use the grid items themselves.
+    <br />
+    The hypothetical horizontal and vertical lines that create the grid are referred to as lines. These lines are numbered starting with 1 at the top left corner of the grid and move right for columns and down for rows.
+    <br />
+    To control the amount of cells an item will consume, you can use the grid-column property in conjunction with the line numbers you want the item to start and stop at. and similarly to the grid-row property.
+    <br />
+    The example: <code>grid-column: 1 / 3;</code> will make the item start at the first vertical line of the grid on the left and span to the 3rd line of the grid, consuming two cells in the same column.
+    <br />
+    The example: <code>grid-row: 2 / 4;</code> will make the item start at the 2nd horisontal line of the grid from the top and span to the 4th, consuming two cells in the same row.
+</p>
+
+<h4>Aligning Grid Elements and the Content</h4>
+<hr />
+<p>
+    Alignment of the grid elements are achived through 4 properties:
+</p>
+<ul><span>Cell content</span>
+   	<li><code>justify-self</code> property for horisontal adjustments e.g. <code>justify-self: center;</code>.</li>
+    <li><code>align-self</code> property for vertical adjustments.</li>
+</ul>
+<ul><span>Cell container</span>
+    <li><code>justify-items</code> property aligns all grid cells horisontally.</li>
+    <li><code>align-items</code> property aligns all grid cells vertically.</li>
+</ul>
+<p>
+    The values are by default <code>stretch</code> but has 3 additional options:
+</p>
+<ul>
+	<li><code>start</code> aligns the content at the left of the cell.</li>
+	<li><code>center</code> aligns the content in the center of the cell.</li>
+	<li><code>end</code> aligns the content at the right of the cell.</li>
+</ul>
+
+<h4>Cell Grouping</h4>
+<hr />
+<p>
+    You can group cells of your grid together into an area and give the area a custom name. Do this by using <code>grid-template-areas</code> on the container like this:
+</p><pre>
+grid-template-areas:
+	"a a a"
+	"b c c"
+	"d d d";
+</pre>
+<p>
+    The code above merges the top three cells together into an header area named a (names are flexible), the bottom three cells into a footer area called d, and it makes two areas in the middle row; b advert and c content.<br />
+    <strong>Note:</strong> Every cells must be represented to prevent error.
+<p>
+	Every letter in the code represents a cell and every pair of quotation marks represent a row. In addition to custom labels, you can use a period (.) to designate an empty cell in the grid. 
+</p>
+<p>
+    After creating an area's template for your grid container, you can place an item in your custom area by referencing the name you gave it. To do this, you use the <code>grid-area</code> property on an item like this:
+</p><pre>
+#header {
+	grid-area: a;
+}
+</pre>
+<p>
+    This lets the grid know that you want the item1 class to go in the area named header. In this case, the item will use the entire top row because that whole row is named as the header area.
+</p>
+<p>
+    If your grid doesn't have an areas template to reference, you can create an area on the fly for an item to be placed like this:
+</p>
+<pre>
+    item1 { grid-area: 1/1/2/4; }
+</pre>
+<p>
+    This is using the line numbers you learned about earlier to define where the area for this item will be. The numbers in the example above represent these values:
+    <br />
+    grid-area: horizontal line to start at / vertical line to start at / horizontal line to end at / vertical line to end at;
+    <br />
+    So the item in the example will consume the rows between lines 1 and 2, and the columns between lines 1 and 4.
+</p>
+
+<h4>Size of Grid Elements</h4>
+<hr />
+<p>
+    There's another built-in function to use with grid-template-columns and grid-template-rows called <code>minmax</code>. It's used to limit the size of items when the grid container changes size. To do this you need to specify the acceptable size range for your item. Here is an example:
+    <br />
+    grid-template-columns: 100px minmax(50px, 200px);
+    <br />
+    In the code above, grid-template-columns is set to create two columns; the first is 100px wide, and the second has the minimum width of 50px and the maximum width of 200px.
+</p>
+<p>
+    The repeat function comes with an option called <code>auto-fill</code>. This allows you to automatically insert as many rows or columns of your desired size as possible depending on the size of the container. You can create flexible layouts when combining auto-fill with minmax, like this:
+</p>
+<pre>
+    repeat(auto-fill, minmax(60px, 1fr));
+</pre>
+<p>
+    When the container changes size, this setup keeps inserting 60px columns and stretching them until it can insert another one. Note: If your container can't fit all your items on one row, it will move them down to a new one.
+</p>
+<p>
+    <code>auto-fit</code> works almost identically to auto-fill. The only difference is that when the container's size exceeds the size of all the items combined, auto-fill keeps inserting empty rows or columns and pushes your items to the side, while auto-fit collapses those empty rows or columns and stretches your items to fit the size of the container.
+    <br />
+    Note: If your container can't fit all your items on one row, it will move them down to a new one.
+</p>
+<p>
+    CSS Grid can be an easy way to make your site more responsive by using media queries to rearrange grid areas, change dimensions of a grid, and rearrange the placement of items.
+    <br />
+    In the preview, when the viewport width is 300px or more, the number of columns changes from 1 to 2. The advertisement area then occupies the left column completely.
+</p>
+<div class="fig_flex" style="display: flex; justify-items: center; align-items: center;">
+<pre>
+@media (min-width: 300px){
+	.container{
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto 1fr auto;
+		grid-template-areas:
+			"advert header"
+			"advert content"
+			"advert footer";
+	}
+}
+@media (min-width: 400px){
+	.container{
+		grid-template-areas:
+			"header header"
+			"advert content"
+			"footer footer";
+		}
+	}
+</pre>
+<figure>
+    <img title="CSS Grid Layout Example" id="CSS-grid" src="/getCoding/images/CSS Grid.png" alt="Document layout with CSS grid" />
+</figure> 
+</div>
+<p>
+    Turning an element into a grid only affects the behavior of its direct descendants. So by turning a direct descendant into a grid, you have a grid within a grid.
+    <br />
+    For example, by setting the display and grid-template-columns properties of the element with the item3 class, you create a grid within your grid.
+</p>
+</article>
+
+<article>
+<h3>CSS Attribute selectors</h3>
+<hr />
+<pre>
+<b>Selector		Example				Example description</b>
+[attribute]		[target]			Selects all elements with a target attribute
+[attribute=value]	[target=_blank]			Selects all elements with target="_blank"
+[attribute~=value]	[title~=flower]			Selects all elements with a title attribute containing the word "flower"
+[attribute|=value]	[lang|=en]			Selects all elements with a lang attribute value starting with "en"
+[attribute^=value]	a[href^="https"]		Selects every &lt;a&gt; element whose href attribute value begins with "https"
+[attribute$=value]	a[href$=".pdf"]			Selects every &lt;a&gt; element whose href attribute value ends with ".pdf"
+[attribute*=value]	a[href*="w3schools"]		Selects every &lt;a&gt; element whose href attribute value contains the substring "w3schools"
+</pre>
+</article>
+
+<article>
+    <h3>SASS - Super Awesome Style Sheet</h3>
+    <hr>
+    <p>A superset of CSS allowing the use of variables and nesting for an easier more reusable code.</p>
+    <p>Variables are declared with the <q>$</q> symbol: <code>$myVar = 'red';</code></p>
+    <p>To use the variable we simply write the same way we declared it: <code>background-color: $myVar;</code></p>
+    <h4>Superset</h4>
+    <hr>
+    <p>As SASS is a superset of CSS it allows the same syntax to. the way to implement SASS in a html document is by replacing the <code>style type="text/css"</code> with <code>style type="text/scss</code></p>
+    <h4>Nesting</h4>
+    <hr>
+    <p>A useful feature for readability is the option to nest the style sheet. First example shows traditional CSS the following is a SCSS:</p>
+    <pre>
+nav {
+    background-color: red;
+}
+nav ul {
+    list-style: none;
+}
+nav ul li {
+    display: inline-block;
+}
+
+nav {
+    background-color: red;
+    ul {
+        list-style: none;
+        li {
+            display: inline-block;
+        }
+    }
+}
+    </pre>
+    <h4>Mixins</h4>
+    <hr>
+    <p>When new features are introduced in CSS it may take some time for each browser vendor to follow suit. We are then faced with a lot of typing in CSS for each of these new rules as the example shows:</p>
+    <pre>
+div {
+    -webkit-box-shadow: 0px 0px 4px #fff;
+    -moz-box-shadow: 0px 0px 4px #fff;
+    -ms-box-shadow: 0px 0px 4px #fff;
+    box-shadow: 0px 0px 4px #fff;
+}
+    </pre>
+    <p>We are able to reduce this in SASS with what is reffered to as <q>mixins</q></p>
+    <pre>
+/* First we declare the @mixin with a name */
+@mixin box-shadow($x, $y, $blur, $c){ 
+    -webkit-box-shadow: $x $y $blur $c;
+    -moz-box-shadow: $x $y $blur $c;
+    -ms-box-shadow: $x $y $blur $c;
+    box-shadow: $x $y $blur $c;
+}
+/* Then we simply call the object to use it */
+div {
+    @include box-shadow(0px, 0px, 4px, #fff);
+}
+    </pre>
+    <h4>Conditional Statements</h4>
+    <hr>
+    <p>The @if directive in Sass is useful to test for a specific case - it works just like the if statement in JavaScript.</p>
+    <pre>
+@mixin make-bold($bool) {
+    @if $bool == true {
+        font-weight: bold;
+    }
+    }
+    </pre>
+    <p>And just like in JavaScript, @else if and @else test for more conditions:</p>
+    <pre>
+@mixin text-effect($val) {
+    @if $val == danger {
+        color: red;
+    }
+    @else if $val == alert {
+        color: yellow;
+    }
+    @else if $val == success {
+        color: green;
+    }
+    @else {
+        color: black;
+    }
+}
+    </pre>
+    <h4>The For Loop</h4>
+    <hr>
+    <p>The @for directive adds styles in a loop, very similar to a for loop in JavaScript.</p>
+    <p>@for is used in two ways: "start through end" or "start to end". The main difference is that the "start to end" excludes the end number as part of the count, and "start through end" includes the end number as part of the count.</p>
+    <pre>
+&lt;style type='text/scss'&gt;
+    @for $i from 1 to 6 {
+        .text-#{$i} { font-size: 15 * $i + px }
+    }
+&lt;/style&gt;
+    </pre>
+    <p>The <code>#{$i}</code> part is the syntax to combine a variable (i) with text to make a string. When the Sass file is converted to CSS, it looks like this:</p>
+    <pre>
+.text-1 {
+    font-size: 15px;
+}      
+.text-2 {
+    font-size: 30px;
+}
+.text-3 {
+    font-size: 45px;
+}
+.text-4 {
+    font-size: 60px;
+}
+.text-5 {
+    font-size: 75px;
+}
+    </pre>
+    
+    <h4>For Each Loop</h4>
+    <hr>
+    <p>Sass also offers the @each directive which loops over each item in a list or map. On each iteration, the variable gets assigned to the current value from the list or map.</p>
+    <pre>
+$colors: (col1: blue, col2: black, col3: red);
+@each $key, $color in $colors {
+    .#{$color}-bg { background-color: $color;}
+}
+    </pre>
+    
+    <h4>The While Loop</h4>
+    <hr>
+    <pre>
+$x: 1;
+@while $x &lt;= 5 {
+    .text-#{$x} { font-size: 15 * $x + px; }
+    $x: $x + 1;
+}
+    </pre>
+    <h4>Partials</h4>
+    <hr>
+    <p>
+        Partials in Sass are separate files that hold segments of CSS code. These are imported and used in other Sass files. This is a great way to group similar code into a module to keep it organized.
+    </p>
+    <p>
+        Names for partials start with the underscore (_) character, which tells Sass it is a small segment of CSS and not to convert it into a CSS file. Also, Sass files end with the .scss file extension. To bring the code in the partial into another Sass file, use the @import directive.
+    </p>
+    <p>
+        For example, if all your mixins are saved in a partial named "_mixins.scss", and they are needed in the "main.scss" file, this is how to use them in the main file:
+    </p>
+    <pre>
+// In the main.scss file
+@import 'mixins'
+    </pre>
+    <p>
+        Note that the underscore and file extension are not needed in the import statement - Sass understands it is a partial. Once a partial is imported into a file, all variables, mixins, and other code are available to use.
+    </p>
+    <h4>Extend CSS properties</h4>
+    <hr>
+    <p>
+        To avoid reusing code SASS has a feature to use the CSS properties in different elements without copying and pasting the same code.
+    </p>
+    <pre>
+.panel{
+    background-color: red;
+    height: 70px;
+    border: 2px solid green;
+}
+.big-panel{
+    @extend .panel;
+    width: 150px;
+    font-size: 2em;
+}
+    </pre>
+</article>

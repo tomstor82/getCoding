@@ -1,0 +1,72 @@
+<!DOCTYPE=html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Console Test Page</title>
+		<style>
+		* {
+			text-align: center;
+		}
+		#white {
+			background-color: white;
+		}
+		#black {
+			background-color: black;
+		}
+		#green {
+			background-color: green;
+		}
+		#orange {
+			background-color: orange;
+		}
+		body {
+			background-color: black;
+			color: white;
+		}		
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>Test JavaScript, HTML and CSS here</h1>
+		</header>
+		<main>
+			<button type="button" id="button">Theme</button>
+			<select>
+				<option id="white" onclick="change(2)">  </option>
+				<option id="black" onclick="change(3)">  </option>
+				<option id="orange" onclick="change(1)">  </option>
+				<option id="green" onclick="change(0)">  </option>
+			</select>
+			<nav>
+			</nav>
+			<footer>
+			</footer>
+		</main>
+		<script>
+			const colourArray = ["green","orange","white","black"];
+
+			function change(val) {
+				// change text colour for black background
+				if (colourArray[val] === "black") document.body.style.color = "white";
+				else document.body.style.color = "black";
+				// change background colour
+				document.body.style.backgroundColor = colourArray[val];
+			}
+			let i=0;
+			const button = document.getElementById("button");
+			button.addEventListener("click", changeBackgroundColour);
+			
+			function changeBackgroundColour() {
+				// Change background color
+				document.body.style.backgroundColor = colourArray[i];
+				// Change text color if background is black
+				if (i===0) document.body.style.color = "white";
+				// If any other background color text color is black
+				else document.body.style.color = "black";
+				
+				if (i < colourArray.length-1) i++;
+				else i=0;
+			}
+		</script>
+	</body>
+</html>

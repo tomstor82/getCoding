@@ -1,0 +1,296 @@
+<p>
+HTML5 (Hyper Text Markup Language) has native built-in media players, can run API's (Application Programming Interface) like games and Twitter, obtain data from servers through JS and stores data on client side to allow usage offline as of the W3C HTML5 standard and validate input methods.
+</p>
+
+<h3  id="HTML_tags">Tags and semantics</h3>
+<hr />
+<p>
+Starting with line <code>&lt;!DOCTYPE html&gt;</code>, then <code>&lt;html lang="en"&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;meta charset="utf-8" /&gt;</code>.
+</p>
+HTML5 introduced a number of new tags that give developers more options while also incorporating accessibility features. These include <code>&lt;header&gt;, &lt;main&gt;, &lt;footer&gt;, &lt;nav&gt;, &lt;article&gt;, &lt;section&gt;</code> among others. These are important to create meaning for internet search engines as well as aiding visually and aurally impared users.
+</p>
+
+<h3>Top Level Tag Hierarchy</h3>
+<hr>
+<ol>
+	<li>header
+		<ol>
+			<li>section
+				<ol>
+					<li>h1</li>
+					<li>h2</li>
+				</ol>
+			</li>
+			<li>nav</li>
+		</ol>
+	</li>
+	<li>main
+		<ol>
+			<li>section
+				<ol>
+					<li>article
+						<ul>
+							<li>h3</li>
+							<li>aside</li>
+						</ul>
+					</li>
+					<li>article
+						<ul>
+							<li>h3</li>
+						</ul>
+					</li>
+				</ol>
+			</li>
+			<li>nav</li>
+			<li>nav</li>
+		</ol>
+	</li>
+	<li>footer
+		<ol>
+			<li>address</li>
+		</ol>
+	</li>
+</ol>
+
+<h4>Block element tags excluding top level tags. They use all available width, creating line breaks:</h4>
+<hr />
+<ul>
+	<li>&lt;h1&gt; to &lt;h6&gt; - header tags. The &lt;h1&gt; tag is to be used <u>once</u> in the same page.</li>
+	<li>&lt;p&gt; - starts a new paragraph.</li>
+	<li>&lt;pre&gt; - preformatted text presented in monospace fonts. <u>Creates line breaks.</u></li>
+	<li>&lt;div&gt; - where we can't use a semantic tag. Used to wrap around several elements.</li>
+</ul>
+
+<h4>Inline element tags:</h4>
+<hr />
+<ul>
+	<li>&lt;em&gt; - emphasised text. Presented as <em>italic</em> without styling.</li>
+	<li>&lt;strong&gt; - strong text. Presented as <em>bold</em> without styling.</li>
+	<li>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;, &lt;sub&gt;, &lt;sup&gt;, &lt;ins&gt;, &lt;small&gt;, &lt;mark&gt;, &lt;del&gt; - for text formatting.</li>
+	<li>&lt;span&gt; - similar to &lt;div&gt; but for inline purposes. Used to attribute inline text.</li>
+	<li>&lt;code&gt; - draws content <code>like this and was designed for displaying machine code text.</code></li>
+
+	<li>&lt;samp&gt; - interpreted as sample output and can be used to write sequences which HTML normally would render as part of the document e.g. the next paragraph escape sequences list is full of &lt;samp&gt;.</li>
+</ul>
+
+<h3>HTML Symbols and Characters Escape Sequences</h3>
+<hr />
+<ul>
+	<li><samp> &amp;amp; </samp> = <samp> &amp; </samp></li>
+	<li><samp> &amp;lt; </samp> = <samp> &lt; </samp></li>
+	<li><samp> &amp;gt; </samp> = <samp> &gt; </samp></li>
+	<li><samp> &amp;oslash; </samp> = <samp> &oslash; </samp></li>
+	<li><samp> &amp;aring; </samp> = <samp> &aring; </samp></li>
+	<li><samp> &amp;ouml; </samp> = <samp> &ouml; </samp></li>
+	<li><samp> &amp;ograve; </samp> = <samp> &ograve; </samp></li>
+	<li><samp> &amp;ntilde; </samp> = <samp> &ntilde; </samp></li>
+	<li><samp> &amp;euro; </samp> = <samp> &euro; </samp></li>
+</ul>
+<p>
+By default, a browser renders these elements similarly to the humble div. However, using them where appropriate gives additional meaning in your markup. The tag name alone can indicate the type of information it contains, which adds semantic meaning to that content. Assistive technologies can access this information to provide better page summary or navigation options to their users.
+</p>
+<p>
+The <code>&lt;header&gt;</code> element adds semantic meaning and improves accessibility. It's used to wrap introductory information or navigation links for its parent tag and works well around content that's repeated at the top on multiple pages.
+<br />
+header shares the embedded landmark feature you saw with main, allowing assistive technologies to quickly navigate to that content.
+</p>
+<p>
+The <code>&lt;main&gt;</code> element is used to wrap the main content, and there should be only one per page. It's meant to surround the information that's related to the central topic of your page. It's not meant to include items that repeat across pages, like navigation links or banners.
+<br />
+The main tag also has an embedded landmark feature that assistive technology can use to quickly navigate to the main content. If you've ever seen a "Jump to Main Content" link at the top of a page, using a main tag automatically gives assistive devices that functionality.
+</p>
+<p>
+<code>&lt;article&gt;</code> is another one of the new HTML5 elements that adds semantic meaning to your markup. article is a sectioning element, and is used to wrap independent, self-contained content. The tag works well with blog entries, forum posts, or news articles.
+</p>
+<p>
+The <code>&lt;section&gt;</code> element is also new with HTML5, and has a slightly different semantic meaning than article. An article is for standalone content, and a section is for grouping thematically related content. They can be used within each other, as needed. For example, if a book is the article, then each chapter is a section. When there's no relationship between groups of content, then use a <code&lt;>div&gt;</code>.
+</p>
+<p>
+The <code>&lt;nav&gt;</code> element is another HTML5 item with the embedded landmark feature for easy screen reader navigation. This tag is meant to wrap around the main navigation links in your page.
+<br />
+If there are repeated site links at the bottom of the page, it is <u>not</u> necessary to put those within a nav tag. Using a footer is sufficient.
+</p>
+<p>
+Similar to header and nav, the footer element has a built-in landmark feature that allows assistive devices to quickly navigate to it. It's primarily used to contain copyright information or links to related documents that usually sit at the bottom of a page.
+</p>
+<p>
+Some tags have no closing tag like <code>&lt;meta /&gt;, &lt;input /&gt;, &lt;img /&gt;, &lt;video /&gt;, &lt;br /&gt;, &lt;hr /&gt;</code> among some.<br />
+We can add extra information to our tags in the form of attributes. An input group with <code>type="radio"</code> requires the <code>name</code> attribute to be similar for the other radio inputs to form a group.
+</p>
+<p>
+Wrapping <code>&lt;input&gt;</code> tags with <code>&lt;label&gt;</code> tags, automatically associates the label with the button. It is nevertheless considered best practice to set a <code>for</code> attribute on the label element, with a value that matches the value of the <code>id</code> attribute of the input element. This allows assistive technologies to create a linked relationship between the label and the child input element.
+</p>
+<p>
+	HTML5 introduced the <code>&lt;figure&gt;</code> tag, along with the related <code>&lt;figcaption&gt;</code>. Used together, these items wrap a visual representation (like an image, diagram, or chart) along with its caption. This gives a two-fold accessibility boost by both semantically grouping related content, and providing a text alternative that explains the figure. For data visualizations like charts, the caption can be used to briefly note the trends or conclusions for users with visual impairments. Another challenge covers how to move a table version of the chart's data off-screen (using CSS) for screen reader users.
+</p>
+
+<h3>Buttons</h3>
+<hr />
+<p>
+The next form topic covers accessibility of <em>radio buttons</em>. Each choice is given a label with a <code>for</code> <em>attribute</em> tying to the id of the corresponding item. Since radio buttons often come in a group where the user must choose one, there's a way to semantically show the choices are part of a set. The <code>fieldset</code> tag surrounds the entire grouping of radio buttons to achieve this. It often uses a legend tag to provide a description for the grouping, which is read by screen readers for each choice in the fieldset element. The fieldset wrapper and legend tag are not necessary when the choices are self-explanatory, like a gender selection. Using a label with the for attribute for each radio button is sufficient.
+</p>
+<p>
+Forms often include the <em>input</em> field, which can be used to create several different form controls. The <code>type</code> attribute on this element indicates what kind of input will be created. In HTML5 W3C introduced an option to specify a <em>date</em> field. Depending on browser support, a date picker shows up in the input field when it's in focus, which makes filling in a form easier for all users. For older browsers, the type will default to <em>text</em>, so it helps to show users the expected date format in the label or as placeholder text just in case.
+<br />
+Continuing with the date theme, HTML5 also introduced the <em>time</em> element along with a datetime attribute to standardize times. This is an inline element that can wrap a date or time on a page. A valid format of that date is held by the datetime attribute. This is the value accessed by assistive devices. It helps avoid confusion by stating a standardized version of a time, even if it's written in an informal or colloquial manner in the text. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank">External list of <u>Input</u> attributes</a>
+</p>
+<p>
+<em>Forms</em> are used to send data to the server or url. Wrapping <code>&lt;form&gt;</code> around an <code>&lt;input&gt;</code> tag is all it takes after specifying <code>action="url"</code> inside the form tag and along with a <code>method="post" or "get"</code>.<br />
+The <code>&lt;input&gt;</code> tag has a whole variety of <code>type</code> attributes as <code>submit, text, date, email, slider</code> and more. They are also self validating as of the W3C HTML5 standard.
+</p>
+<p>
+Form tags  here are described in chronological order following the <em>form</em> tag: <em>fieldset</em> divide different form sections into groups for easy of using screen readers. Next <em>legend</em> describes the headline of the section and places it on top of the border line of the section. Next <em>label</em> and <em>input</em> with many options. There's also <em>select</em> type with <em>option</em> consisting of drop or scroll list options.
+</p>
+<p>
+When a form gets submitted, the data is sent to the server and includes entries for the options selected. Inputs of type radio and checkbox report their values from the value attribute.
+</p>
+<p>
+	<code>&lt;button&gt;</code> tag and the <code>&lt;input type="submit"&gt;</code> elements are similar. However one can assign names to the button between the two tags.
+</p>
+<p>
+	For example:
+</p>
+<pre>
+&lt;label for="indoor"&gt;
+&lt;input id="indoor" value="indoor" type="radio" name="indoor-outdoor"	/&gt;Indoor
+&lt;/label&gt;
+&lt;label for="outdoor"&gt;
+&lt;input id="outdoor" value="outdoor" type="radio" name="indoor-outdoor" /&gt;Outdoor
+&lt;/label&gt;
+</pre>
+<p>
+Here, you have two radio inputs. When the user submits the form with the indoor option selected, the form data will include the line: indoor-outdoor=indoor. This is from the name and value attributes of the "indoor" input.
+</p>
+<p>
+If you omit the value attribute, the submitted form data uses the default value, which is on. In this scenario, if the user clicked the "indoor" option and submitted the form, the resulting form data would be indoor-outdoor=on, which is not useful. So the value attribute needs to be set to something to identify the option.
+</p>
+<p>
+Give each of the radio and checkbox inputs the value attribute. Use the input label text, in lowercase, as the value for the attribute.
+</p>
+<p>
+To display the checkbox and radio buttons as pre-selected or checked simply add <code>checked</code> as the last keyword inside the input tags.
+</p>
+<p>
+	<code>button</code> type attribute within <code>&lt;input&gt;</code> tags perform no action and can be linked to JavaScript. Instead of using submit (more used for back-end submission) or the <em>button</em> tag.
+</p>
+
+<h3>Web Document Structure - Document Object Model</h3>
+<hr />
+<p>
+	When you open any web page in the browser, the HTML of the page is loaded and rendered visually on the screen.
+	<br />
+	To accomplish this, the browser builds the <em>Document Object Model (DOM)</em> of that page, which is an <em>object</em> oriented model of it's logical structure.
+	<br />
+	The <em>DOM</em> represents a document as a tree structure where HTML elements are interrelated <em>nodes</em> in the three. Nodes can have child nodes and if on the same tree level siblings.
+	</p>
+<div class="fig-flex" title="DOM Tree">
+	<figure>
+		<img src="getCoding/images/HTML5semantic.jpg" alt="Semantic layout HTML" height="200px" />
+	</figure>
+	<figure>
+		<img src="/getCoding/images/DOM-tree.png" alt="DOM tree" height="200px"/>
+	</figure>
+</div>
+
+<h3>Personal Information Encryption</h3>
+<hr />
+<p>
+Encrypt email addresses with ASCII to avoid spammers harvesting my address.
+</p>
+
+<h3>Raster and Vector Images</h3>
+<hr />
+<p>
+	Raster images are defined using a grid of pixels — a raster image file contains information showing exactly where each pixel is to be placed, and exactly what color it should be. Popular web raster formats include Bitmap (.bmp), PNG (.png), JPEG (.jpg), and GIF (.gif.)
+</p>
+<p>
+	Vector images are defined using algorithms — a vector image file contains shape and path definitions that the computer can use to work out what the image should look like when rendered on the screen. The SVG format allows us to create powerful vector graphics for use on the Web.
+</p>
+<p>
+	A web standard for defining vector-based graphics in web pages. Based on XML the SVG standard provides markup to describe paths, shapes, and text within a viewport. The markup can be embedded directly into HTML for display or saved to a .svg file and inserted like any other image.
+</p>
+<p>
+	You can write SVG by hand, but more complicated graphics can be designed in vector graphics editors such as Illustrator or InkScape and exported to SVG files or code.
+SVG Basics
+<pre>
+&lt;svg version="1.1"
+     baseProfile="full"
+     width="300" height="200"
+     xmlns="http://www.w3.org/2000/svg">
+  &lt;rect width="100%" height="100%" fill="black" /&gt;
+  &lt;circle cx="150" cy="100" r="90" fill="blue" /&gt;
+&lt;/svg&gt;
+</pre>
+<p>
+	The version attribute is optional but it is recommended for complaince with XML specifications.
+</p>
+
+<h4>Embed SVG</h4>
+<hr />
+<p>
+To embed an SVG via an &lt;img&gt; element, you just need to reference it in the src attribute as you'd expect. You will need a height or a width attribute (or both if your SVG has no inherent aspect ratio). If you have not already done so, please read Images in HTML.
+</p>
+<p>
+	This is the easy way but it does not allow for manipulation of the graphic through JavaScript.
+</p>
+
+<h4>Inline SVG</h4>
+<hr />
+<p>
+	You can also open up the SVG file in a text editor, copy the SVG code, and paste it into your HTML document — this is sometimes called putting your SVG inline, or inlining SVG. Make sure your SVG code snippet begins and ends with the &lt;svg&gt;&lt;/svg&gt; tags (don't include anything outside those.)
+</p>
+
+<h4>Embed with iFrame</h4>
+<hr />
+<p>
+You can open SVG images in your browser just like webpages. So embedding an SVG document with an &lt;iframe&gt;
+</p>
+<pre>
+&lt;iframe src="triangle.svg" width="500" height="500" sandbox&gt;
+    &lt;img src="triangle.png" alt="Triangle with three unequal sides" /&gt;
+&lt;/iframe&gt;
+</pre>
+<p>
+SVG converters as well as design software from Adobe can be used for generating SVG. CAD software can normally export objects to SVG too.<br />
+Editing can be achieved with a simple text editor. SVG is also suited for animation as they offer no loss of quality during scaling.<br />
+<a href="https://www.freecodecamp.org/news/svg-basics-what-are-scalable-vector-graphics-and-how-do-you-use-them/" target="_blank">freeCodeCamp Tutorial</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started" target="_blank">Mozilla tutorial</a>
+</p>
+
+<h3>Access Keys</h3>
+<hr />
+<p>
+HTML offers the accesskey attribute to specify a shortcut key to activate or bring focus to an element. This can make navigation more efficient for keyboard-only users.
+<br />
+HTML5 allows this attribute to be used on any element, but it's particularly useful when it's used with interactive ones. This includes links, buttons, and form controls.
+<br />
+If <em>accesskey="b"</em> is set inside the button tag a keyboard user can locate the button by using the "b" key.
+</p>
+<p>
+The HTML tabindex attribute has three distinct functions relating to an element's keyboard focus. When it's on a tag, it indicates that element can be focused on. The value (an integer that's positive, negative, or zero) determines the behavior.
+</p>
+<p>
+Certain elements, such as links and form controls, automatically receive keyboard focus when a user tabs through a page. It's in the same order as the elements come in the HTML source markup. This same functionality can be given to other elements, such as div, span, and p, by placing a <code>tabindex="0"</code> attribute on them.
+</p>
+<p>
+Note: A negative tabindex value (typically -1) indicates that an element is focusable, but is not reachable by the keyboard. This method is generally used to bring focus to content programmatically (like when a div used for a pop-up window is activated). Specify the exact tab order of elements with the value of the attribute set to a positive number of 1 or higher.
+</p>
+
+<h3 id="api">Application Programming Interface API</h3>
+<hr />
+<p>
+They are stand alone applications independent of the main code. Think of an API in the same way you think of a graphical user interface or GUI—except that instead of being an interface for humans, it’s an interface for your code. An API provides your code with a set of “buttons” (predefined methods) that it can press to elicit the desired behavior from the system, software library, or browser.
+<br />
+API-based commands are a way of abstracting the more complex workings that are done in the background (or sometimes by third-party software).
+</p>
+
+<h3>&lt;script&gt; Async and Defer loading</h3>
+<hr />
+<p>
+	The async or defer attribute is only for external scripts with the <em>src</em> attribute present.
+</p>
+<ul>
+	<li>If async is present: The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing).</li>
+	<li>If async is not present and defer is present: The script is executed when the page has finished parsing.</li>
+	<li>If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page.</li>
+</ul>
