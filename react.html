@@ -66,6 +66,9 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
     <li>The use of ES6 class syntax creates a component which extends a parent class, inheriting all its features. Such as local state and lifecycle hooks. This is what is called a <q>stateful</q> component, which is a class component that maintain its own internal state. Stateful components are often referred to simply as components or React components.</li>
 </ol>
 <p>
+    A common pattern is to try to minimize statefulness and to create stateless functional components wherever possible. This helps contain your state management to a specific area of your application. In turn, this improves development and maintenance of your app by making it easier to follow how changes to state affect its behavior.
+</p>
+<p>
     To create a component with a function, you simply write a JavaScript function that returns either JSX or null. One important thing to note is that React requires your function name to begin with a capital letter.
 </p>
 <pre>
