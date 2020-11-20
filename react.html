@@ -62,8 +62,8 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
     Components are the core of React and there are two ways to create a React component.
 </p>
 <ol>
-    <li>The use of a JavaScript function creates a <i>stateless functional component</i>. A component that can receive data and render it, but does not manage or track changes to that data.</li>
-    <li>The use of ES6 class syntax creates a component which extends a parent class, inheriting all its features. Such as local state and lifecycle hooks. **********</li>
+    <li>The use of a JavaScript function creates a <i>stateless functional component</i>. A component that can receive data and render it, but does not manage or track changes to that data. A <q>stateless functional component</q> is any function you write which accepts props and returns JSX. A <q>stateless component</q>, on the other hand, is a class that <code>extends React.Component</code>, but does not use internal state</li>
+    <li>The use of ES6 class syntax creates a component which extends a parent class, inheriting all its features. Such as local state and lifecycle hooks. This is what is called a <q>stateful</q> component, which is a class component that maintain its own internal state. Stateful components are often referred to simply as components or React components.</li>
 </ol>
 <p>
     To create a component with a function, you simply write a JavaScript function that returns either JSX or null. One important thing to note is that React requires your function name to begin with a capital letter.
