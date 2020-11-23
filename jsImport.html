@@ -1099,8 +1099,11 @@ homeWork('math', finished); // I'm studying math right now. I've finised my home
 function myFunc(a, b) {
   console.log(this + a + "\n" + this + b);
 }
-myFunc.apply("Tom is ", ["Awesome", "Sexy"]);
-myFunc.call("Tom is ", "Fantastic", "Smart");
+myFunc.apply("Tom is ", ["Awesome", "Fun"]);
+myFunc.call("Tom is ", "Fantastic", "Great");
+
+const newFunc = myFunc.bind("Tom is ");
+newFunc("Loyal", "Reliable");
 </pre>
 
 <h4>Default Function Parameter</h4>
