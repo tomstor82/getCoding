@@ -227,3 +227,82 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
 <p>
     <strong>Note:</strong> As of React v15.5.0, PropTypes is imported independently from React, like this: <code>import PropTypes from 'prop-types';</code>
 </p>
+
+<h4>State</h4>
+<hr>
+<p>
+    One of the most important topics in React is <q>state</q>. State consists of any data your application needs to know about, that can change over time. You want your apps to respond to state changes and present an updated UI when necessary. React offers a nice solution for the state management of modern web applications.
+</p>
+<p>
+    You create state in a React component by declaring a state property on the component class in its constructor. This initializes the component with state when it is created. The state property must be set to a JavaScript object. Declaring it looks like this:
+</p>
+<pre>
+this.state = {
+  // describe your state here
+}
+</pre>
+<p>
+    You have access to the state object throughout the life of your component. You can update it, render it in your UI, and pass it as props to child components. The state object can be as complex or as simple as you need it to be. Note that you must create a class component by extending React.Component in order to create state like this.
+</p>
+<pre>
+    class MyComponent extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                name: 'Initial State'
+            };
+            this.handleClick = this.handleClick.bind(this);
+        }
+        handleClick() {
+            this.setState(
+            {
+              name: 'Reach Rocks!'
+            }
+          );
+        }
+        render() {
+            return (
+            <div>
+                <button onClick={this.handleClick}>Click Me</button>
+                <h1>{this.state.name}</h1>
+            </div>
+          );
+        }
+      };
+</pre>
+<p>
+    React expects you to never modify state directly, instead always use <code>this.setState()</code> when state changes occur.<br />
+    Note that React may batch multiple state updates in order to improve performance. What this means is that state updates through the <i>setState</i> method can be asynchronous. There is an alternative syntax for the <i>setState</i> method which provides a way around this problem. The <a href="https://facebook.github.io/react/docs/state-and-lifecycle.html" target="_blank">React documentation</a> contains further details.
+</p>
+
+<h4>Bind the <q>this</q> keyword to the class</h4>
+<hr>
+<p>
+    A class method typically needs to use the this keyword so it can access properties on the class (such as state and props) inside the scope of the method. There are a few ways to allow your class methods to access this.<br />
+    One common way is to explicitly bind this in the constructor so this becomes bound to the class methods when the component is initialized.
+</p>
+<pre>
+    class MyComponent extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                text: "Hello"
+            };
+            // Binding this to the class
+            this.handleClick = this.handleClick.bind(this)
+        }
+        handleClick() {
+            this.setState({
+                text: "You clicked!"
+            });
+        }
+        render() {
+            return (
+            &lt;div&gt;
+                &lt;button onClick={this.handleClick}&gt;Click Me&lt;/button&gt;
+                &lt;h1&gt;{this.state.text}&lt;/h1&gt;
+            &lt;/div&gt;
+            );
+        }
+    };
+</pre>

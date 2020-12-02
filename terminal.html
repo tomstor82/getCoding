@@ -57,16 +57,16 @@
         <ul>
             <li>find -P ~/ -iregex '.+\.jpe?g' // search home directory for Perl regex pattern ignoring case</li>
             <li>find / -name '???.txt' 2> /dev/null //  search root directory for 3 letter long txt files. Errors passed to /dev/null</li>
-            <li>find ~/ -ctime -2 // search home directory for files changed within the last 48 hours (ctime = 24hrs)</li>
-            <li>find ~/ -cmin -5 -name '*.html' // search home directory for html files changed within the last 5 minutes</li>
-            <li>find /etc -mmin 2 </li>
-            <li>find ~/ -atime +1 -iname '*.html' // search case insensistive html files accessed 48 hrs ago</li>
-            <li>find ~/ -used 1 -name '*.html' // files last accessed one day after its status was last changed</li>
+            <li>find ~/ -ctime -2 // search home directory for files <i>changed</i> within the last 48 hours (ctime = 24hrs)</li>
+            <li>find ~/ -cmin -60 -name '*.html' // search home directory for html files <i>changed</i> within the last 60 minutes</li>
+            <li>find /etc -mmin -15 // search for files <i>modified</i> within the last quarter</li>
+            <li>find ~/ -atime +1 -iname '*.html' // search case insensistive html files <i>accessed</i> 48 hrs ago</li>
+            <li>find ~/ -used 1 -name '*.html' // files last <i>accessed</i> one day after its status was last changed</li>
         </ul>
     </li>
-    <li>ifconfig - Interface Configuration</li>
-    <li>netstat - Network Status</li>
-    <li>route - Shows network routing</li>
+    <li>ifconfig - Interface Configuration. <code>ifconfig -a</code> lists all information from all network adapters</li>
+    <li>netstat - Network Status. <code>netstat -r</code> shows same information as <code>route</code></li>
+    <li>route - Shows network routing. Useful for finding the gateway or other intermediate networking points</li>
 </ul>
 <h4>
     StdIn, StdOut, StdError and streams
