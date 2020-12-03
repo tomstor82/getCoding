@@ -306,3 +306,86 @@ this.state = {
         }
     };
 </pre>
+<p>
+    Sometimes a state needs to be tracked, for intance with a toggle where there need to be a memory of previous state. As there might be multiple state changes in an app this, is best achieved by passing arguments of current state to the <q>setter</q> method.
+</p>
+<pre>
+    class MyComponent extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                visibility: false
+            };
+            // Binding this to the class rather than the instance //
+            this.toggleVisibility = this.toggleVisibility.bind(this);
+        }
+        // Class method with a setter method passed the "current" state as argument //
+        // Allowing to toggle the state property between true and false //
+        toggleVisibility() {
+            this.setState(state =&gt; ({
+                visibility: state.visibility ? false : true
+            }));      
+        }
+        render() {
+            if (this.state.visibility) {
+                return (
+                &lt;div&gt;
+                    &lt;button onClick={this.toggleVisibility}&gt;Click Me&lt;/button&gt;
+                    &lt;h1&gt;Now you see me!&lt;/h1&gt;
+                &lt;/div&gt;
+                );
+            }
+            else {
+                return (
+                &lt;div&gt;
+                    &lt;button onClick={this.toggleVisibility}&gt;Click Me&lt;/button&gt;
+                &lt;/div&gt;
+                );
+            }
+        }
+    }
+</pre>
+
+<p>
+    The next example shows a counter, initialised to 0 with controls to increment, decrement and reset the counter.
+</p>
+<pre>
+    class Counter extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                count: 0
+            };
+            // Binding methods to the class and not the instances //
+            this.increment = this.increment.bind(this);
+            this.decrement = this.decrement.bind(this);
+            this.reset = this.reset.bind(this);
+        }
+        // Methods for changing values //
+        increment() {
+            this.setState(state =&gt; ({
+                count: state.count + 1
+            }))
+        };
+        decrement() {
+            this.setState(state =&gt; ({
+                count: state.count - 1
+            }))
+        };
+        reset() {
+            this.setState ({
+                count: 0
+            })
+        };
+        render() {
+            return (
+            &lt;div&gt;
+                &lt;button className='inc' onClick={this.increment}&gt;Increment!&lt;/button&gt;
+                &lt;button className='dec' onClick={this.decrement}&gt;Decrement!&lt;/button&gt;
+                &lt;button className='reset' onClick={this.reset}&gt;Reset&lt;/button&gt;
+                &lt;h1&gt;Current Count: {this.state.count}&lt;/h1&gt;
+            &lt;/div&gt;
+            );
+        }
+    };      
+</pre>
