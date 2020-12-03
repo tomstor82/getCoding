@@ -147,12 +147,12 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
     It is standard to call this value props and when dealing with stateless functional components, you basically consider it as an argument to a function which returns JSX. You can access the value of the argument in the function body. With class components, you will see this is a little different.
 </p>
 <pre>
-    const CurrentDate = (props) => {
+    const CurrentDate = (props) =&gt; {
         return (
-        <div>
+        &lt;div&gt;
             { /* The property is accessed using supported custom attribute */ }
-            <p>The current date is: {props.date}</p>
-        </div>
+            &lt;p&gt;The current date is: {props.date}&lt;/p&gt;
+        &lt;/div&gt;
         );
     };
       
@@ -162,11 +162,11 @@ ReactDOM.render(&lt;myComponent /&gt;, document.querySelector('#main'));
         }
         render() {
             return (
-            <div>
-                <h3>What date is it?</h3>
+            &lt;div&gt;
+                &lt;h3&gt;What date is it?&lt;/h3&gt;
                 { /* custom supported "date" attribute passed to CurrentDate*/ }
-                <CurrentDate date={Date()}/>
-            </div>
+                &lt;CurrentDate date={Date()}/&gt;
+            &lt;/div&gt;
             );
         }
     };  
@@ -256,19 +256,19 @@ this.state = {
         handleClick() {
             this.setState(
             {
-              name: 'Reach Rocks!'
+                name: 'Reach is Difficult but Ok!'
             }
-          );
+            );
         }
         render() {
             return (
-            <div>
-                <button onClick={this.handleClick}>Click Me</button>
-                <h1>{this.state.name}</h1>
-            </div>
-          );
+            &lt;div&gt;
+                &lt;button onClick={this.handleClick}&gt;Click Me&lt;/button&gt;
+                &lt;h1&gt;{this.state.name}&lt;/h1&gt;
+            &lt;/div&gt;
+            );
         }
-      };
+    };
 </pre>
 <p>
     React expects you to never modify state directly, instead always use <code>this.setState()</code> when state changes occur.<br />
@@ -278,8 +278,8 @@ this.state = {
 <h4>Bind the <q>this</q> keyword to the class</h4>
 <hr>
 <p>
-    A class method typically needs to use the this keyword so it can access properties on the class (such as state and props) inside the scope of the method. There are a few ways to allow your class methods to access this.<br />
-    One common way is to explicitly bind this in the constructor so this becomes bound to the class methods when the component is initialized.
+    A class method typically needs to use the <q>this</q> keyword so it can access properties of the class itself inside the scope of the method. As <q>this</q> inside the class constructor gets bound to the instances the constructor builds, we need a way to bind <q>this</q> to the class itself rather than the instances. There are a few ways to allow your class methods to get that access.<br />
+    One common way is to explicitly bind <q>this</q> in the constructor to the class, <q>this</q> then becomes bound to the class methods when the component is initialized.
 </p>
 <pre>
     class MyComponent extends React.Component {
