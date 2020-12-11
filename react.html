@@ -389,3 +389,47 @@ this.state = {
         }
     };      
 </pre>
+<h4>Controlling input</h4>
+<hr>
+<p>
+    When typing the input text field is updated on the fly. When submit is pressed it displays the submitted text.
+</p>
+<pre>
+    class MyForm extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                input: '',
+                submit: ''
+            };
+            // binding "this" to instances and not the class
+            this.handleChange = this.handleChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+        // method storing input changes
+        handleChange(event) {
+            this.setState({
+                input: event.target.value
+            });
+        }
+        // method storing submitted text
+        handleSubmit(event) {
+            this.setState({
+                submit: this.state.input
+            });
+            // method preventing document refresh with submit button
+            event.preventDefault();
+        }
+        render() {
+            return (
+            &lt;div&gt;
+                &lt;form onSubmit={this.handleSubmit}&gt;
+                    &lt;input type="text" value={ this.state.input } onChange={ this.handleChange }&gt;&lt;/input&gt;
+                    &lt;button type='submit'&gt;Submit!&lt;/button&gt;
+                &lt;/form&gt;
+                &lt;h1&gt;{ this.state.submit }&lt;/h1&gt;
+            &lt;/div&gt;
+            );
+        }
+    }  
+</pre>
