@@ -9,11 +9,38 @@
 </p>
 <p>
     Because JSX is a syntactic extension of JavaScript, you can actually write JavaScript directly within JSX. To do this, you simply include the code you want to be treated as JavaScript within curly braces: <code>{ 'this is treated as JavaScript code' }</code>.<br />
-    However JSX must be compiled into JavaScript before it can be used by the browser, and the transpiler Babel is a popular tool for this process.
+    However JSX must be compiled into JavaScript before it can be used by the browser, and the transpiler <q>Babel</q> is a popular tool for this process.
 </p>
 <p>
-    All JSX elements needs to be wrapped up in a parent element to work. Usually accomplished by the use of <code>&lt;div&gt;</code> tags.
+    All JSX elements needs to be wrapped up in a parent element to work. Usually accomplished by the use of <code>&lt;div&gt;</code> tags. However JSX also accepts a class with a render method returning HTML as syntax.
 </p>
+<pre>
+    class Parent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { name: 'from Parent' };
+        }
+        { // render method returning a class with similar method // }
+        render() {
+            return (
+            &lt;Child_Class name={ this.state.name }/&gt;
+            );
+        }
+    }
+    Class Child_Class extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+            &lt;div&gt;
+                { // Include parent property // }
+                &lt;h1&gt;Child Class with property { this.props.name }&lt;/h1&gt;
+            &lt;/div&gt;
+            );
+        }
+    }
+</pre>
 <p>
     With React, we can render JSX directly to the HTML DOM using React's rendering API known as ReactDOM.<br />
     ReactDOM offers a simple method to render React elements to the DOM which looks like this: <code>ReactDOM.render(componentToRender, targetNode)</code>, where the first argument is the React element or component that you want to render, and the second argument is the DOM node that you want to render the component to.
@@ -432,4 +459,47 @@ this.state = {
             );
         }
     }  
+</pre>
+
+<h4>Pass State as Props to Child Components</h4>
+<hr>
+<p>
+    A common pattern is to have a stateful component containing the state important to your app, that then renders child components. You want these components to have access to some pieces of that state, which are passed in as props.
+</p>
+<p>
+    This pattern illustrates some important paradigms in React.<br />
+    The first is unidirectional data flow. State flows in one direction down the tree of your application's components, from the stateful parent component to child components. The child components only receive the state data they need.<br />
+    The second is that complex stateful apps can be broken down into just a few, or maybe a single, stateful component. The rest of your components simply receive state from the parent as props, and render a UI from that state. It begins to create a separation where state management is handled in one part of code and UI rendering in another.<br />
+    This principle of separating state logic from UI logic is one of React's key principles. When it's used correctly, it makes the design of complex, stateful applications much easier to manage.
+</p>
+<pre>
+    class MyApp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            name: "CamperBot"
+          };
+        }
+        /* This method calls the class Navbar as a child, which adds the elements neccessary for rendering the html. The property name is passed from here, adding security. */
+        render() {
+          return (
+            &lt;div&gt;
+              &lt;Navbar name={this.state.name} /&gt;
+            &lt;/div&gt;
+          );
+        }
+      }
+      
+      class Navbar extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+        render() {
+          return (
+            &lt;div&gt;
+              &lt;h1&gt;Hello, my name is: {this.props.name}&lt;/h1&gt;
+            &lt;/div&gt;
+          );
+        }
+      }
 </pre>
