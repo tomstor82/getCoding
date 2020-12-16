@@ -1622,6 +1622,24 @@ function wordBin(str) {
 wordBin('Tom Storebø');
 wordBin('1000001');
 </pre>
+<h4>Evaluate Strings with "eval"</h4>
+<hr>
+<p>
+	The <code>eval()</code> function evaluates JavaScript code represented as a string.
+</p>
+<pre>
+console.log(eval('2 + 2'));
+// expected output: 4
+
+console.log(eval(new String('2 + 2')));
+// expected output: 2 + 2
+
+console.log(eval('2 + 2') === eval('4'));
+// expected output: true
+
+console.log(eval('2 + 2') === eval(new String('2 + 2')));
+// expected output: false
+</pre>
 
 <h3>Template Literals</h3>
 <hr>
