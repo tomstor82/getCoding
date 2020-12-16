@@ -1582,6 +1582,25 @@ myArray.sort(numbercompare);
 This function takes two values at a time and if the return is negative JS knows it is lower than a positive number.
 </p>
 
+<h4>Evaluate Strings with "eval"</h4>
+<hr>
+<p>
+	The <code>eval()</code> function evaluates JavaScript code represented as a string.
+</p>
+<pre>
+console.log(eval('2 + 2'));
+// expected output: 4
+
+console.log(eval(new String('2 + 2')));
+// expected output: 2 + 2
+
+console.log(eval('2 + 2') === eval('4'));
+// expected output: true
+
+console.log(eval('2 + 2') === eval(new String('2 + 2')));
+// expected output: false
+</pre>
+
 <h3>Numeric Base System conversion with Radix</h3>
 <hr>
 <p>
@@ -1621,24 +1640,6 @@ function wordBin(str) {
 }
 wordBin('Tom Storebø');
 wordBin('1000001');
-</pre>
-<h4>Evaluate Strings with "eval"</h4>
-<hr>
-<p>
-	The <code>eval()</code> function evaluates JavaScript code represented as a string.
-</p>
-<pre>
-console.log(eval('2 + 2'));
-// expected output: 4
-
-console.log(eval(new String('2 + 2')));
-// expected output: 2 + 2
-
-console.log(eval('2 + 2') === eval('4'));
-// expected output: true
-
-console.log(eval('2 + 2') === eval(new String('2 + 2')));
-// expected output: false
 </pre>
 
 <h3>Template Literals</h3>
