@@ -119,7 +119,51 @@ MY_ARRAY = ["abc","def"]; // not allowed as this is re-assignment
 const MY_ARRAY = "abc"; // not allowed as this is re-declaration
 </pre>
 
-<h4>Best Practice</h4>
+<h3>Error Checking</h3>
+<hr>
+<p>
+	JS has a functionality that allows for error checking with customised outputs to user.<br />
+	This consist of:
+<ul>
+	<li>The try statement lets you test a block of code for errors.</li>
+	<li>The catch statement lets you handle the error.</li>	
+	<li>The throw statement lets you create custom errors.</li>	
+	<li>The finally statement lets you execute code, after try and catch, regardless of the result.</li>
+</ul>
+<p>
+	<strong>Note:</strong> The JavaScript statements try and catch come in pairs.
+<pre>
+	function myFunction() {
+		var message, x;
+		message = document.getElementById("p01");
+		message.innerHTML = "";
+		x = document.getElementById("demo").value;
+		try {
+			if(x == "") throw "empty";
+			if(isNaN(x)) throw "not a number";
+			x = Number(x);
+			if(x < 5) throw "too low";
+			if(x > 10) throw "too high";
+		}
+		catch(err) {
+			message.innerHTML = "Input is " + err;
+		}
+	  }
+</pre>
+<p>
+	JavaScript has a built in error object that provides error information when an error occurs.<br />
+	The error object provides two useful properties: name and message.
+</p>
+<ul>
+	<li>EvalError - An error has occurred in the eval() function. Newer JS versions throw SyntaxError instead.</li>
+	<li>RangeError - A number "out of range" has occurred.</li>
+	<li>ReferenceError - An illegal reference has occurred.</li>
+	<li>SyntaxError - A syntax error has occurred.</li>
+	<li>TypeError - A type error has occurred.</li>
+	<li>URIError - An error in encodeURI() has occurred.</li>
+</ul>
+
+<h3>Best Practice</h3>
 <hr>
 <p>
 	Casing the letters when declaring variables helps identify the scope of a variable:
