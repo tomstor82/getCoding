@@ -11,9 +11,10 @@
 <p>
     Variables are declared without a keyword, and accessed through the <code>$</code> symbol.
 </p>
-<h4>
+
+<h3>
     Manual Pages
-</h4>
+</h3>
 <hr>
 <p>
     Bash has built in manuals for many apps (commands) to help the user understand its purpose and syntax. To open a manual simply type: <br />
@@ -22,16 +23,17 @@
 <p>
     To navigate we use arrow keys as well as <q>u, d, b, f</q>. The up and down moves half a page, while the back and forward keys move the full page. To search we press <q>/</q> followed by search word. scroll to next result is accomplished with the <q>n</q> key; and to quit we press <q>q</q>.
 </p>
-<h4>
+
+<h3>
     Command syntax
-</h4>
+</h3>
 <hr>
 <p>
     A command normally follows a standard syntax. first app name then flags preceeded by a single or double dash, then arguments. Flags can in many cases be joined together like <code>ls -alhF</code> instead of <code>ls -a -l -h -F</code>.<br />
     <code>ls -a1hF --color /dev</code>
 </p>
 <h4>
-    Comman Commands
+    Useful Commands
 </h4>
 <ul>
     <li>ls - listing</li>
@@ -68,9 +70,10 @@
     <li>netstat - Network Status. <code>netstat -r</code> shows same information as <code>route</code></li>
     <li>route - Shows network routing. Useful for finding the gateway or other intermediate networking points</li>
 </ul>
-<h4>
+
+<h3>
     StdIn, StdOut, StdError and streams
-</h4>
+</h3>
 <hr>
 <p>
     Std-in is for us the keyboard input but also a file or an input directed by the user. 0>
@@ -82,7 +85,22 @@
 <p>
     A interesting location which contains inputs and outputs that at first glance appears as files. These items can be used to interact directly with hardware and offer some handy outputs like random numbers (random and urandom), a black hole (zero) eating anything sent in, and many more. Use with caution!
 </p>
-<h4>Network</h4>
+
+<h3>Single vs Double Quotes</h3>
+<hr>
+<ul>
+    <li>
+        <h4>Single Quotes</h4>
+        Enclosing characters in single quotes <code>'</code> preserves the literal value of each character within the quotes. A single quote may not occur between single quotes, even when preceded by a backslash.
+    </li>
+    <li>
+        <h4>Double Quotes</h4>
+        Enclosing characters in double quotes <code>"</code> preserves the literal value of all characters within the quotes, with the exception of <code>$</code>, <code>`</code>, <code>\</code> and <code>,</code> when history expansion is enabled, !. The characters $ and ` retain their special meaning within double quotes (see Shell Expansions). The backslash retains its special meaning only when followed by one of the following characters: $, `, ", \, or newline. Within double quotes, backslashes that are followed by one of these characters are removed. Backslashes preceding characters without a special meaning are left unmodified. A double quote may be quoted within double quotes by preceding it with a backslash. If enabled, history expansion will be performed unless an <code>!</code> appearing in double quotes is escaped using a backslash. The backslash preceding the <code>!</code> is not removed.<br />
+        The special parameters <code>*</code> and <code>@</code> have special meaning when in double quotes.
+    </li>
+</ul>
+
+<h3>Network</h3>
 <hr>
 <p>
     The abstraction layers in networking are link, internet, transport and the application layers. Communication goes exclusively between these and no steps are skipped along the route.
@@ -107,7 +125,8 @@
     IP addresses are 32 bit long as well as a mask. However it is common to refer to the mask in bits despite this, which simply means where to split the IP. If a mask is say 24 bits, it means the first 24 bits in any subnet address must be the same, and the last 8 bits can be utilised for the clients, in decimal this comes to 256 IP addresses. 2 addresses are reserved which gives the opportunity for there to be 254 clients in this subnet.<br />
     24 bits are the most common in home networks and it translates into 255.255.255.0, which in a normal home network will allow clients to occupy the IP range from 192.168.0.1 to 192.168.0.254.
 </p>
-<h4>Git - Local Revision Control</h4>
+
+<h3>Git - Local Version Control</h3>
 <hr />
 <p>
 	Git is a version control system developed by Linus Torvalds. There are multiple commands to get started. And everything in a filesystem can be version controlled this way. Tracking changes to be able to go back in time and even start again
@@ -120,3 +139,13 @@
 	<li>git commit 'filename / *.txt' -m 'Text to be added' - The modified file is now added to the git repository as a permanent file.</li>
 	<li>git config *******************</li>
 </ul>
+
+<h3>TMUX - Terminal Multiplexer</h3>
+<hr>
+<p>
+    TMUX is a tool for keeping a session alive if connection is interrupted e.g. if performing work on a remote server with an unstable connection, it prevents the abortion of applications as they are running on remote system, the local simply tapping into it.
+</p>
+<p>
+    However TMUX offers much more than just that with multiple screens and automated start and more.<br />
+    <code>CTRL-b</code> is the key shortcut to enter command mode.
+</p>
