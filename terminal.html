@@ -100,6 +100,36 @@
     </li>
 </ul>
 
+<h3>Newline</h3>
+<hr>
+<p>
+    Newlines in print statements can be achieved in a few different ways:
+</p>
+<ul>
+    <li>Straight forward echo
+        <pre>
+        echo "I'm writing on"
+        echo
+        echo "two lines"
+        </pre>
+    </li>
+    <li>echo -e (enabling backslash escape interpretation)
+        <pre>
+        echo -e "I'm writing on\ntwo lines"
+        </pre>
+    </li>
+    <li>printf (widely supported)
+        <pre>
+        printf "I'm writing on\ntwo lines\n"
+        </pre>
+    </li>
+</ul>
+<h4>Long commands newlines</h4>
+<hr>
+<p>
+    As commands grow long it is convenient to split them over several lines. This is achieved by escaping the newline character (enter) with the backslash.
+</p>
+
 <h3>Network</h3>
 <hr>
 <p>
