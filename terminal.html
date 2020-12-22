@@ -167,7 +167,13 @@
 	<code>echo <q>Repository Description<q> &gt; README.md & git add README.md</code></li>
 	<li>git status - Dispays status of files not commited to repository.</li>
 	<li>git commit 'filename / *.txt' -m 'Text to be added' - The modified file is now added to the git repository as a permanent file.</li>
-    <li>git config.author 'Tom Storeboe' -add (double tap Tab after config lists available options in the config file)</li>
+    <li>git config
+        <ul>
+            <li>git config --global user.email "tomstoreboe@gmail.com"</li>
+            <li>git config --global user.name "Tom Storeboe"</li>
+            <li>author 'Tom Storeboe' -add (double tap Tab after config lists available options in the config file).</li>
+        </ul>
+    </li>
     <li>git branch - displays branches.</li>
     <li>git checkout 'branch-name' - Swaps to working on different branch.</li>
 </ul>
@@ -179,6 +185,27 @@
     <li>Only work on one revision at a time.</li>
     <li>Split developments to a new branch (dev or features) to be merged with main at a later time.</li>
 </ol>
+<p>
+    Example:
+</p>
+<pre>
+    // Applying settings to all git projects on user
+    git config --global user.email "myEmail@server.com"
+    git config --global user.name "My Name"
+    git config --global author.name "My Name"
+    // Inside directory where we want to have files version controlled
+    git init -b Main
+    // Creates repo initialised with branch named Main. Default is Master
+    echo 'Readme file explaining the repository' 2> README.md
+    git add README.md file1
+    // Puts two files into staging, where one reflects over the changes
+    git commit -m 'Initial commit message'
+    // Commits the two files to the repository
+    git checkout -b 'Feature'
+    // Creates new branch Feature starting at Head if not specified
+    git branch -m 'New_Branch_Name'
+    // Change name on checked out branch
+</pre>
 
 <h3>TMUX - Terminal Multiplexer</h3>
 <hr>
