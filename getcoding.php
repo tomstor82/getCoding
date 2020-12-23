@@ -256,7 +256,7 @@
 						<li><a href="#js_head">JavaScript</a></li>
 						<li><a href="#css_head">CSS3</a></li>
 						<li><a href="#html_head">HTML5</a></li>
-						<li><a href="#jsx_head">React</a></li>
+						<li><a href="#react_head">React</a></li>
 						<li><a href="#php_head">PHP</a></li>
 						<li><a href="#azure_head">Azure IoT</a></li>
 						<li><a href="#notes_head">Notes</a></li>
@@ -277,13 +277,17 @@
 				<hr>
 				<article id="html"></article>
 
-				<h2 id="jsx_head">React - 15 Nov 20</h2>
+				<h2 id="react_head">React - 15 Nov 20</h2>
 				<hr>
-				<article id="jsx"></article>
+				<article id="react"></article>
 
 				<h2 id="php_head">PHP - 22 Apr 20</h2>
 				<hr>
 				<article id="php"></article>
+
+				<h2 id="terminal_head">Terminal - 15 Oct 20</h2>
+				<hr>
+				<article id="terminal"></article>
 
 				<h2>Microsoft Azure IoT Certification Course - 21 Apr 20</h2>
 				<hr>
@@ -380,7 +384,7 @@
 							<td>Angular</td><td>30.Aug20</td><td>xxxxxxxx</td>
 						</tr>
 						<tr>
-							<td>React</td><td>xxxxxxxx</td><td>xxxxxxxx</td>
+							<td>React</td><td>15.Nov20</td><td>xxxxxxxx</td>
 						</tr>
 						<tr>
 							<td>Vue</td><td>xxxxxxxx</td><td>xxxxxxxx</td>

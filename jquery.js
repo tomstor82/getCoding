@@ -8,8 +8,9 @@
 $("#js").first().load("getCoding/jsImport.html");
 $("#css").first().load("getCoding/cssImport.html");
 $("#html").first().load("getCoding/htmlImport.html");
-$("#jsx").first().load("getCoding/react.html")
+$("#react").first().load("getCoding/react.html");
 $("#php").first().load("getCoding/phpImport.html");
+$("#terminal").first().load("getCoding/terminal.html");
 $("#azure").first().load("getCoding/azureImport.html");
 $("#notes").first().load("getCoding/notesImport.html");
 
