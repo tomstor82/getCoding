@@ -193,8 +193,6 @@
         done;
     }
     
-    # Adding header to first ping
-    #echo "Pinging $IP on $(date)" >> "$logfile";
     # Starting ping application
     ping -O "$IP" 2>> "$logfile" & pingStats;
 </pre>
