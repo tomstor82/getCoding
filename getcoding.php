@@ -258,6 +258,7 @@
 						<li><a href="#html_head">HTML5</a></li>
 						<li><a href="#react_head">React</a></li>
 						<li><a href="#php_head">PHP</a></li>
+						<li><a href="terminal_head">Terminal</a></li>
 						<li><a href="#azure_head">Azure IoT</a></li>
 						<li><a href="#notes_head">Notes</a></li>
 					</ul>
