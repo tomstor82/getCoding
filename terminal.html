@@ -30,7 +30,7 @@
 <hr>
 <p>
     A command normally follows a standard syntax. first app name then flags preceeded by a single or double dash, then arguments. Flags can in many cases be joined together like <code>ls -alhF</code> instead of <code>ls -a -l -h -F</code>.<br />
-    <code>ls -a1hF --color /dev</code>
+    <code>ls -a1hF --color --group-directories-first /dev</code>
 </p>
 <h4>
     Useful Commands
@@ -38,6 +38,7 @@
 <ul>
     <li>ls - listing</li>
     <li>wc - word count</li>
+    <li>sed - filter and edit text files</li>
     <li>cat - print text content from files</li>
     <li>vi - basic text editor</li>
     <li>rm - remove files or directories</li>
@@ -124,11 +125,79 @@
         </pre>
     </li>
 </ul>
+
 <h4>Long commands newlines</h4>
 <hr>
 <p>
     As commands grow long it is convenient to split them over several lines. This is achieved by escaping the newline character (enter) with the backslash.
 </p>
+
+<h3>Scripting</h3>
+<hr>
+<p>
+    Writing scripts in bash is a convenient way of automating tasks. Scripts commonly has the <q>.sh</q> file extension, though this is not necessary. <br>
+    In bash we can mark any file executable with the change app. In most cases the command <code>chmod 755 filename</code> or simpler <code>chmod +x filename</code>.
+
+</p>
+<p>
+    Chmod arguments 755 denotes the level of file or directory permissions over 3 user accounts. 7 indicates full permission for the owner (read, write and execute), read and execute for same group users and the same priviliges for other users.<br />
+    Chmod with the +x argument simply adds the <q>execute</q> permission to all users.
+</p>
+<p>
+    For a script to work in itself we need to add a <q>shebang</q> to line 1: <code>#!/bin/bash</code><br />
+    Now we can declare variables add functions and run loops and contitional statements to make things work. The principles are similar to C but the syntax is slightly different.
+</p>
+<pre>
+    #!/bin/bash
+
+    # Ping script outputting stats to external log file
+    #
+    # Two arguments are required and the ping command will run until stopped
+    #
+    # First argument is the address to ping
+    # Second argument is the time interval in minutes for sending statistics to external log file
+    #
+    # Logfile location and name
+    logfile=~/ping.log;
+    logLen=50;
+    
+    # Passed arguments
+    IP=$1;
+    SLEEP=$2;
+    
+    pingStats() {
+        # store process id to PID variable
+        PID=$!;
+    
+        # declare command variable as non empty string to allow for loop to start
+        command='start';
+    
+        # do loop until command variable length is Zero
+        until [ -z command ]
+        do
+            # set interval
+            sleep "${SLEEP}m";
+            # add timestamp to log entry
+            echo "Pinging $IP on $(date)" >> "$logfile";
+            # send quit signal to trigger ping status
+            kill -SIGQUIT "$PID";
+            # delete two first lines when log exceeds 50 lines
+            if [[ $logLines -gt 50 ]]
+            then
+                sed -i '1,2d' "$logfile";
+            fi;
+            # update command variable
+            command=$(ps "$PID" | grep -o ping);
+            # update size of logfile
+            logLines=$(wc -l $logfile | grep -Po '\d+');
+        done;
+    }
+    
+    # Adding header to first ping
+    #echo "Pinging $IP on $(date)" >> "$logfile";
+    # Starting ping application
+    ping -O "$IP" 2>> "$logfile" & pingStats;
+</pre>
 
 <h3>Network</h3>
 <hr>
@@ -185,6 +254,38 @@
     <li>Only work on one revision at a time.</li>
     <li>Split developments to a new branch (dev or features) to be merged with main at a later time.</li>
 </ol>
+
+<h4>Merge and Fast-Forward Merge</h4>
+<hr>
+<p>
+    Merging is Git's way of putting a forked history back together again. The <code>git merge</code> command lets you take the independent lines of development created by git branch and integrate them into a single branch.<br />
+    The merge commit has two parents formed by the two branches.
+</p>
+<p>
+    A fast-forward merge can occur when there is a linear path from the current branch tip to the target branch. Instead of “actually” merging the branches, all Git has to do to integrate the histories is move (i.e., “fast forward”) the current branch tip up to the target branch tip. This effectively combines the histories, since all of the commits reachable from the target branch are now available through the current one.
+</p>
+<p>
+    Git defaults to <q>fast forward merge</q> if possible. To control this we can use flags:
+</p>
+<pre>
+    git merge --ff-only
+    git merge --no-ff
+</pre>
+<p>
+    We checkout the branch we want as master, and pull the branch to be merged into this branch. The example has two commit message paragraphs indicated by the two <code>-m</code> flags:
+</p>
+<pre>
+    git checkout main
+    git merge --no-ff dev -m 'Merging the Developed version with main' -m 'This enables a bunch of new features'
+</pre>
+
+<h4>Tags and Annotated Tags</h4>
+<hr>
+<ul>
+    <li>Tags - Used as post-it notes. Temporary lightweight note.</li>
+    <li>Annotaded Tags - Permanent descriptive note.</li>
+</ul>
+
 <p>
     Example:
 </p>
@@ -202,9 +303,15 @@
     git commit -m 'Initial commit message'
     // Commits the two files to the repository
     git checkout -b 'Feature'
-    // Creates new branch Feature starting at Head if not specified
+    // Creates new branch Feature starting at Head if not specified otherwise and move to branch
     git branch -m 'New_Branch_Name'
     // Change name on checked out branch
+    git branch -d
+    // Delete obsolete branch
+    git log --one-line
+    // Display the log file with title and abbreviated hash
+    git commit -am "commit 'modified' files without staging"
+    // Does not include newly added files
 </pre>
 
 <h3>TMUX - Terminal Multiplexer</h3>
