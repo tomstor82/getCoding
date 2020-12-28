@@ -318,6 +318,56 @@
     TMUX is a tool for keeping a session alive if connection is interrupted e.g. if performing work on a remote server with an unstable connection, it prevents the abortion of applications as they are running on remote system, the local simply tapping into it.
 </p>
 <p>
-    However TMUX offers much more than just that with multiple screens and automated start and more.<br />
-    <code>CTRL-b</code> is the key shortcut to enter command mode.
+    List sessions with <code>tmux ls</code>. Start a new session with a custom name with <code>tmux new -s 'newTmuxSession'</code>. Stop all sessions with <code>tmux kill-server</code>.
 </p>
+<p>
+    TMUX offers much more than just that with multiple screens and automated start and more.<br />
+    <code>CTRL-b</code> is the key shortcut to enter command mode. From here a great variety of key commands follows. A handful useful examples in <i>command mode</i> are:
+</p>
+<ul>
+    <ul>Manipulating:
+        <li>z - zoom selected pane.</li>
+        <li>% - split window vertically into two panes.</li>
+        <li>" - split window horisontally into two panes.</li>
+        <li>c - create new window.</li>
+        <li>! - break pane free from window.</li>
+        <li>space - select next window preset layout.</li>
+    </ul>
+    <ul>Navigating:
+        <li>0-9 - select between windows.</li>
+        <li>o - select next pane.</li>
+        <li>n - next window.</li>
+        <li>p - previous window.</li>
+        <li>; - previous active pane.</li>
+        <li>w - interactive window menu.</li>
+    </ul>
+    <ul>Stopping:
+        <li>Ctrl+z - suspend client.</li>
+        <li>& - kill current window.</li>
+        <li>x - kill current pane.</li>
+    </ul>
+</ul>
+<p>
+    <strong>Note:</strong> Use man page for TMUX or simply list commands with <code>tmux lscm</code> and grep the whatever tickles your fancy e.g: <code>tmux lscm | grep window</code>.
+</p>
+
+<h4>Scripting with Commands</h4>
+<hr>
+<p>
+    A powerful feature with TMUX is the ability to run individual commands in separate panes and windows, all initiated automatically during the creation of these items.
+</p>
+<pre>
+#!/bin/bash
+
+session=Tom;
+
+start=$(tmux new  -s $session -n Bash \;\
+		split-window top \;\
+		split-window 'tail -f /var/log/syslog' \;\
+		select-layout main-horizontal \;\
+		new-window 'ssh pi' \;\
+		select-window -t 0 \;\
+		select-pane -t 0);
+
+tmux a -t $session || $start;
+</pre>
