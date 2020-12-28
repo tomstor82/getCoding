@@ -290,7 +290,7 @@
 				<hr>
 				<article id="terminal"></article>
 
-				<h2>Microsoft Azure IoT Certification Course - 21 Apr 20</h2>
+				<h2 id="azure_head">Microsoft Azure IoT Certification Course - 21 Apr 20</h2>
 				<hr>
 				<article id="azure"></article>
 
