@@ -2487,48 +2487,57 @@ console.log(a, b); // 1, 2
 console.log(arr); // 3, 4, 5, 6	** NOTE multiple variables are placed into an array **
 </pre>
 
-<h3>Conditional Statements</h3>
+<h3>Conditional (ternary) Operator</h3>
 <hr>
 <p>
-	<i>if else</i> statements can be written without the <i>else</i> on single condition statements:
+	The conditional operator is the only JavaScript operator that takes three operands:
+</p>
+<ul>
+	<li>condition or conditions followed by a question mark <code>?</code></li>
+	<li>then an expression to execute if the condition is truthy followed by one or more colons <code>:</code></li>
+	<li>and finally the expression to execute if the condition is falsy</li>
+</ul>
+<p>
+	This operator is frequently used as a shortcut for the <q>if statement</q>.
+</p>
+<p>
+	An <q>if statement</q> written without the <q>else</q> can be used to illustrate the simple syntax:
 </p>
 <pre>
-if (a === true) {
-	return "Yes, it is true";
+function trueFalse(a) {
+	if (a == true) {
+		return "Yes, it is true";
+	}
+	return "No, it is false";
 }
-return "No, it is false";
 </pre>
 <p>
 	Conditional (Ternary) Operator:
 </p>
 <pre>
-if (a == 1 ) {
-	x = 1;
+function trueFalse(a) {
+	return a == true ? 'Yes, it is true' : 'No, it is false';
 }
 </pre>
-equates to:
-<pre>
-x = (a == 1) ? 1 : 0;
-</pre>
-<p>
-	This also works with more conditional criteria:
-</p>
+
+<h4>Multiple Questions</h4>
+<hr>
 <pre>
 x = (a !== 0) && (b == 1) ? 1 : 0;
 </pre>
-<p>
-	Multiple Conditional Operators:
-</p>
+
+<h4>Multiple Answers</h4>
+<hr>
 <pre>
 function findGreaterOrEqual(a, b) {
-  return (a === b) ? "a and b are equal" 
-    : (a > b) ? "a is greater" 
-    : "b is greater";
+  return (a === b) ? 'a and b are equal' 
+    : (a > b) ? 'a is greater'
+    : 'b is greater';
 }
 </pre>
-<p>
-	Condition within a condition:
-</p>
+
+<h4>Condition within a condition</h4>
+<hr>	
 <pre>
 function translatePigLatin(str) {
   // test 1 = vowel vs consonant
@@ -2538,14 +2547,6 @@ function translatePigLatin(str) {
 }
 
 translatePigLatin("rhythm");
-</pre>
-<p>
-	<b>To test if a property exist</b>
-</p>
-<pre>
-	if(parent[property]) alert("it exist");
-	
-	if(!parent[property]) alert("does not exist");
 </pre>
 
 <h3>Switch statement</h3>
