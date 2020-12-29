@@ -132,6 +132,46 @@
     As commands grow long it is convenient to split them over several lines. This is achieved by escaping the newline character (enter) with the backslash.
 </p>
 
+<h3>Built in Variables</h3>
+<hr>
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">Special Variable Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$0</td>
+            <td>The name of the bash script.</td>
+        </tr>
+        <tr>
+            <td>$1, $2...$n</td>
+            <td>The bash script arguments.</td>
+        </tr>
+        <tr>
+            <td>$$</td>
+            <td>The process id of the current shell.</td>
+        </tr>
+        <tr>
+            <td>$!</td>
+            <td>The process id of the last executed command.</td>
+        </tr>
+        <tr>
+            <td>$#</td>
+            <td>The total number of arguments passed to the script.</td>
+        </tr>
+        <tr>
+            <td>$@</td>
+            <td>The value of all the arguments passed to the script.</td>
+        </tr>
+        <tr>
+            <td>$?</td>
+            <td>The exit status of the last executed command.</td>
+        </tr>
+    </tbody>
+</table>
+
 <h3>Scripting</h3>
 <hr>
 <p>
