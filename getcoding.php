@@ -388,6 +388,9 @@
 							<td>React</td><td>15.Nov20</td><td>xxxxxxxx</td>
 						</tr>
 						<tr>
+							<td>Python</td><td>29.Dec20</td><td>xxxxxxxx</td>
+						</tr>
+						<tr>
 							<td>Vue</td><td>xxxxxxxx</td><td>xxxxxxxx</td>
 						</tr>
 						<tr>
