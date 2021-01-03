@@ -20,7 +20,7 @@
 <ul>
     <li style="color: green;">JSX - &lt;div/&gt; (inside the return statement)</li>
     <li style="color: blue;">React Component - &lt;ReactComponent&gt;</li>
-    <li style="color: yellow;">JavaScript within JSX - {}</li>
+    <li style="color: red;">JavaScript within JSX - {}</li>
 </ul>
 <pre>
     class Child_Class extends React.Component {
@@ -31,8 +31,8 @@
             return (
             <div style="color: green">
             &lt;div&gt;
-                <span style="color: yellow;">{ /* Include parent property */ }</span>
-                &lt;h1&gt;Child Class with property <span style="color: yellow;">{ this.props.origin }</span> &lt;/h1&gt;
+                <span style="color:red;">{ /* Include parent property */ }</span>
+                &lt;h1&gt;Child Class with property <span style="color: red;">{ this.props.origin }</span> &lt;/h1&gt;
             &lt;/div&gt;</div>
             );
         }
@@ -47,7 +47,7 @@
         // Render Child Component
         render() {
             return (
-            <span style="color: blue;">&lt;Child_Class name=<span style="color: yellow;">{ this.state.origin }</span>/&gt;</span>
+            <span style="color: blue;">&lt;Child_Class name=<span style="color:red;">{ this.state.origin }</span>/&gt;</span>
             );
         }
     }
