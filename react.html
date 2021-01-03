@@ -19,7 +19,7 @@
 </p>
 <ul>
     <li style="color: green;">JSX - &lt;div/&gt; (inside the return statement)</li>
-    <li style="color: blue;">React Component - &lt;ReactComponent&gt;</li>
+    <li style="color: blue;">React Component - &lt;ReactComponent/&gt;</li>
     <li style="color: red;">JavaScript within JSX - {}</li>
 </ul>
 <pre>
@@ -29,11 +29,10 @@
         }
         render() {
             return (
-            <div style="color: green">
-            &lt;div&gt;
+            <span style="color: green">&lt;div&gt;
                 <span style="color:red;">{ /* Include parent property */ }</span>
                 &lt;h1&gt;Child Class with property <span style="color: red;">{ this.props.origin }</span> &lt;/h1&gt;
-            &lt;/div&gt;</div>
+            &lt;/div&gt;</span>
             );
         }
     }
