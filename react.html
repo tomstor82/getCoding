@@ -4,7 +4,7 @@
     React is an Open Source library created and maintained by Facebook. It's a great tool to render the User Interface (UI) of modern web applications.
 </p>
 <p>
-    React uses a syntax extension of JavaScript called JSX that allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable.<br />
+    React uses a syntax extension of JavaScript called JSX inside the <u>return statement</u> of the <i>render method</i>. This allows you to write HTML directly within JavaScript. This has several benefits. It lets you use the full programmatic power of JavaScript within HTML, and helps to keep your code readable.<br />
     JSX syntax: <code>const component = &lt;h1&gt;Hello World!&lt;h1/&gt;</code>
 </p>
 <p>
@@ -14,29 +14,40 @@
 <p>
     All JSX elements needs to be wrapped up in a parent element to work. Usually accomplished by the use of <code>&lt;div&gt;</code> tags. However JSX also accepts a class with a render method returning HTML as syntax.
 </p>
+<p>
+    Colour Codes in this example:
+</p>
+<ul>
+    <li style="color: green;">JSX - &lt;div/&gt; (inside the return statement)</li>
+    <li style="color: blue;">React Component - &lt;ReactComponent&gt;</li>
+    <li style="color: yellow;">JavaScript within JSX - {}</li>
+</ul>
 <pre>
-    class Parent extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { name: 'from Parent' };
-        }
-        { // render method returning a class with similar method // }
-        render() {
-            return (
-            &lt;Child_Class name={ this.state.name }/&gt;
-            );
-        }
-    }
-    Class Child_Class extends React.Component {
+    class Child_Class extends React.Component {
         constructor(props) {
             super(props);
         }
         render() {
             return (
+            <div style="color: green">
             &lt;div&gt;
-                { // Include parent property // }
-                &lt;h1&gt;Child Class with property { this.props.name }&lt;/h1&gt;
-            &lt;/div&gt;
+                <span style="color: yellow;">{ /* Include parent property */ }</span>
+                &lt;h1&gt;Child Class with property <span style="color: yellow;">{ this.props.origin }</span> &lt;/h1&gt;
+            &lt;/div&gt;</div>
+            );
+        }
+    }
+    class Parent extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                origin: 'From Parent Constructor'
+            };
+        }
+        // Render Child Component
+        render() {
+            return (
+            <span style="color: blue;">&lt;Child_Class name=<span style="color: yellow;">{ this.state.origin }</span>/&gt;</span>
             );
         }
     }
@@ -502,4 +513,49 @@ this.state = {
           );
         }
       }
+</pre>
+
+<ul>
+    <li>mapping over states as they are unknown to programmer until UI</li>
+    <li>filtering out states</li>
+</ul>
+
+
+<h3>Rendering React to Server</h3>
+<hr>
+<p>
+    To make web content visible to a search engines crawler bots we need to present them with HTML content. As this is not what a React App contains but mereley JavaScript and JSX we can render the content to the server. This has other benefits too.
+</p>
+<p>
+    Since React is a JavaScript view library and you can run JavaScript on the server with Node, this is possible. In fact, React provides a <code>renderToString()</code> method you can use for this purpose.
+</p>
+<p>
+    There are two key reasons why rendering on the server may be used in a real world app.
+</p>
+<ol>
+    <li>
+        Without doing this, your React apps would consist of a relatively empty HTML file and a large bundle of JavaScript when it's initially loaded to the browser. This may not be ideal for search engines that are trying to index the content of your pages so people can find you.<br />
+        If you render the initial HTML markup on the server and send this to the client, the initial page load contains all of the page's markup which can be crawled by search engines.
+    </li>
+    <li>
+        This creates a faster initial page load experience because the rendered HTML is smaller than the JavaScript code of the entire app.<br />
+        React will still be able to recognize your app and manage it after the initial load.
+    </li>
+</ol>
+<p>
+    The React Component or Element has a syntax like this: <code>&lt;ComponentName/&gt;</code>, and we use <code>ReactDOMServer's renderToString()</code> method, which accepts a React Component as the argument to accomplish rendering to the server.
+</p>
+<pre>
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+        render() {
+            return (
+                &lt;div&gt;Hei&lt;/div&gt;
+            );
+        }
+    };
+    /* ReactDOMServer in this example is available as a global object */
+    ReactDOMServer.renderToString(&lt;App/&gt;)
 </pre>
