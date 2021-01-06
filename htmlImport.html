@@ -139,7 +139,7 @@ Continuing with the date theme, HTML5 also introduced the <em>time</em> element 
 The <code>&lt;input&gt;</code> tag has a whole variety of <code>type</code> attributes as <code>submit, text, date, email, slider</code> and more. They are also self validating as of the W3C HTML5 standard.
 </p>
 <p>
-Form tags  here are described in chronological order following the <em>form</em> tag: <em>fieldset</em> divide different form sections into groups for easy of using screen readers. Next <em>legend</em> describes the headline of the section and places it on top of the border line of the section. Next <em>label</em> and <em>input</em> with many options. There's also <em>select</em> type with <em>option</em> consisting of drop or scroll list options.
+Form tags here are described in chronological order following the <em>form</em> tag: <em>fieldset</em> divide different form sections into groups for easy of using screen readers. Next <em>legend</em> describes the headline of the section and places it on top of the border line of the section. Next <em>label</em> and <em>input</em> with many options. There's also <em>select</em> type with <em>option</em> consisting of drop or scroll list options.
 </p>
 <p>
 When a form gets submitted, the data is sent to the server and includes entries for the options selected. Inputs of type radio and checkbox report their values from the value attribute.
@@ -173,6 +173,32 @@ To display the checkbox and radio buttons as pre-selected or checked simply add 
 <p>
 	<code>button</code> type attribute within <code>&lt;input&gt;</code> tags perform no action and can be linked to JavaScript. Instead of using submit (more used for back-end submission) or the <em>button</em> tag.
 </p>
+
+<h3>Tables</h3>
+<hr>
+<p>
+	Tables are designed to show tabular data, however they were against their purpose used to place items on a html document. This is not recommended and with HTHML5 there are many options to do so.
+</p>
+<pre>
+	&lt;table&gt;
+		&lt;thead&gt;
+			&lt;tr&gt;
+            	&lt;th colspan="2"&gt;Optional header&lt;/th&gt;
+        	&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Row 1 Cell 1&lt;/td&gt;&lt;td&gt;Row 1 Cell 2&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Row 2 Cell 1&lt;/td&gt;&lt;td&gt;Row 2 Cell 2&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/tbody&gt;
+		&lt;tfoot&gt;
+			Optional Footer
+		&lt;/tfoot&gt;
+	&lt;/table&gt;
+</pre>
 
 <h3>Web Document Structure - Document Object Model</h3>
 <hr />
