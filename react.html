@@ -514,6 +514,58 @@ this.state = {
       }
 </pre>
 
+<h3>Using <code>map()</code> to expand App Dynamically from UI</h3>
+<hr>
+<p>
+    If we create an app that takes various user inputs to be rendered in the html, we can potentially be working with an unknown number of list items.<br />
+    A good way to mitigate this is with JavaScript's <code>map()</code> function.
+</p>
+<pre>
+    const textAreaStyles = {
+        width: 235,
+        margin: 5
+      };
+      
+      class MyToDoList extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            userInput: "",
+            toDoList: []
+          }
+          this.handleSubmit = this.handleSubmit.bind(this);
+          this.handleChange = this.handleChange.bind(this);
+        }
+        handleSubmit() {
+          const itemsArray = this.state.userInput.split(',');
+          this.setState({
+            toDoList: itemsArray
+          });
+        }
+        handleChange(e) {
+          this.setState({
+            userInput: e.target.value
+          });
+        }
+        render() {
+          const items = this.state.toDoList.map(e =&gt; <li key={`#0${items.indexOf(e)}`}&gt;{ e }&lt;/li&gt;);
+          return (
+            &lt;div&gt;
+              &lt;textarea
+                onChange={this.handleChange}
+                value={this.state.userInput}
+                style={textAreaStyles}
+                placeholder='Separate Items With Commas'
+              /&gt;
+              &lt;br /&gt;
+              &lt;button onClick={this.handleSubmit}&gt;Create List&lt;/button&gt;
+              &lt;h1&gt;My "To Do" List:&lt;/h1&gt;
+              &lt;ul&gt;{items}&lt;/ul&gt;
+            &lt;/div&gt;
+          );
+        }
+      }
+</pre>
 <ul>
     <li>mapping over states as they are unknown to programmer until UI</li>
     <li>filtering out states</li>
