@@ -64,7 +64,7 @@
     </li>
     <li>find - search directories
         <ul>
-            <li>find -P ~/ -iregex '.+\.jpe?g' // search home directory for Perl regex pattern ignoring case</li>
+            <li>find ~/ -regextype egrep -iregex '.+\.jpe?g' // search home directory with extended regex pattern ignoring case</li>
             <li>find / -name '???.txt' 2> /dev/null //  search root directory for 3 letter long txt files. Errors passed to /dev/null</li>
             <li>find ~/ -ctime -2 // search home directory for files <i>changed</i> within the last 48 hours (ctime = 24hrs)</li>
             <li>find ~/ -cmin -60 -name '*.html' // search home directory for html files <i>changed</i> within the last 60 minutes</li>
