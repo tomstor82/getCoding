@@ -288,6 +288,7 @@
         </ul>
     </li>
     <li>git branch - displays branches.</li>
+    <li>git branch -a - displays all branches remote and local.</li>
     <li>git checkout 'branch-name' - Swaps to working on different branch.</li>
 </ul>
 <p>
@@ -358,6 +359,20 @@
     git commit -am "commit 'modified' files without staging"
     // Does not include newly added files
 </pre>
+
+<h4>Git Remote Repositories (gitHub)</h4>
+<hr>
+<p>
+    To backup git versioned work we have a few options. gitHub is one which is now managed by Microsoft. It offers free storage for normal users.
+</p>
+<ul>
+    <li>git remote add remoteRepoNickName git@gitHub:user/repository.git</li>
+    <li>git remote remove remoteRepoNickName - remove stored remote repo address.</li>
+    <li>git status - tells us if local and remote repo are in sync.</li>
+    <li>git push -u main remoteRepNichName - pushes changes from main branch to remote repo. The -u saves upstream tracking (reference) information of successful push.</li>
+    <li>git clone git@gitHub:user/repository.git - clones the main branch from remote repo.</li>
+    <li>git clone -b dev git@gitHub:user/repositoy.git - clones the dev branch from remote repo.</li>
+</ul>
 
 <h3>TMUX - Terminal Multiplexer</h3>
 <hr>
