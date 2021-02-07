@@ -610,3 +610,70 @@ this.state = {
     /* ReactDOMServer in this example is available as a global object */
     ReactDOMServer.renderToString(&lt;App/&gt;)
 </pre>
+<h3>Redux Framework for Managing App State</h3>
+<hr>
+<p>
+    Redux is a predictable state container for JavaScript apps. It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test.
+</p>
+<p>
+    In Redux, there is a single state object that's responsible for the entire state of your application. This means if you had a React app with ten components, and each component had its own local state, the entire state of your app would be defined by a single state object housed in the Redux store. This is the first important principle to understand when learning Redux: the Redux store is the single source of truth when it comes to application state.
+</p>
+<p>
+    This also means that any time any piece of your app wants to update state, it must do so through the Redux store. The unidirectional data flow makes it easier to track state management in your app.
+</p>
+<p>
+    A few terms in the Redux Framework needs to be explained for better understanding:
+</p>
+<ul>
+    <li>State - A specific position of a changable value, often changed by user interaction through an event handler.</li>
+        <code>const reducer = (state = 5) =&gt; state;</code>
+    <li>Store - An Object which holds and manages application state.
+        <code>const store = Redux.createStore(<br />    (state = 5) =&gt; state<br />);</code>
+    </li>
+    <li>Action - Is a JS Object containing information about an action event that has occured. Must carry a minimum of a "type" property.
+        <code>const action = {<br />    type: "LOGIN"<br />}</code>
+    </li>
+    <li>Action Creators - Simply a function returning an "action object". Used for sending the action to the Redux store so it can update its state.
+        <code>const actionCreator = () =&gt; action;</code>
+    </li>
+    <li>Dispatch - method used to dispatch "actions" to the "store". Calling <code>store.dispatch()</code> and passing the value returned from an "action creator" sends an "action" back to the "store".
+        <code>store.dispatch(actionCreator());</code> essentially the same as <code>store.dispatch({ type: "LOGIN" });</code> in this example.
+    </li>
+    <li>Reducer - After an "action" is created and "dispatched", the Redux store needs to know how to respond to that "action". This is the job of a "reducer function". Reducers in Redux are responsible for the state modifications that take place in response to actions. A reducer takes "state" and "action" as arguments, and it always returns a <i>new</i> state.</li>
+    <li>Listener - We can subscribe to any updates in the store allowing for logging events, through <code>store.subscribe()</code>.</li>
+</ul>
+<h5>Complete Example:</h5>
+<pre>
+    const LOGIN = 'LOGIN';
+    const LOGOUT = 'LOGOUT';
+    const defaultState = {
+        authenticated: false
+    };
+
+    const authReducer = (state = defaultState, action) => {
+        switch (action.type) {
+            case LOGIN: return state = { authenticated: true};
+            break;
+            case LOGOUT: return state = { authenticated: false };
+            break;
+            default: return state;
+        }
+    };
+
+    const store = Redux.createStore(authReducer);
+
+    let count = 0;
+    store.subscribe(() => count++);
+
+    const loginUser = () => {
+        return {
+            type: LOGIN
+        }
+    };
+      
+    const logoutUser = () => {
+        return {
+            type: LOGOUT
+        }
+    };
+</pre>
