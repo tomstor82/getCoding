@@ -626,20 +626,24 @@ this.state = {
 </p>
 <ul>
     <li>State - A specific position of a changable value, often changed by user interaction through an event handler.</li>
-        <code>const reducer = (state = 5) =&gt; state;</code>
-    <li>Store - An Object which holds and manages application state.
-        <code>const store = Redux.createStore(<br />    (state = 5) =&gt; state<br />);</code>
+    <li>Store - An Object which holds and manages application state.<br />
+        <pre>const store = Redux.createStore((state = 5) =&gt; state);</pre>
     </li>
-    <li>Action - Is a JS Object containing information about an action event that has occured. Must carry a minimum of a "type" property.
-        <code>const action = {<br />    type: "LOGIN"<br />}</code>
+    <li>Action - Another Object containing information about an action event that has occured. Must carry a minimum of a "type" property.<br />
+        <pre>
+    const action = {
+        type: "LOGIN"
+    }</pre>
     </li>
-    <li>Action Creators - Simply a function returning an "action object". Used for sending the action to the Redux store so it can update its state.
-        <code>const actionCreator = () =&gt; action;</code>
+    <li>Action Creators - Simply a function returning an "action object". Used for sending the action to the Redux store so it can update its state.<br />
+        <pre>const actionCreator = () =&gt; action;</pre>
     </li>
-    <li>Dispatch - method used to dispatch "actions" to the "store". Calling <code>store.dispatch()</code> and passing the value returned from an "action creator" sends an "action" back to the "store".
-        <code>store.dispatch(actionCreator());</code> essentially the same as <code>store.dispatch({ type: "LOGIN" });</code> in this example.
+    <li>Dispatch - method used to dispatch "actions" to the "store". Calling <code>store.dispatch()</code> and passing the value returned from an "action creator" sends an "action" back to the "store".<br />
+        <pre>store.dispatch(actionCreator());</pre> essentially the same as <pre>store.dispatch({ type: "LOGIN" });</pre> in this example.
     </li>
-    <li>Reducer - After an "action" is created and "dispatched", the Redux store needs to know how to respond to that "action". This is the job of a "reducer function". Reducers in Redux are responsible for the state modifications that take place in response to actions. A reducer takes "state" and "action" as arguments, and it always returns a <i>new</i> state.</li>
+    <li>Reducer - After an "action" is created and "dispatched", the Redux store needs to know how to respond to that "action". This is the job of a "reducer function". Reducers in Redux are responsible for the state modifications that take place in response to actions. A reducer takes "state" and "action" as arguments, and it always returns a <i>new</i> state.<br />
+        <pre>const reducer = (state = 5) =&gt; state;</pre>
+    </li>
     <li>Listener - We can subscribe to any updates in the store allowing for logging events, through <code>store.subscribe()</code>.</li>
 </ul>
 <h5>Complete Example:</h5>
@@ -677,3 +681,23 @@ this.state = {
         }
     };
 </pre>
+<h4>Multiple Reducers</h4>
+<hr>
+<p>
+    When the state of your app begins to grow more complex, it may be tempting to divide state into multiple pieces. However the first principle of Redux is: all app state is held in a single state object in the store. Therefore, Redux provides reducer composition as a solution for a complex state model. You define multiple reducers to handle different pieces of your application's state, then compose these reducers together into one root reducer. The root reducer is then passed into the Redux <code>createStore()</code> method.
+</p>
+<p>
+    In order to let us combine multiple reducers together, Redux provides the <code>combineReducers()</code> method. This method accepts an object as an argument in which you define properties which associate keys to specific reducer functions. The name you give to the keys will be used by Redux as the name for the associated piece of state.
+</p>
+<p>
+    Typically, it is a good practice to create a reducer for each piece of application state when they are distinct or unique in some way. For example, in a note-taking app with user authentication, one reducer could handle authentication while another handles the text and notes that the user is submitting. For such an application, we might write the <code>combineReducers()</code> method like this:
+</p>
+<pre>
+const rootReducer = Redux.combineReducers({
+  auth: authenticationReducer,
+  notes: notesReducer
+});
+</pre>
+<p>
+    Now, the key notes will contain all of the state associated with our notes and handled by our notesReducer. This is how multiple reducers can be composed to manage more complex application state. In this example, the state held in the Redux store would then be a single object containing auth and notes properties.
+</p>
