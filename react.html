@@ -653,34 +653,49 @@ this.state = {
     const defaultState = {
         authenticated: false
     };
-
+    /* Reducer with switch to handle multiple actions */
     const authReducer = (state = defaultState, action) => {
         switch (action.type) {
-            case LOGIN: return state = { authenticated: true};
+            case LOGIN:
+                return state = {
+                    authenticated: true,
+                    user: action.user
+                };
             break;
-            case LOGOUT: return state = { authenticated: false };
+            case LOGOUT:
+                return state = {
+                    authenticated: false,
+                    user: action.user
+                };
             break;
             default: return state;
         }
     };
 
-    const store = Redux.createStore(authReducer);
-
     let count = 0;
     store.subscribe(() => count++);
 
-    const loginUser = () => {
+    /* Action Creators */
+    const loginUser = (name) => {
         return {
-            type: LOGIN
+            type: LOGIN,
+            user: name
         }
     };
       
-    const logoutUser = () => {
+    const logoutUser = (name) => {
         return {
-            type: LOGOUT
+            type: LOGOUT,
+            user: name
         }
     };
+    const store = Redux.createStore(authReducer);
+
+    console.log(store.getState());
+    store.dispatch(loginUser('Tom'));
+    console.log(store.getState());
 </pre>
+
 <h4>Multiple Reducers</h4>
 <hr>
 <p>
