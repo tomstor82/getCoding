@@ -1373,7 +1373,7 @@ const y = [];
 	
 	<h4>Copy(slice), Cut and Paste(splice)</h4>
 	<li>slice() - copies a section or the entire array.<br />
-		<strong>Note:</strong> as Arrays are Objects in JS, <code>arr2 = arr1;</code> simply creates a pointer from arr2 to arr1. Modifying either array changes the other. <code>arr2 = arr1.slice(); //or .concat();</code> creates a separate Object and can be modified separately.</li>
+		<strong>Note:</strong> as Arrays are Objects in JS, <code>arr2 = arr1;</code> simply creates a pointer from arr2 to arr1. Modifying either array changes the other. <code>arr2 = arr1.slice();</code> or <code>arr2 = arr1.concat();</code> creates a separate Object and can be modified separately.</li>
 	<li>splice(<i>index number</i>, <i>number of indexes to be remove(can be 0), value to insert at index, more values separated by comma</i>) - adds/removes values from the array.</li>
 		
 	<h4>Locate</h4>
