@@ -716,3 +716,67 @@ const rootReducer = Redux.combineReducers({
 <p>
     Now, the key notes will contain all of the state associated with our notes and handled by our notesReducer. This is how multiple reducers can be composed to manage more complex application state. In this example, the state held in the Redux store would then be a single object containing auth and notes properties.
 </p>
+
+<h4>How to handle Asynchronous (not simultaneous) Actions</h4>
+<hr>
+<p>
+    Redux provides middleware designed specifically for this purpose, called Redux Thunk middleware.
+</p>
+<p>
+    To include Redux Thunk middleware, you pass it as an argument to <code>Redux.applyMiddleware()</code>. This statement is then provided as a second optional parameter to the <code>Redux.createStore()</code> function.
+</p>
+<pre>
+const REQUESTING_DATA = 'REQUESTING_DATA'
+const RECEIVED_DATA = 'RECEIVED_DATA'
+
+// Actions
+const requestingData = () => { return {type: REQUESTING_DATA} }
+const receivedData = (data) => { return {type: RECEIVED_DATA, users: data.users} }
+
+// Action Creator
+const handleAsync = () => {
+    return function(dispatch) {
+        // Dispatch request action
+        store.dispatch(requestingData());
+        setTimeout(function() {
+            let data = {
+                users: ['Jeff', 'William', 'Alice']
+            }
+            // Dispatch received data action
+            store.dispatch(receivedData(data));
+        }, 2500);
+    }
+};
+
+// Default State
+const defaultState = {
+    fetching: false,
+    users: []
+};
+
+// Reducer
+const asyncDataReducer = (state = defaultState, action) => {
+    switch(action.type) {
+        case REQUESTING_DATA:
+            return {
+                fetching: true,
+                users: []
+            }
+        case RECEIVED_DATA:
+            return {
+                fetching: false,
+                users: action.users
+            }
+        default:
+            return state;
+    }
+};
+
+// Store
+const store = Redux.createStore(
+    asyncDataReducer,
+    Redux.applyMiddleware(
+        ReduxThunk.default
+    )
+);
+</pre>
