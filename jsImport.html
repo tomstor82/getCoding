@@ -1394,10 +1394,22 @@ const y = [];
 	<li>forEach(<i>element => console.log(element)</i>) - calls a function for each element in the array.</li>
 	<li>fill(<i>value, from index, to index</i>) - replaces the array elements with the specified value. Optional <i>from</i> and <i>to</i> index can be supplied.</li>
 </ul>
-<p>Serial use of some methods:</p>
+<p>
+	Serial use of some methods:
+</p>
 <pre>
 myArr.filter(num =&gt; num &lt; 0).sort((a,b) =&gt; b-a).map(num =&gt; num-5).join("").split(" ").splice(0,1).reverse().reduce((a,b) =&gt; a-b);
 </pre>
+
+<p>
+	Delete Array element without Mutability of Original Array (spread operator and slice method)
+</p>
+<pre>
+function nonMuteCopyArray (originalArray, index) {
+	return [...originalArray.slice(0, index), ...originalArray.slice(index+1, originalArray.length)];
+}
+</pre>
+
 <p>
 	<strong>Locate placement of letters in a word string with <b>Tom's</b> letterFinder function:</strong><br />
 	<small>Methods used: includes(), push(), indexOf(), lastIndexOf(), map(), sort() and pop() .</small>
