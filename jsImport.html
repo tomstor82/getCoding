@@ -1405,7 +1405,7 @@ myArr.filter(num =&gt; num &lt; 0).sort((a,b) =&gt; b-a).map(num =&gt; num-5).jo
 	Delete Array element without Mutability of Original Array (spread operator and slice method)
 </p>
 <pre>
-function nonMuteCopyArray (originalArray, index) {
+function ModifiedCopy (originalArray, index) {
 	return [...originalArray.slice(0, index), ...originalArray.slice(index+1, originalArray.length)];
 }
 </pre>
