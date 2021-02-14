@@ -1409,6 +1409,9 @@ function ModifiedCopy (originalArray, index) {
 	return [...originalArray.slice(0, index), ...originalArray.slice(index+1, originalArray.length)];
 }
 </pre>
+<p>
+	<strong>Note:</strong> While this can be used to join together strings as well as arrays, the spread operator separatates characters in a string into individual array elemenets. This can be avoided by using the <code>concat()</code> method instead.
+</p>
 
 <p>
 	<strong>Locate placement of letters in a word string with <b>Tom's</b> letterFinder function:</strong><br />
