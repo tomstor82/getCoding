@@ -48,7 +48,8 @@
 			/********************* Top Nav Bar **********/
 			#jump {
 				position: fixed;
-				left: 33%;
+				left: 28vw;
+				top: 2vh;
 			}
 			#jump ul, #jump ul li {
 				display: inline;
