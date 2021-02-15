@@ -16,6 +16,11 @@
 				box-sizing: border-box;
 				padding: 0;
 			}
+			/************** Page settings ***************/
+			html {
+				scroll-behavior: smooth;
+				scroll-margin-top: 2em;
+			}
 			/***************** List margins *************/
 			#text ul > li, #text ol > li {
 				margin-left: 1em;
