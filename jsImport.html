@@ -1410,7 +1410,8 @@ function ModifiedCopy (originalArray, index) {
 }
 </pre>
 <p>
-	<strong>Note:</strong> While this can be used to join together strings as well as arrays, the spread operator separatates characters in a string into individual array elemenets. This can be avoided by using the <code>concat()</code> method instead.
+	<strong>Note:</strong> While this can be used to join together strings as well as arrays, the spread operator separatates characters in a string into individual array elemenets.<br />
+	This can be avoided by omitting the spread "operator" preceeding the string <code>comb = [...arr1, str1]</code> or simply using the concat method: <code>comb = arr1.concat(str1)</code>. 
 </p>
 
 <p>
