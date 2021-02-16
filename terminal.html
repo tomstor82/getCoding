@@ -278,8 +278,10 @@
 	<li>git init - Makes current directory a repository (project). This can be the directory where the files I want a record of recide.</li>
 	<li>git add 'filename / *.txt' - Adds file or files to the repository, either new or modified. They are now in staging, which is a place to reflect over the changes before committing to them. Stage can be regretted.<br />
 	<code>echo <q>Repository Description<q> &gt; README.md & git add README.md</code></li>
-	<li>git status - Dispays status of files not commited to repository.</li>
+	<li>git status - dispays status of files not commited to repository.</li>
+    <li>git log - display log of commits with # and messages.</li>
 	<li>git commit 'filename / *.txt' -m 'Text to be added' - The modified file is now added to the git repository as a permanent file.</li>
+    <li>git commit -am 'message' - stages and commits in one go. -a add and -m message.</li>
     <li>git config
         <ul>
             <li>git config --global user.email "tomstoreboe@gmail.com"</li>
@@ -289,7 +291,13 @@
     </li>
     <li>git branch - displays branches.</li>
     <li>git branch -a - displays all branches remote and local.</li>
-    <li>git checkout 'branch-name' - Swaps to working on different branch.</li>
+    <li>git checkout 'dev' - checks out (swaps) to working on 'dev' branch.</li>
+    <li>git checkout -b 'dev' - creates and checks out 'dev' branch.</li>
+    <li>git merge dev - pulls dev into checked out branch.</li>
+    <li>git tag - lists tags on commit.</li>
+    <li>git tag -d 'v0.0.3' - deletes tag with name 'v0.0.3'.</li>
+    <li>git stash push - push file to top of stack.</li>
+    <li>git stash pop - pops the file at top of stack back to checked out branch.</li>
 </ul>
 <p>
     Some convenient rules to follow when managing the repository are:
@@ -349,16 +357,27 @@
     git commit -m 'Initial commit message'
     // Commits the two files to the repository
     git checkout -b 'Feature'
-    // Creates new branch Feature starting at Head if not specified otherwise and move to branch
-    git branch -m 'New_Branch_Name'
+    // Creates new branch Feature starting at Head if not specified otherwise and check out branch
+    git branch -m 'Dev'
     // Change name on checked out branch
-    git branch -d
-    // Delete obsolete branch
+    git commit -am 'New Development Finished'
+    // Commit changes directly
+    git checkout main; git merge Dev; git branch -d Dev;
+    // Checkout main branch before merging Dev into it, followed by deleting Dev branch
     git log --one-line
     // Display the log file with title and abbreviated hash
     git commit -am "commit 'modified' files without staging"
     // Does not include newly added files
 </pre>
+
+<h4>Editing on Wrong Branch</h4>
+<p>
+    In the above example things were done correctly. However if we forget to checkout the right branch before editing files, we can "stash" our file after saving it, switch to desired branch, collect our file from the "stash" and commit it.
+</p>
+<ul>
+    <li>git stash push ("myFile") - pushes the current or specified file to the top of the stash, allowing us to navigate branches.</li>
+    <li>git stash pop ("index") - pops the file from the top of the stash or as specified by the index number. <code>git stash pop 0</code> is at the top.</li>
+</ul>
 
 <h4>Git Remote Repositories (gitHub)</h4>
 <hr>
@@ -373,6 +392,13 @@
     <li>git clone git@gitHub:user/repository.git - clones the main branch from remote repo.</li>
     <li>git clone -b dev git@gitHub:user/repositoy.git - clones the dev branch from remote repo.</li>
 </ul>
+
+<h4>Git Merge Conflict</h4>
+<hr>
+<p>
+    If there have been modifications to a repository after a pull request which is seen by git as non fast-forwardable, a merge conflict occurs.<br />
+    Git then adds the conflict information to the concerned file, indicated by chevrons surrounding the conflict, separated by equal signs between the choices. To resolve we delete the obsolete choice and save the file, before staging and committing it and finally merging it into the branch of choice.
+</p>
 
 <h3>TMUX - Terminal Multiplexer</h3>
 <hr>
