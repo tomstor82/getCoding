@@ -396,8 +396,9 @@
 <h4>Git Merge Conflict</h4>
 <hr>
 <p>
-    If there have been modifications to a repository after a pull request which is seen by git as non fast-forwardable, a merge conflict occurs.<br />
-    Git then adds the conflict information to the concerned file, indicated by chevrons surrounding the conflict, separated by equal signs between the choices. To resolve we delete the obsolete choice and save the file, before staging and committing it and finally merging it into the branch of choice.
+    If there has been modifications to the <u>same lines</u> in a file in two or more separate branches before merging is attempted, a "merge conflict" occurs.<br />
+    As a file can be composed of all kinds of languages git is unable to determine which branch version to keep.<br />
+    Information to where the conflict has occured is then added to the concerned file, indicated by chevrons surrounding the conflict, separated by equal signs between the choices. To resolve we delete the obsolete choice and save the file, before staging and committing it and finally merging it into the branch of choice.
 </p>
 
 <h3>TMUX - Terminal Multiplexer</h3>
