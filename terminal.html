@@ -414,11 +414,13 @@
 <ol>
     <li>
         MAJOR version when you make <span style="background-color: rgb(197, 224, 75);">incompatible API changes</span>.<br />
-        It MAY also include minor and patch level changes. Patch and minor version MUST be reset to 0 when major version is incremented.
+        It <u>may</u> also include minor and patch level changes.<br />
+        Patch and minor version <u>must</u> be reset to 0 when major version is incremented.
     </li>
     <li>
         MINOR version when you <span style="background-color: rgb(197, 224, 75);">add functionality</span> in a backwards compatible manner.<br />
-        It <u>must</u> be incremented if any public API functionality is marked as deprecated. It <u>may</u> be incremented if substantial new functionality or improvements are introduced within the private code. It <u>may</u> include patch level changes. Patch version MUST be reset to 0 when minor version is incremented.
+        It <u>must</u> be incremented if any public API functionality is marked as deprecated. It <u>may</u> be incremented if substantial new functionality or improvements are introduced within the private code. It <u>may</u> include patch level changes.<br />
+        Patch version <u>must</u> be reset to 0 when minor version is incremented.
     </li>
     <li>
         PATCH version when you make backwards compatible <span style="background-color: rgb(197, 224, 75);">bug fixes.</span><br />
