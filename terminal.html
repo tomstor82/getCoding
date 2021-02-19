@@ -38,22 +38,24 @@
 <ul>
     <li>ls - listing</li>
     <li>cp - copy, <code>cp -r</code> for recursive (include directories)</li>
-    <li>mv - move or rename</li>
-    <li>wc - word count</li>
-    <li>sed - filter and edit text files</li>
-    <li>cat - print text content from files</li>
+    <li>mv - move or rename.</li>
+    <li>wc - word count or line count with <code>-l</code>flag option.</li>
+    <li>sed - filter and edit text files.</li>
+    <li>cat - print text content from files.</li>
     <li>less - display large text file or files simultanously, also track a log file with <code>+F</code> flag</li>
-    <li>vi - basic text editor</li>
-    <li>tail - one useful feature with the <code>-f</code> flag is to track a log file</li>
-    <li>rm - remove files or directories</li>
-    <li>mkdir - create directory</li>
-    <li>touch - create file</li>
-    <li>ssh - secure shell</li>
-    <li>scp - secure copy over ssh</li>
-    <li>sftp - secure file transfer over ftp</li>
-    <li>cd - return to home directory</li>
-    <li>cd- - go back to previous directory</li>
-    <li>~ - tilda symbol used to point to home directory</li>
+    <li>vi - basic text editor. <code>:wq</code> writes and quits the editor. Key d = delete line, x = delete character, a = append, i = insert, o = start new line, h, j, k, l = navigate. ESC to escape modes.</li>
+    <li>tail - one useful feature with the <code>-f</code> flag is to track a log file.</li>
+    <li>watch - does a command at specified intervals. <code>-n 10</code> flag indicates to repeat command every 10s.</li>
+    <li>rm - remove files or directories with <code>-r</code> flag (recursive).</li>
+    <li>mkdir - create directory.</li>
+    <li>rmdir - remove empty directory</li>
+    <li>touch - create file.</li>
+    <li>ssh - secure shell.</li>
+    <li>scp - secure copy over ssh.</li>
+    <li>sftp - secure file transfer over ftp.</li>
+    <li>cd - return to home directory.</li>
+    <li>cd- - go back to previous directory.</li>
+    <li>~ - "tilda" symbol used to point to home directory.</li>
     <li>awk - similar to grep but separates every word into printable variables. <code>date | awk 'OFS="/" {print $2,$3,£NF}'</code></li>
     <li>grep - get RegExp matches from file or std-in (Basic Regular Expressions - BRE)
         <ul>
@@ -63,9 +65,9 @@
             <li>grep -P (Perl Compatible RegExp - PCREs)</li>
         </ul>
     </li>
-    <li>pgrep -u tom - look up process based on name and other attributes</li>
-    <li>jobs - lists active jobs</li>
-    <li>ps -A - list processes. -A signifies from all users</li>
+    <li>pgrep -u tom - look up process based on name and other attributes.</li>
+    <li>jobs - lists active jobs.</li>
+    <li>ps -A - list processes. -A signifies from all users.</li>
     <li>find - search directories
         <ul>
             <li>find ~/ -regextype egrep -iregex '.+\.jpe?g' // search home directory with extended regex pattern ignoring case</li>
