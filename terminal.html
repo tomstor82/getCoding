@@ -54,6 +54,7 @@
     <li>cd - return to home directory</li>
     <li>cd- - go back to previous directory</li>
     <li>~ - tilda symbol used to point to home directory</li>
+    <li>awk - similar to grep but separates every word into printable variables. <code>date | awk 'OFS="/" {print $2,$3,£NF}'</code></li>
     <li>grep - get RegExp matches from file or std-in (Basic Regular Expressions - BRE)
         <ul>
             <li>egrep or grep -E (Extended RegExp - ERE)</li>
@@ -62,6 +63,9 @@
             <li>grep -P (Perl Compatible RegExp - PCREs)</li>
         </ul>
     </li>
+    <li>pgrep -u tom - look up process based on name and other attributes</li>
+    <li>jobs - lists active jobs</li>
+    <li>ps -A - list processes. -A signifies from all users</li>
     <li>find - search directories
         <ul>
             <li>find ~/ -regextype egrep -iregex '.+\.jpe?g' // search home directory with extended regex pattern ignoring case</li>
@@ -295,6 +299,7 @@
     <li>git checkout -b 'dev' - creates and checks out 'dev' branch.</li>
     <li>git merge dev - pulls dev into checked out branch.</li>
     <li>git tag - lists tags on commit.</li>
+    <li>git tag v0.0.3 - creates a tag.</li>
     <li>git tag -d 'v0.0.3' - deletes tag with name 'v0.0.3'.</li>
     <li>git stash push - push file to top of stash.</li>
     <li>git stash pop - pops the file at top of stash back to checked out branch.</li>
@@ -399,6 +404,32 @@
     If there has been modifications to the <u>same lines</u> in a file in two or more separate branches before merging is attempted, a "merge conflict" occurs.<br />
     As a file can be composed of all kinds of languages git is unable to determine which branch version to keep.<br />
     Information to where the conflict has occured is then added to the concerned file, indicated by chevrons surrounding the conflict, separated by equal signs between the choices. To resolve we delete the obsolete choice and save the file, before staging and committing it and finally merging it into the branch of choice.
+</p>
+
+<h3>Semantic Versioning (SemVer)</h3>
+<hr>
+<p>
+    Given a version number MAJOR.MINOR.PATCH, increment the:
+</p>
+<ol>
+    <li>
+        MAJOR version when you make <span style="background-color: rgb(197, 224, 75);">incompatible API changes</span>.<br />
+        It MAY also include minor and patch level changes. Patch and minor version MUST be reset to 0 when major version is incremented.
+    </li>
+    <li>
+        MINOR version when you <span style="background-color: rgb(197, 224, 75);">add functionality</span> in a backwards compatible manner.<br />
+        It <u>must</u> be incremented if any public API functionality is marked as deprecated. It <u>may</u> be incremented if substantial new functionality or improvements are introduced within the private code. It <u>may</u> include patch level changes. Patch version MUST be reset to 0 when minor version is incremented.
+    </li>
+    <li>
+        PATCH version when you make backwards compatible <span style="background-color: rgb(197, 224, 75);">bug fixes.</span><br />
+        A bug fix is defined as an internal change that fixes incorrect behavior.
+    </li>
+</ol>
+<p>
+    <strong>v0.1.2</strong> indicates original API, with one added functionality and two bug fixes to that functionality.
+</p>
+<p>
+    Major version 0 is for initial development and should <u>not</u> be considered stable. v1.0.0 defines the public API
 </p>
 
 <h3>TMUX - Terminal Multiplexer</h3>
