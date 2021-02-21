@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- JQ library for $function -->
-		<script defer src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> <!-- UI for drag and drop menu, which can be deferred -->
-		<script async src="/getCoding/fadeTo.js"></script> <!-- my background fade API -->
-		<script async src="/getCoding/jquery.js"></script> <!-- async allows import to start as soon as the JQ library is loaded and before the DOM is ready -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="icon" href="favicon.ico">
 		<title>Full Stack Software Developer</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- JQ library for $function -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<!-- UI for drag and drop menu, which can be deferred -->
+		<script defer src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<!-- my background fade API -->
+		<script async src="/getCoding/fadeTo.js"></script>
+		<!-- async allows import to start as soon as the JQ library is loaded and before the DOM is ready -->
+		<script async src="/getCoding/jquery.js"></script>
 		<style>
 			/************** Global settings *************/
 			* {
@@ -115,9 +119,8 @@
 				padding-left: 3%;
 				padding-right: 10%;
 				width: 100%;
-				border-bottom: 1px solid /*yellow*/;
+				border-bottom: 1px solid;
 				background-color: #dddddd;
-				/*color: yellow;*/
 			}
 			.bullet_list {
 				list-style-type: circle;
@@ -137,9 +140,6 @@
 			img {
 				margin-left: 10%;
 			}
-			/*article ol li {
-				padding-bottom: 1%;
-			}*/
 			footer {
 				grid-area: bottom;
 			}
@@ -157,19 +157,6 @@
 				color: inherit;
 				text-decoration: none;
 			}
-			/*.text a:link {
-				text-decoration: underline;
-				color: inherit;
-			}*/
-			/*nav a:active, #jump a:active, .text a:active {
-				color: green;
-			}
-			.text a:visited, nav a:visited, .text a:visited {
-				color: grey;
-			}
-			nav a:hover, #jump a:hover, .text a:hover {
-				color: red;
-			}*/
 			/************** Drop-Down Menu *****************/
 			.dropDown {
 				min-width: 40px;
@@ -259,48 +246,48 @@
 				<h1>Becoming a Full Stack Software Developer</h1>
 				<nav id="jump">
 					<ul>
-						<li><a href="#js_head">JavaScript</a></li>
-						<li><a href="#css_head">CSS3</a></li>
-						<li><a href="#html_head">HTML5</a></li>
-						<li><a href="#react_head">React</a></li>
-						<li><a href="#php_head">PHP</a></li>
-						<li><a href="#terminal_head">Terminal</a></li>
-						<li><a href="#azure_head">Azure IoT</a></li>
-						<li><a href="#notes_head">Notes</a></li>
+						<li><a href="#js">JavaScript</a></li>
+						<li><a href="#css">CSS3</a></li>
+						<li><a href="#html">HTML5</a></li>
+						<li><a href="#react">React</a></li>
+						<li><a href="#php">PHP</a></li>
+						<li><a href="#terminal">Terminal</a></li>
+						<li><a href="#azure">Azure IoT</a></li>
+						<li><a href="#notes">Notes</a></li>
 					</ul>
 				</nav>
 			</header>
 			<main id="text">
 
-				<h2 id="js_head">JavaScript - 22 Apr 20</h2>
+				<h2>JavaScript - 22 Apr 20</h2>
 				<hr>
 				<article id="js"></article>
 
-				<h2 id="css_head">CSS3 - 22 Apr 20</h2>
+				<h2>CSS3 - 22 Apr 20</h2>
 				<hr>
 				<article id="css"></article>
 
-				<h2 id="html_head">HTML - 22 Apr 20</h2>
+				<h2>HTML - 22 Apr 20</h2>
 				<hr>
 				<article id="html"></article>
 
-				<h2 id="react_head">React - 15 Nov 20</h2>
+				<h2>React - 15 Nov 20</h2>
 				<hr>
 				<article id="react"></article>
 
-				<h2 id="php_head">PHP - 22 Apr 20</h2>
+				<h2>PHP - 22 Apr 20</h2>
 				<hr>
 				<article id="php"></article>
 
-				<h2 id="terminal_head">Terminal - 15 Oct 20</h2>
+				<h2>Terminal - 15 Oct 20</h2>
 				<hr>
 				<article id="terminal"></article>
 
-				<h2 id="azure_head">Microsoft Azure IoT Certification Course - 21 Apr 20</h2>
+				<h2>Microsoft Azure IoT Certification Course - 21 Apr 20</h2>
 				<hr>
 				<article id="azure"></article>
 
-				<h2 id="notes_head">Notes</h2>
+				<h2>Notes</h2>
 				<hr>
 				<article id="notes"></article>
 
