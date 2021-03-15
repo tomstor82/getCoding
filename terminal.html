@@ -43,7 +43,23 @@
     <li>sed - filter and edit text files.</li>
     <li>cat - print text content from files.</li>
     <li>less - display large text file or files simultanously, also track a log file with <code>+F</code> flag</li>
-    <li>vi - basic text editor</li>
+    <li>vi - basic text editor
+        <ul>
+            <li>:q - quit editor</li>
+            <li>:wq - write and quit editor</li>
+            <ul>ESC to exit command modes
+                <li>i - input characters left of cursor</li>
+                <li>I - input characters at beginning of line</li>
+                <li>a - append characters after cursor</li>
+                <li>A - append to current line</li>
+                <li>o - add new line after current</li>
+                <li>O - insert new line before current</li>
+            </ul>
+            <li>x - delete character at cursor</li> 
+            <li>X - delete character left of cursor</li>
+            <li>dd - delete current line</li>
+        </ul>
+    </li>
     <li>tail - one useful feature with the <code>-f</code> flag is to track a log file</li>
     <li>rm - remove files or directories</li>
     <li>mkdir - create directory</li>
@@ -64,9 +80,9 @@
             <li>grep -P (Perl Compatible RegExp - PCREs)</li>
         </ul>
     </li>
-    <li>pgrep -u tom - look up process based on name and other attributes.</li>
+    <li>pgrep -u tom - look up process based on user or other attributes.</li>
     <li>jobs - lists active jobs.</li>
-    <li>ps -A - list processes. -A signifies from all users.</li>
+    <li>ps -A or -e - list all/every process.</li>
     <li>find - search directories
         <ul>
             <li>find ~/ -regextype egrep -iregex '.+\.jpe?g' // search home directory with extended regex pattern ignoring case</li>
