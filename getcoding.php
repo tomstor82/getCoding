@@ -125,6 +125,9 @@
 			.bullet_list {
 				list-style-type: circle;
 			}
+			.no_bullet_list {
+				list-style-type: none;
+			}
 			form {
 				position: absolute;
 				left: 18%;
