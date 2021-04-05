@@ -302,7 +302,7 @@
 </p>
 <ul>
 	<li>git init - Makes current directory a repository (project). This can be the directory where the files I want a record of recide.</li>
-    <li>git init --bare name.git - Creates a bare repository commonly denoted with .git extension. This repo does not contain branches or a working tree, simply data.</li>
+    <li>git init --bare name.git - Creates a bare repository commonly denoted with .git extension. This will not contain a working tree as no branches will be checked out. It hold all the information of a working repository but they are used as backups or main peer repos. gitHub repos are <q>bare</q>.</li>
 	<li>git add 'filename / *.txt' - Adds file or files to the repository, either new or modified. They are now in staging, which is a place to reflect over the changes before committing to them. Stage can be regretted.<br />
 	<code>echo <q>Repository Description<q> &gt; README.md & git add README.md</code></li>
 	<li>git status - dispays status of files not commited to repository.</li>
@@ -317,7 +317,7 @@
         </ul>
     </li>
     <li>git branch - displays branches.</li>
-    <li>git branch -a - displays all branches remote and local.</li>
+    <li>git branch -a - displays all branches remote and local (if remote data has been <q>fetched</q>).</li>
     <li>git checkout 'dev' - checks out (swaps) to working on 'dev' branch. <strong>Note:</strong> Local directory content changes when doing this.</li>
     <li>git checkout -b 'dev' - creates and checks out 'dev' branch.</li>
     <li>git merge dev - pulls dev into checked out branch.</li>
@@ -332,8 +332,8 @@
 </p>
 <ol>
     <li>Keep main branch functional e.g. as a working code and not under development.</li>
-    <li>Only work on one revision at a time.</li>
-    <li>Split developments to a new branch (dev or features) to be merged with main at a later time.</li>
+    <li>Only work on one branch at a time, and merge it in when finished.</li>
+    <li>Split developments to a new branch (dev or feat commonly used) to be merged with main and then deleted.</li>
 </ol>
 
 <h4>Merge and Fast-Forward Merge</h4>
@@ -410,26 +410,28 @@
 <h4>Git Remote and Cloud Repositories (gitHub)</h4>
 <hr>
 <p>
-    To backup git versioned work onto a cloud server we have a few options. gitHub is the most popular one now managed by Microsoft. It offers free storage for normal users.
+    To backup git versioned work onto a cloud server we have a few options in the likes of gitLab or gitHub among some. The latter being the most used and now managed by Microsoft, who has agreed to let it remain free for private users and with free storage.
 </p>
 <ul>
-    <li>git remote add remoteRepoNickName git@gitHub:user/repository.git</li>
-    <li>git remote remove remoteRepoNickName - remove stored remote repo address.</li>
-    <li>git status - tells us if local and remote repo are in sync.</li>
-    <li>git ls-remote origin - list remote repo origin's files.</li>
-    <li>git push -all origin - pushes all branches to remote repo named origin.</li>
-    <li>git push -u remoteRepNichName - pushes commits to remote repo. The -u saves upstream tracking (reference) information of successful push.</li>
-    <li>git clone git@gitHub:user/repository.git - clones the main branch from remote repo.</li>
-    <li>git clone -b dev git@gitHub:user/repositoy.git - clones the dev branch from remote repo.</li>
+    <li>git remote add gitHub git@gitHub:user/repository.git - Adds remote repo named gitHub.</li>
+    <li>git remote add backup ssh://pi:/home/pi/backup.git - Adds remote repo backup with ssh connection. IP and ports can be specified if needed.</li>
+    <li>git remote remove OldRepo - remove reference to repository named OldRepo.</li>
+    <li>git status - tells us if local and remote repositories are in sync. This might require fetching or pulling if no upstream <q>tracking</q> is used.</li>
+    <li>git ls-remote origin - list remote repository origin's files.</li>
+    <li>git fetch origin - Downloads objects and references from remote repository origin.</li>
+    <li>git push -all origin - pushes all branches to remote repository named origin.</li>
+    <li>git push -u remoteRepNichName - pushes commits to remote repository. The -u enables the <q>tracking</q> of the remote upstream repository to the local, fetching it behind the scenes.</li>
+    <li>git clone git@gitHub:user/repository.git - saves a copy of the remote repository to the local harddrive.</li>
+    <li>git clone -b dev git@gitHub:user/repositoy.git - clones the dev branch from the remote repository.</li>
 </ul>
 <p>
     Some git and gitHub jargon explained:
 </p>
 <ul>
-    <li>Remote - Any repository different from the current one in use "local". Both on a remote server or a different location on same computer</li>
-    <li>Origin - The origin of the current repository</li>
-    <li>Upstream - The origin of the origin</li>
-    <li>Pull request - A term used in gitHub alone representing a "suggested" commit to the owner of a repository</li>
+    <li>Remote - Any repository which is not the current one <q>local</q> in use. A remote can be anythign between a cloud server to a different location on the same computer.</li>
+    <li>Origin - The origin of the current repository.</li>
+    <li>Upstream - The origin of the origin.</li>
+    <li>Pull request - A term used in gitHub alone representing a "suggested" commit to the owner of a repository.</li>
 </ul>
 
 <h4>Git Merge Conflict</h4>
