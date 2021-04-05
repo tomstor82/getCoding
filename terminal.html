@@ -204,7 +204,6 @@
 <p>
     Writing scripts in bash is a convenient way of automating tasks. Scripts commonly has the <q>.sh</q> file extension, though this is not necessary. <br>
     In bash we can mark any file executable with the change app. In most cases the command <code>chmod 755 filename</code> or simpler <code>chmod +x filename</code>.
-
 </p>
 <p>
     Chmod arguments 755 denotes the level of file or directory permissions over 3 user accounts. 7 indicates full permission for the owner (read, write and execute), read and execute for same group users and the same priviliges for other users.<br />
@@ -212,7 +211,10 @@
 </p>
 <p>
     For a script to work in itself we need to add a <q>shebang</q> to line 1: <code>#!/bin/bash</code><br />
-    Now we can declare variables add functions and run loops and contitional statements to make things work. The principles are similar to C but the syntax is slightly different.
+    A feature of seing the commands executed by a script can be achieved by adding the <code>+x</code> flag after the <q>shebang</q>.
+</p>
+<p>
+    We can declare variables, write functions, run loops and contitional statements like other programming languages. The principles are similar to C but the syntax is slightly different.
 </p>
 <pre>
     #!/bin/bash
@@ -290,13 +292,17 @@
     24 bits are the most common in home networks and it translates into 255.255.255.0, which in a normal home network will allow clients to occupy the IP range from 192.168.0.1 to 192.168.0.254.
 </p>
 
-<h3>Git - Local Version Control</h3>
+<h3>Git - Version Control</h3>
 <hr />
 <p>
-	Git is a version control system developed by Linus Torvalds. There are multiple commands to get started. And everything in a filesystem can be version controlled this way. Tracking changes to be able to go back in time and even start again
+	Git is a version control system developed by Linus Torvalds. There are multiple commands to get started. And everything in a filesystem can be version controlled this way. Tracking changes to be able to go back in time and even start again.
+</p>
+<p>
+    The <q>working tree</q> is where we do our current changes to our files. If changing between branches and commits the files in our repository's directory reflects these changes. As example we have a blank README.md file in main branch but with content on our dev branch. Checking out dev we can see the content. Changing back to main we have the blank file.
 </p>
 <ul>
 	<li>git init - Makes current directory a repository (project). This can be the directory where the files I want a record of recide.</li>
+    <li>git init --bare name.git - Creates a bare repository commonly denoted with .git extension. This repo does not contain branches or a working tree, simply data.</li>
 	<li>git add 'filename / *.txt' - Adds file or files to the repository, either new or modified. They are now in staging, which is a place to reflect over the changes before committing to them. Stage can be regretted.<br />
 	<code>echo <q>Repository Description<q> &gt; README.md & git add README.md</code></li>
 	<li>git status - dispays status of files not commited to repository.</li>
@@ -401,18 +407,29 @@
     <li>git stash pop ("index") - pops the file from the top of the stash or as specified by the index number. <code>git stash pop 0</code> is at the top.</li>
 </ul>
 
-<h4>Git Remote Repositories (gitHub)</h4>
+<h4>Git Remote and Cloud Repositories (gitHub)</h4>
 <hr>
 <p>
-    To backup git versioned work we have a few options. gitHub is one which is now managed by Microsoft. It offers free storage for normal users.
+    To backup git versioned work onto a cloud server we have a few options. gitHub is the most popular one now managed by Microsoft. It offers free storage for normal users.
 </p>
 <ul>
     <li>git remote add remoteRepoNickName git@gitHub:user/repository.git</li>
     <li>git remote remove remoteRepoNickName - remove stored remote repo address.</li>
     <li>git status - tells us if local and remote repo are in sync.</li>
+    <li>git ls-remote origin - list remote repo origin's files.</li>
+    <li>git push -all origin - pushes all branches to remote repo named origin.</li>
     <li>git push -u remoteRepNichName - pushes commits to remote repo. The -u saves upstream tracking (reference) information of successful push.</li>
     <li>git clone git@gitHub:user/repository.git - clones the main branch from remote repo.</li>
     <li>git clone -b dev git@gitHub:user/repositoy.git - clones the dev branch from remote repo.</li>
+</ul>
+<p>
+    Some git and gitHub jargon explained:
+</p>
+<ul>
+    <li>Remote - Any repository different from the current one in use "local". Both on a remote server or a different location on same computer</li>
+    <li>Origin - The origin of the current repository</li>
+    <li>Upstream - The origin of the origin</li>
+    <li>Pull request - A term used in gitHub alone representing a "suggested" commit to the owner of a repository</li>
 </ul>
 
 <h4>Git Merge Conflict</h4>
