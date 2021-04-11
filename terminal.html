@@ -269,27 +269,26 @@
 <h3>Network</h3>
 <hr>
 <p>
-    The abstraction layers in networking are link, internet, transport and the application layers. Communication goes exclusively between these and no steps are skipped along the route.
+    The abstraction layers in networking are <q>link, internet, transport and the application layers</q>. Communication goes exclusively between these and no steps are skipped along the route.
 </p>
 <ol>
-    <li>link: utilise MAC addresses when communicating together. Ethernet, ISDN, ADSL, Fiber, WiFi ethernet. This is the network card communicating with another network card on a local network.</li>
-    <li>internet: utilise the Internet Protocol IP. This is a router communicating with another router on the Internet. Package loss is acceptable in this protocoll.</li>
-    <li>transport: utilise Port numbers. TCP and UDP are the protocols. TCP is the work horse which checks if packages are lost and querries for new if so. UDP is a simple shell which doesn't query package loss.<br />
-        Naturally one would see the benefit of TCP when accurat data is transported, however when speed is prioritiesed UDP can be of benefit in examples like streaming and VoIP communications.</li>
-    <li>application: Broad term for all softwares using the internet. Email clients, Streaming apps, HTTP and HTTPS...</li>
+    <li>Link - utilise MAC addresses when communicating together. Ethernet, ISDN, ADSL, Fiber, WiFi ethernet. This is the network card communicating with another network card on a local network.</li>
+    <li>Internet - utilise the Internet Protocol IP. This is a router communicating with another router on the Internet. Package loss is acceptable in this protocoll.</li>
+    <li>Transport - utilise Port numbers. TCP and UDP are the protocols. TCP is the work horse which checks if packages are lost and querries for new if so. UDP is a simple shell which doesn't query package loss.<br />
+        Naturally one would see the benefit of TCP when accurat data is transported, however when speed is prioritised UDP can be of benefit in examples like streaming and Voice over IP (VoIP) communications.</li>
+    <li>Application - a broad term for all softwares using the internet. Email clients, streaming apps, HTTP and HTTPS...</li>
 </ol>
 <p>
-    To move up and down the layers we use different tools. Network cards help us in the link layer, along with routers that can communicate through multiple protocols in the same layer, as well as elevate the communication to the internet layers.
+    To move up and down the layers we use different tools. Network cards help us in the link layer, along with routers that can communicate through multiple protocols in the same layer, as well as elevate the communication to the internet layer.
 </p>
 <p>
     Switches are used to split the communication between multiple devices. These are only allowing communication between the requested MAC addressed unlike the predated <q>hubs</q>, which sent the same data to all the devices slowing communication drastically.
 </p>
 <p>
-    Netmask or subnet mask determines the size of the subnet, or how many IP addresses should be made available for the network.
+    Netmask or subnet mask determines the size of the subnet, how many IP addresses should be made available for the network.
 </p>
 <p>
-    IP addresses are 32 bit long as well as a mask. However it is common to refer to the mask in bits despite this, which simply means where to split the IP. If a mask is say 24 bits, it means the first 24 bits in any subnet address must be the same, and the last 8 bits can be utilised for the clients, in decimal this comes to 256 IP addresses. 2 addresses are reserved which gives the opportunity for there to be 254 clients in this subnet.<br />
-    24 bits are the most common in home networks and it translates into 255.255.255.0, which in a normal home network will allow clients to occupy the IP range from 192.168.0.1 to 192.168.0.254.
+    IP addresses are 32 bit long, And it is therefore common to refer to the mask in bits. A common mask size is 24 bits, which means the first 24 bits in any subnet address must be the same, allowing the last 8 bits to be utilised for the clients of the network. In decimal this equals 256 IP addresses (0-255) whereas 2 addresses are reserved (0 id of subnet and 255 broadcast) which gives the opportunity for there to be 254 clients in the subnet ranging from 1-254.
 </p>
 
 <h3>Git - Version Control</h3>
