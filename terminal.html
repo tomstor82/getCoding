@@ -79,6 +79,10 @@
             <li>grep -G (Basic RegExp, e.g. no groups * standard)</li>
             <li>grep -P (Perl Compatible RegExp - PCREs)</li>
         </ul>
+        <ul>
+            <li>Example searching files in a directory showing line number (-n/-N), recursively (-r) and match the whole keyword <code>#!/bin/bash</code> (-w) and omit non matching (-o):<br />
+                <code>grep -nrw ~/scripts/ -e '#!/bin/bash' -o</code></li>
+        </ul>
     </li>
     <li>pgrep -u tom - look up process based on user or other attributes.</li>
     <li>jobs - lists active jobs.</li>
