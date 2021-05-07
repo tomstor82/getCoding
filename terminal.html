@@ -9,7 +9,19 @@
     Hidden files and folders are preceeded by a single dot. Listing permissions will indicate a dash for normal file, d for directory, c for character and some more I am not familiar with currently.
 </p>
 <p>
-    Variables are declared without a keyword, and accessed through the <code>$</code> symbol.
+    Variables are declared without a keyword, and accessed through the <code>$</code> symbol.<br />
+    <strong>Note:</strong> Do <u>not</u> use space when declaring variables.
+</p>
+<pre>
+    myVar=5;
+    myVar2=$(date); // stores current date to variable
+    myArr=(1 2 3 "four" "five");
+    myArr2=($(grep ~/textFile -Pe '([\d]{1,3}[.]){3}[\d]{1,3}' -o)); // locate IP addresses in "textFile" and store in array
+</pre>
+<p>
+    To view variables we can write <code>echo $myVar;</code> for single variables and <code>echo ${myArr[2]}</code> for arrays.<br />
+    The size of an array can be viewed with <code>echo ${#myArr[@]}</code> or <code>${#myArr[*]}</code>.<br />
+    And to view the full content of the array we can write <code>echo ${myArr[@]}</code> or <code>echo ${myArr[*]}</code>.
 </p>
 
 <h3>
