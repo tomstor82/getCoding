@@ -434,8 +434,8 @@
     <li>git remote remove OldRepo - remove reference to repository named OldRepo.</li>
     <li>git status - tells us if local and remote repositories are in sync. This might require fetching or pulling if no upstream <q>tracking</q> is used.</li>
     <li>git ls-remote origin - list remote repository origin's files.</li>
-    <li>git fetch origin - Downloads objects and references from remote repository origin, <u>without</u> over-writing local repository data. Caching changes.</li>
-    <li>git pull - Fetches and Merges local repository data if behind the remote branch.</li>
+    <li>git fetch origin - Downloads objects and references from remote repository origin, <u>without</u> over-writing local repository data. Caching changes made from someone else pushing to this remote.</li>
+    <li>git pull - Fetches and <q>merges</q> remote into local repository if behind the remote branch and fast-forwarding is possible.</li>
     <li>git push -all origin - pushes all branches to remote repository named origin.</li>
     <li>git push -u remoteRepNichName - pushes commits to remote repository. The -u enables the <q>tracking</q> of the remote <q>upstream</q> repository to the local. Seen checking <code>git status</code></li>
     <li>git clone -b main git@gitHub:user/repository.git - saves a copy of the remote repository to branch main on local machine, and sets up upstream tracking.</li>
