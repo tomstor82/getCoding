@@ -176,6 +176,33 @@
     As commands grow long it is convenient to split them over several lines. This is achieved by escaping the newline character (enter) with the backslash.
 </p>
 
+<h3>String character substitution</h3>
+<hr>
+<p>
+    The <code>echo</code> command can be used for simple substitution of characters in a string. <code>sed</code> can be used with more complex patterns.
+</p>
+<p>echo example:</p>
+<pre>
+myString="String substitution or char replacement example";
+echo ${myString// /+}; # substitutes all white space with +
+echo ${myString/S/s}; # substitute first "S" with "s"
+</pre>
+<p>sed example:</p>
+<pre>
+echo "This is a more complex string" > myString.file
+# First letters of words transformed to upper case
+sed 's/\s\w/\U&/g' myString.file);
+</pre>
+<p>
+    Breakdown of code:
+</p>
+<p>
+    s/ - substitute mode; / indicates start of regular matching pattern<br />
+    \s\w/ - match white space followed by alphanumeric symbol; / indicates end of matching pattern<br />
+    \U&/ - substitution. In this example convert to uppercase. \L& converts to lowercase.<br />
+    g - global. Apply to whole string
+</p>
+
 <h3>Built in Variables</h3>
 <hr>
 <table>
